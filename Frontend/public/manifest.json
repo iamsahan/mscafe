@@ -1,0 +1,26 @@
+{
+  "short_name": "MSG Tax Services",
+  "name": "MSG Tax Services - Professional Tax & Financial Services",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3B82F6",
+  "background_color": "#ffffff",
+  "description": "Professional tax services, bookkeeping, and financial consulting. Get expert help with your taxes and financial planning."
+}
