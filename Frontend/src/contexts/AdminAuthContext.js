@@ -17,10 +17,6 @@ export const AdminAuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, [checkAuthStatus]);
-
   const checkAuthStatus = useCallback(async () => {
     try {
       const token = Cookies.get('adminToken');
@@ -43,6 +39,10 @@ export const AdminAuthProvider = ({ children }) => {
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]);
 
   const login = useCallback(async (credentials) => {
     try {

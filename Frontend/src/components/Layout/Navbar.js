@@ -19,7 +19,6 @@ const Navbar = () => {
   const [companyMenuOpen, setCompanyMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const userMenuRef = useRef(null);
   const companyMenuRef = useRef(null);
 
   // Handle scroll effect

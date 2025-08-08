@@ -367,22 +367,6 @@ const ServicesManagement = () => {
     requirements: ''
   });
 
-  useEffect(() => {
-    let isMounted = true;
-    
-    const loadServices = async () => {
-      if (isMounted) {
-        await fetchServices();
-      }
-    };
-    
-    loadServices();
-    
-    return () => {
-      isMounted = false;
-    };
-  }, [fetchServices]); // Add fetchServices to dependency array
-
   const fetchServices = useCallback(async () => {
     try {
       setLoading(true);
@@ -412,6 +396,22 @@ const ServicesManagement = () => {
       setLoading(false);
     }
   }, [services]);
+
+  useEffect(() => {
+    let isMounted = true;
+    
+    const loadServices = async () => {
+      if (isMounted) {
+        await fetchServices();
+      }
+    };
+    
+    loadServices();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [fetchServices]); // Add fetchServices to dependency array
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;

@@ -6,7 +6,6 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import {
   CheckCircleIcon,
   StarIcon,
-  UserGroupIcon,
   AcademicCapIcon,
   DocumentTextIcon,
   CurrencyDollarIcon,

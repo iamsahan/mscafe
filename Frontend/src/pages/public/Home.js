@@ -9,14 +9,12 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        setError(null);
 
         const [servicesRes, coursesRes] = await Promise.all([
           servicesAPI.getAll(),
