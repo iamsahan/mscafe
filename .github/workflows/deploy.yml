@@ -46,7 +46,6 @@ jobs:
           source: "deploy_package/*"
           target: "${{ secrets.TARGET_DIR }}/_tmp_build"
           overwrite: true
-          rm: true
 
       # Step 6: Run deploy script on VPS via SSH
       - name: Run deploy script on VPS
@@ -59,8 +58,10 @@ jobs:
           script: |
             echo "Starting deployment..."
 
-            # Clean up and prepare target directory
+            # Clean up previous temporary builds (with sudo)
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/_tmp_build_clean
+
+            # Prepare clean directory
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S mkdir -p ${{ secrets.TARGET_DIR }}/_tmp_build_clean
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S cp -r ${{ secrets.TARGET_DIR }}/_tmp_build/* ${{ secrets.TARGET_DIR }}/_tmp_build_clean/
 
@@ -85,7 +86,7 @@ jobs:
             # Start the service
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl start cafe
 
-            # Clean up
+            # Clean up temporary files
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/_tmp_build
 
             echo "Deployment completed!"
