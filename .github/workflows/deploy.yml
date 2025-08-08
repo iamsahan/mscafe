@@ -60,7 +60,7 @@ jobs:
             echo "Backing up current website files..."
 
             # Stop the service
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl stop your-app-name
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl stop cafe
 
             # Move new files
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S cp -r ${{ secrets.TARGET_DIR }}/_tmp_build/* ${{ secrets.TARGET_DIR }}/
@@ -69,6 +69,6 @@ jobs:
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S chown -R www-data:www-data ${{ secrets.TARGET_DIR }}/
 
             # Start the service
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl start your-app-name
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl start cafe
 
             echo "Deployment completed!"
