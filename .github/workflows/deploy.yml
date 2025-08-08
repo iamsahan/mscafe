@@ -37,7 +37,7 @@ jobs:
 
       # Step 5: Copy files to VPS via SCP
       - name: Copy files to VPS
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -45,8 +45,6 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           source: "deploy_package/*"
           target: "${{ secrets.TARGET_DIR }}/_tmp_build"
-          strip_components: 1
-          overwrite: true
 
       # Step 6: Run deploy.sh script on VPS via SSH
       - name: Run deploy script on VPS
