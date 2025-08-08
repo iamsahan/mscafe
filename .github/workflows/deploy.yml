@@ -1,59 +1,49 @@
-name: Deploy React + Node App to Hostinger VPS
+name: Deploy to Hostinger VPS
 
 on:
   push:
     branches:
-      - prod # Deploy when pushing to prod branch
-  workflow_dispatch: # Allow manual trigger
+      - prod
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
           cache-dependency-path: |
             Frontend/package-lock.json
             backend/package-lock.json
 
-      # Step 3: Install and build frontend
-      - name: Install and build React frontend
+      - name: Build Frontend
         working-directory: Frontend
         run: |
           npm ci
           npm run build
 
-      # Step 4: Install backend dependencies 
-      - name: Install backend dependencies
+      - name: Install Backend Dependencies
         working-directory: backend
         run: |
-          npm ci --only=production
+          npm ci --production
 
-      # Step 5: Create deployment package
-      - name: Create deployment package
+      - name: Create Deployment Package
         run: |
-          mkdir -p deploy
-          # Copy built frontend
-          cp -r Frontend/build deploy/frontend
-          # Copy backend files (excluding node_modules, logs, uploads)
-          rsync -av --exclude='node_modules' --exclude='logs' --exclude='uploads' --exclude='.env' backend/ deploy/backend/
-          # Create directory structure
-          mkdir -p deploy/backend/logs
-          mkdir -p deploy/backend/uploads/images/courses
-          mkdir -p deploy/backend/uploads/images/services
-          # Copy package files for production install
-          cp backend/package*.json deploy/backend/
+          mkdir -p deploy/app
+          cp -r Frontend/build deploy/app/frontend
+          rsync -av --exclude='node_modules' --exclude='logs' --exclude='uploads' --exclude='.env' backend/ deploy/app/backend/
+          mkdir -p deploy/app/backend/logs
+          mkdir -p deploy/app/backend/uploads/images/courses
+          mkdir -p deploy/app/backend/uploads/images/services
+          cp backend/package*.json deploy/app/backend/
 
-      # Step 6: Deploy to Hostinger VPS
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.8
         with:
@@ -62,12 +52,11 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT || 22 }}
           source: "deploy/*"
-          target: "~/mscafe_new"
+          target: "~/"
           strip_components: 1
           overwrite: true
 
-      # Step 7: Setup and start application on VPS
-      - name: Setup application on VPS
+      - name: Setup Application
         uses: appleboy/ssh-action@v1.3.0
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
@@ -75,107 +64,43 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT || 22 }}
           script: |
-            echo "🚀 Starting deployment to Hostinger VPS..."
-            
-            # Install Node.js if not installed (for Hostinger)
+            echo "Starting deployment..."
+
+            # Install Node.js if needed
             if ! command -v node &> /dev/null; then
-              echo "📦 Installing Node.js..."
               curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
               sudo apt-get install -y nodejs
             fi
-            
-            # Navigate to app directory
-            cd ~/mscafe_new/backend
-            
-            # Install production dependencies
-            echo "📦 Installing backend dependencies..."
-            npm install --only=production
-            
-            # Copy environment file if it exists
-            if [ -f ~/mscafe/.env ]; then
-              cp ~/mscafe/.env .
-              echo "✅ Environment file copied"
-            else
-              echo "⚠️ No .env file found. Please create one with your database credentials."
-            fi
-            
-            # Stop existing application (if running)
-            echo "🛑 Stopping existing application..."
-            pkill -f "node server.js" || true
-            
-            # Backup current app if it exists
+
+            # Install PM2 globally
+            sudo npm install -g pm2
+
+            # Stop existing app
+            pm2 stop mscafe-app || true
+            pm2 delete mscafe-app || true
+
+            # Backup current app
             if [ -d ~/mscafe ]; then
-              echo "💾 Backing up current application..."
               rm -rf ~/mscafe_backup
               mv ~/mscafe ~/mscafe_backup
             fi
-            
-            # Move new version to production
-            echo "🔄 Deploying new version..."
-            mv ~/mscafe_new ~/mscafe
-            
-            # Set up PM2 process manager (better than direct node)
-            echo "🔧 Setting up PM2 process manager..."
-            npm install -g pm2
-            
-            # Create PM2 ecosystem file
-            cd ~/mscafe
-            echo "module.exports = {" > ecosystem.config.js
-            echo "  apps: [{" >> ecosystem.config.js
-            echo "    name: 'mscafe-backend'," >> ecosystem.config.js
-            echo "    script: './backend/server.js'," >> ecosystem.config.js
-            echo "    cwd: '~/mscafe'," >> ecosystem.config.js
-            echo "    instances: 1," >> ecosystem.config.js
-            echo "    autorestart: true," >> ecosystem.config.js
-            echo "    watch: false," >> ecosystem.config.js
-            echo "    max_memory_restart: '1G'," >> ecosystem.config.js
-            echo "    env: {" >> ecosystem.config.js
-            echo "      NODE_ENV: 'production'," >> ecosystem.config.js
-            echo "      PORT: 5000" >> ecosystem.config.js
-            echo "    }" >> ecosystem.config.js
-            echo "  }]" >> ecosystem.config.js
-            echo "};" >> ecosystem.config.js
-            
-            # Start application with PM2
-            echo "🚀 Starting application..."
-            cd ~/mscafe
-            pm2 start ecosystem.config.js
+
+            # Move new app to production
+            mv ~/app ~/mscafe
+
+            # Install production dependencies
+            cd ~/mscafe/backend
+            npm install --production
+
+            # Copy environment file if exists
+            if [ -f ~/mscafe_backup/backend/.env ]; then
+              cp ~/mscafe_backup/backend/.env .
+            fi
+
+            # Start app with PM2
+            pm2 start server.js --name mscafe-app
             pm2 save
             pm2 startup
-            
-            # Setup Nginx (web server) configuration
-            echo "🌐 Setting up Nginx..."
-            sudo tee /etc/nginx/sites-available/mscafe > /dev/null << 'NGINX_EOF'
-server {
-    listen 80;
-    server_name your-domain.com www.your-domain.com;
-    
-    location / {
-        root /home/$USER/mscafe/frontend;
-        try_files $uri $uri/ /index.html;
-        index index.html;
-    }
-    
-    location /api/ {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-NGINX_EOF
-            
-            # Enable the site
-            sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
-            sudo nginx -t && sudo systemctl reload nginx
-            
-            echo "✅ Deployment completed successfully!"
-            echo "🌐 Frontend: http://your-domain.com"
-            echo "🔗 Backend API: http://your-domain.com/api"
-            echo "📊 PM2 Status:"
+
+            echo "Deployment completed!"
             pm2 status
