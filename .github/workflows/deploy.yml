@@ -3,7 +3,7 @@ name: Deploy React + Node App to VPS
 on:
   push:
     branches:
-      - prod # run deploy only when pushing to main branch
+      - prod # run deploy only when pushing to main branchhh
   workflow_dispatch: # allow manual trigger from GitHub UI
 
 jobs:
