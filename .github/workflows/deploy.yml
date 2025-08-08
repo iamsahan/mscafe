@@ -45,7 +45,7 @@ jobs:
           cp backend/package*.json deploy/app/backend/
 
       - name: Deploy to VPS
-        uses: appleboy/scp-action@v0.1.8
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USER }}
@@ -57,7 +57,7 @@ jobs:
           overwrite: true
 
       - name: Setup Application
-        uses: appleboy/ssh-action@v1.3.0
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USER }}
