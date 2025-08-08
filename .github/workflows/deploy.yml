@@ -45,7 +45,8 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           source: "deploy_package/*"
           target: "${{ secrets.TARGET_DIR }}/_tmp_build"
-          debug: true
+          overwrite: true
+          rm: true
 
       # Step 6: Run deploy script on VPS via SSH
       - name: Run deploy script on VPS
@@ -57,18 +58,34 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             echo "Starting deployment..."
-            echo "Backing up current website files..."
+
+            # Clean up and prepare target directory
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/_tmp_build_clean
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S mkdir -p ${{ secrets.TARGET_DIR }}/_tmp_build_clean
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S cp -r ${{ secrets.TARGET_DIR }}/_tmp_build/* ${{ secrets.TARGET_DIR }}/_tmp_build_clean/
 
             # Stop the service
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl stop cafe
 
-            # Move new files
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S cp -r ${{ secrets.TARGET_DIR }}/_tmp_build/* ${{ secrets.TARGET_DIR }}/
+            # Backup current deployment
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/backup
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S cp -r ${{ secrets.TARGET_DIR }}/current ${{ secrets.TARGET_DIR }}/backup || true
+
+            # Deploy new files
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/current
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S mv ${{ secrets.TARGET_DIR }}/_tmp_build_clean ${{ secrets.TARGET_DIR }}/current
 
             # Set permissions
-            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S chown -R www-data:www-data ${{ secrets.TARGET_DIR }}/
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S chown -R www-data:www-data ${{ secrets.TARGET_DIR }}/current
+
+            # Install backend dependencies
+            cd ${{ secrets.TARGET_DIR }}/current/backend
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S npm install --production
 
             # Start the service
             echo "${{ secrets.VPS_PASSWORD }}" | sudo -S systemctl start cafe
+
+            # Clean up
+            echo "${{ secrets.VPS_PASSWORD }}" | sudo -S rm -rf ${{ secrets.TARGET_DIR }}/_tmp_build
 
             echo "Deployment completed!"
