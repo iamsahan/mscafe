@@ -1,63 +1,185 @@
-name: Deploy React + Node App to VPS
+name: Deploy React + Node App to Hostinger VPS
 
 on:
   push:
     branches:
-      - prod # run deploy only when pushing to main branch
-  workflow_dispatch: # allow manual trigger from GitHub UI
+      - prod # Deploy when pushing to prod branch
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # Step 1: Checkout repo code
-      - name: Checkout code
+      # Step 1: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Node.js environment (version 20)
+      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: |
+            Frontend/package-lock.json
+            backend/package-lock.json
 
-      # Step 3: Build React frontend
-      - name: Build React frontend
+      # Step 3: Install and build frontend
+      - name: Install and build React frontend
         working-directory: Frontend
         run: |
           npm ci
           npm run build
 
-      # Step 4: Prepare files for deployment (copy build and backend code)
-      - name: Prepare deployment package
+      # Step 4: Install backend dependencies 
+      - name: Install backend dependencies
+        working-directory: backend
         run: |
-          mkdir deploy_package
-          cp -r Frontend/build deploy_package/frontend_build
-          rsync -av --exclude 'node_modules' --exclude '.env' backend/ deploy_package/backend
+          npm ci --only=production
 
-      # Step 5: Copy files to VPS via SCP
-      - name: Copy files to VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          port: ${{ secrets.SSH_PORT || 22 }}
-          source: "deploy_package/*"
-          target: "${{ secrets.TARGET_DIR }}/_tmp_build"
-          debug: true
+      # Step 5: Create deployment package
+      - name: Create deployment package
+        run: |
+          mkdir -p deploy
+          # Copy built frontend
+          cp -r Frontend/build deploy/frontend
+          # Copy backend files (excluding node_modules, logs, uploads)
+          rsync -av --exclude='node_modules' --exclude='logs' --exclude='uploads' --exclude='.env' backend/ deploy/backend/
+          # Create directory structure
+          mkdir -p deploy/backend/logs
+          mkdir -p deploy/backend/uploads/images/courses
+          mkdir -p deploy/backend/uploads/images/services
+          # Copy package files for production install
+          cp backend/package*.json deploy/backend/
 
-      # Step 6: Run deploy script on VPS via SSH
-      - name: Run deploy script on VPS
-        uses: appleboy/ssh-action@v1.2.0
-        env:
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      # Step 6: Deploy to Hostinger VPS
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v0.1.8
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          port: ${{ secrets.SSH_PORT || 22 }}
-          envs: VPS_PASSWORD
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_PORT || 22 }}
+          source: "deploy/*"
+          target: "~/mscafe_new"
+          strip_components: 1
+          overwrite: true
+
+      # Step 7: Setup and start application on VPS
+      - name: Setup application on VPS
+        uses: appleboy/ssh-action@v1.3.0
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_PORT || 22 }}
           script: |
-            chmod +x ~/deploy.sh
-            ~/deploy.sh
+            echo "🚀 Starting deployment to Hostinger VPS..."
+            
+            # Install Node.js if not installed (for Hostinger)
+            if ! command -v node &> /dev/null; then
+              echo "📦 Installing Node.js..."
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            fi
+            
+            # Navigate to app directory
+            cd ~/mscafe_new/backend
+            
+            # Install production dependencies
+            echo "📦 Installing backend dependencies..."
+            npm install --only=production
+            
+            # Copy environment file if it exists
+            if [ -f ~/mscafe/.env ]; then
+              cp ~/mscafe/.env .
+              echo "✅ Environment file copied"
+            else
+              echo "⚠️ No .env file found. Please create one with your database credentials."
+            fi
+            
+            # Stop existing application (if running)
+            echo "🛑 Stopping existing application..."
+            pkill -f "node server.js" || true
+            
+            # Backup current app if it exists
+            if [ -d ~/mscafe ]; then
+              echo "💾 Backing up current application..."
+              rm -rf ~/mscafe_backup
+              mv ~/mscafe ~/mscafe_backup
+            fi
+            
+            # Move new version to production
+            echo "🔄 Deploying new version..."
+            mv ~/mscafe_new ~/mscafe
+            
+            # Set up PM2 process manager (better than direct node)
+            echo "🔧 Setting up PM2 process manager..."
+            npm install -g pm2
+            
+            # Create PM2 ecosystem file
+            cd ~/mscafe
+            cat > ecosystem.config.js << 'EOF'
+module.exports = {
+  apps: [{
+    name: 'mscafe-backend',
+    script: './backend/server.js',
+    cwd: '~/mscafe',
+    instances: 1,
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 5000
+    }
+  }]
+};
+EOF
+            
+            # Start application with PM2
+            echo "🚀 Starting application..."
+            cd ~/mscafe
+            pm2 start ecosystem.config.js
+            pm2 save
+            pm2 startup
+            
+            # Setup Nginx (web server) configuration
+            echo "🌐 Setting up Nginx..."
+            sudo tee /etc/nginx/sites-available/mscafe << 'EOF'
+server {
+    listen 80;
+    server_name your-domain.com www.your-domain.com;
+    
+    # Serve React frontend
+    location / {
+        root /home/$USER/mscafe/frontend;
+        try_files $uri $uri/ /index.html;
+        index index.html;
+    }
+    
+    # Proxy API requests to Node.js backend
+    location /api/ {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+EOF
+            
+            # Enable the site
+            sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
+            sudo nginx -t && sudo systemctl reload nginx
+            
+            echo "✅ Deployment completed successfully!"
+            echo "🌐 Frontend: http://your-domain.com"
+            echo "🔗 Backend API: http://your-domain.com/api"
+            echo "📊 PM2 Status:"
+            pm2 status
