@@ -111,48 +111,21 @@ jobs:
             pm2 save
             pm2 startup
 
-            # Install and configure nginx for frontend
-            sudo apt update
-            sudo apt install -y nginx
+            # Install simple HTTP server for frontend
+            npm install -g serve
 
-            # Create nginx configuration for frontend
-            sudo tee /etc/nginx/sites-available/mscafe > /dev/null <<EOF
-            server {
-                listen 80;
-                server_name _;
-                
-                # Serve React frontend
-                location / {
-                    root /home/$(whoami)/mscafe/frontend;
-                    index index.html;
-                    try_files \$uri \$uri/ /index.html;
-                }
-                
-                # Proxy API requests to backend
-                location /api/ {
-                    proxy_pass http://localhost:5000;
-                    proxy_http_version 1.1;
-                    proxy_set_header Upgrade \$http_upgrade;
-                    proxy_set_header Connection 'upgrade';
-                    proxy_set_header Host \$host;
-                    proxy_set_header X-Real-IP \$remote_addr;
-                    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-                    proxy_set_header X-Forwarded-Proto \$scheme;
-                    proxy_cache_bypass \$http_upgrade;
-                }
-            }
-            EOF
+            # Start frontend server with PM2
+            cd ~/mscafe/frontend
+            pm2 start "serve -s . -p 3000" --name mscafe-frontend
 
-            # Enable the site
-            sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
-            sudo rm -f /etc/nginx/sites-enabled/default
-
-            # Test and reload nginx
-            sudo nginx -t
-            sudo systemctl enable nginx
-            sudo systemctl restart nginx
+            # Save PM2 configuration
+            pm2 save
 
             echo "Deployment completed!"
-            echo "Frontend: http://$(curl -s ifconfig.me)/"
-            echo "Backend API: http://$(curl -s ifconfig.me)/api/"
+            echo ""
+            echo "🚀 Your application is now running:"
+            echo "   Frontend: http://$(curl -s ifconfig.me):3000"
+            echo "   Backend:  http://$(curl -s ifconfig.me):5000"
+            echo ""
+            echo "📊 PM2 Status:"
             pm2 status
