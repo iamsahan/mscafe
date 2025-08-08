@@ -1,0 +1,59 @@
+name: Deploy React + Node App to VPS
+
+on:
+  push:
+    branches:
+      - prod # run deploy only when pushing to main branch
+  workflow_dispatch: # allow manual trigger from GitHub UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repo code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js environment (version 20)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Step 3: Build React frontend
+      - name: Build React frontend
+        working-directory: Frontend
+        run: |
+          npm ci
+          npm run build
+
+      # Step 4: Prepare files for deployment (copy build and backend code)
+      - name: Prepare deployment package
+        run: |
+          mkdir deploy_package
+          cp -r Frontend/build deploy_package/frontend_build
+          rsync -av --exclude 'node_modules' --exclude '.env' backend/ deploy_package/backend
+
+      # Step 5: Copy files to VPS via SCP
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          source: "deploy_package/*"
+          target: "${{ secrets.TARGET_DIR }}/_tmp_build"
+
+      # Step 6: Run deploy.sh script on VPS via SSH
+      - name: Run deploy script on VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            chmod +x ~/deploy.sh
+            ~/deploy.sh
