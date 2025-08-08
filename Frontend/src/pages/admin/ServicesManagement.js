@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -14,13 +14,9 @@ import {
   WrenchScrewdriverIcon,
   StarIcon,
   ClockIcon,
-  CurrencyDollarIcon,
-  XMarkIcon,
-  CheckCircleIcon,
-  XCircleIcon
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
-import AdminBreadcrumb from '../../components/Layout/AdminBreadcrumb';
 import { servicesAPI } from '../../services/api';
 
 // FormModal Component - moved outside to prevent re-creation
@@ -385,9 +381,9 @@ const ServicesManagement = () => {
     return () => {
       isMounted = false;
     };
-  }, []); // Empty dependency array to run only once
+  }, [fetchServices]); // Add fetchServices to dependency array
 
-  const fetchServices = async () => {
+  const fetchServices = useCallback(async () => {
     try {
       setLoading(true);
       // Include inactive services for admin view
@@ -415,7 +411,7 @@ const ServicesManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [services]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;

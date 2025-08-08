@@ -4,17 +4,11 @@ import { useAdminAuth } from '../../contexts/AdminAuthContext';
 import { adminAPI } from '../../services/api';
 import { toast } from 'react-toastify';
 import {
-  ChartBarIcon,
   CubeIcon,
   WrenchScrewdriverIcon,
   CreditCardIcon,
   UsersIcon,
-  ArrowUpIcon,
-  ArrowDownIcon,
-  EyeIcon,
   CalendarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon,
   ClockIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon
@@ -27,8 +21,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell

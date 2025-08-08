@@ -12,7 +12,6 @@ import {
 } from '@heroicons/react/24/outline';
 
 const Contact = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const contactInfo = [
     {
@@ -39,12 +38,6 @@ const Contact = () => {
       description: 'Visit our office location',
       color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
     }
-  ];
-
-  const businessHours = [
-    { day: 'Monday - Friday', hours: '9:00 AM - 6:00 PM', available: true },
-    { day: 'Saturday', hours: '10:00 AM - 4:00 PM', available: true },
-    { day: 'Sunday', hours: 'Closed', available: false }
   ];
 
   const supportOptions = [
@@ -336,7 +329,7 @@ const Contact = () => {
                   </div>
                   <div className="aspect-video bg-gradient-to-br from-secondary-50 to-secondary-100 dark:from-secondary-700 dark:to-secondary-800 rounded-2xl overflow-hidden relative">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.2491841860997!2d-83.66474862487563!3d32.83865338083459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f3fea4bce97a9f%3A0xd608d9a7fde10aec!2sMoney%20Solution%20Cafe!5e0!3m2!1sen!2slk!4v1753806816844!5m2!1sen!2slk"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.2491841860997!2d-83.66474862487563!3d32.83965338083459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f3fea4bce97a9f%3A0xd608d9a7fde10aec!2sMoney%20Solution%20Cafe!5e0!3m2!1sen!2slk!4v1753806816844!5m2!1sen!2slk"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
@@ -344,6 +337,7 @@ const Contact = () => {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       className="absolute inset-0 w-full h-full rounded-2xl"
+                      title="Money Solution Cafe Location Map"
                     />
                   </div>
                 </div>

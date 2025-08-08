@@ -5,17 +5,11 @@ import {
   PlusIcon,
   PencilIcon,
   TrashIcon,
-  EyeIcon,
   MagnifyingGlassIcon,
   FunnelIcon,
   ChevronUpDownIcon,
   CreditCardIcon,
-  StarIcon,
-  BanknotesIcon,
-  CalendarIcon,
-  XMarkIcon,
-  CheckCircleIcon,
-  ExclamationTriangleIcon
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { priorityTradelinesAUAPI } from '../../services/api';
@@ -340,12 +334,6 @@ const PriorityTradelinesManagement = () => {
       }
     });
 
-  const getAccountTypeColor = (accountType) => {
-    return accountType === 'primary' 
-      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-      : 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
-  };
-
   const FormModal = ({ isOpen, onClose, onSubmit, title, isEdit = false, selectedTradeline = null }) => {
     // Create refs for all form inputs to manage them manually
     const formRef = useRef();
@@ -359,13 +347,13 @@ const PriorityTradelinesManagement = () => {
             if (isEdit && selectedTradeline) {
               // Fill form with selected tradeline data for edit
               const form = formRef.current;
-              if (form && form.spots) form.spots.value = formData.spots || '';
-              if (form && form.age) form.age.value = formData.age || '';
-              if (form && form.bank) form.bank.value = formData.bank || '';
-              if (form && form.creditLimit) form.creditLimit.value = formData.creditLimit || '';
-              if (form && form.statement) form.statement.value = formData.statement || '';
-              if (form && form.closingDate) form.closingDate.value = formData.closingDate || '';
-              if (form && form.price) form.price.value = formData.price || '';
+              if (form && form.spots) form.spots.value = selectedTradeline.spots || '';
+              if (form && form.age) form.age.value = selectedTradeline.age || '';
+              if (form && form.bank) form.bank.value = selectedTradeline.bank || '';
+              if (form && form.creditLimit) form.creditLimit.value = selectedTradeline.creditLimit || '';
+              if (form && form.statement) form.statement.value = selectedTradeline.statement || '';
+              if (form && form.closingDate) form.closingDate.value = selectedTradeline.closingDate || '';
+              if (form && form.price) form.price.value = selectedTradeline.price || '';
               // isActive is now controlled by React state, no need to set manually
             } else {
               // Reset form for create and set default values
@@ -375,7 +363,7 @@ const PriorityTradelinesManagement = () => {
           }
         }, 50);
       }
-    }, [isOpen, isEdit, selectedTradeline, formData]);
+    }, [isOpen, isEdit, selectedTradeline]);
 
     return (
       <AnimatePresence>

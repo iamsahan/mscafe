@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { coursesAPI } from '../../services/api';
@@ -6,7 +6,6 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import {
   CheckCircleIcon,
   StarIcon,
-  ClockIcon,
   UserGroupIcon,
   AcademicCapIcon,
   DocumentTextIcon,
@@ -16,8 +15,6 @@ import {
   GiftIcon,
   ShieldCheckIcon,
   ChatBubbleLeftRightIcon,
-  PlayCircleIcon,
-  BookOpenIcon,
   TrophyIcon
 } from '@heroicons/react/24/outline';
 
@@ -30,11 +27,7 @@ const BuyCourse = () => {
   const [imageError, setImageError] = useState(false);
   const [isEnrolling, setIsEnrolling] = useState(false);
 
-  useEffect(() => {
-    fetchCourse();
-  }, [id]);
-
-  const fetchCourse = async () => {
+  const fetchCourse = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -46,7 +39,11 @@ const BuyCourse = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchCourse();
+  }, [fetchCourse]);
 
   const handleImageError = () => {
     setImageError(true);

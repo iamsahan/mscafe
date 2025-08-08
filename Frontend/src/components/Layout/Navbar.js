@@ -4,7 +4,6 @@ import logo from '../../images/logo.png';
 import {
   Bars3Icon,
   XMarkIcon,
-  UserIcon,
   ChevronDownIcon,
   HomeIcon,
   CurrencyDollarIcon,
@@ -17,19 +16,11 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [companyMenuOpen, setCompanyMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const userMenuRef = useRef(null);
   const companyMenuRef = useRef(null);
-
-  // Mock user data
-  const user = isAuthenticated ? {
-    first_name: 'John',
-    last_name: 'Doe',
-    email: 'john.doe@example.com'
-  } : null;
 
   // Handle scroll effect
   useEffect(() => {
@@ -41,12 +32,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close user menu when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-        setUserMenuOpen(false);
-      }
       if (companyMenuRef.current && !companyMenuRef.current.contains(event.target)) {
         setCompanyMenuOpen(false);
       }
@@ -55,11 +43,6 @@ const Navbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUserMenuOpen(false);
-  };
 
   const toggleAuth = () => {
     setIsAuthenticated(!isAuthenticated);

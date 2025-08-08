@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { servicesAPI } from '../../services/api';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import {
-  CheckCircleIcon,
   StarIcon,
   ClockIcon,
-  UserGroupIcon,
   CurrencyDollarIcon,
   ArrowLeftIcon,
-  ShoppingCartIcon,
-  GiftIcon,
   ShieldCheckIcon,
   ChatBubbleLeftRightIcon,
   CalendarDaysIcon,
-  PhoneIcon,
-  EnvelopeIcon,
-  MapPinIcon,
   DocumentTextIcon,
   CalculatorIcon,
   CreditCardIcon,
@@ -34,11 +27,7 @@ const BuyService = () => {
   const [imageError, setImageError] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
 
-  useEffect(() => {
-    fetchService();
-  }, [id]);
-
-  const fetchService = async () => {
+  const fetchService = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -50,7 +39,11 @@ const BuyService = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchService();
+  }, [fetchService]);
 
   const handleImageError = () => {
     setImageError(true);

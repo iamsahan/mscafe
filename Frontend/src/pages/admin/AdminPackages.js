@@ -13,8 +13,6 @@ import {
   ChevronUpDownIcon,
   CubeIcon,
   StarIcon,
-  TagIcon,
-  CalendarIcon,
   XMarkIcon,
   CheckCircleIcon
 } from '@heroicons/react/24/outline';

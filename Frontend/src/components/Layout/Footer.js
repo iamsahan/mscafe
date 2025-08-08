@@ -36,18 +36,38 @@ const Footer = () => {
               professional development opportunities.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-secondary-400 hover:text-primary-400 transition-colors duration-200">
+              <button 
+                type="button"
+                className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
+                onClick={() => window.open('https://facebook.com', '_blank')}
+                aria-label="Visit our Facebook page"
+              >
                 <FacebookIcon className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-secondary-400 hover:text-primary-400 transition-colors duration-200">
+              </button>
+              <button 
+                type="button"
+                className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
+                onClick={() => window.open('https://twitter.com', '_blank')}
+                aria-label="Visit our Twitter page"
+              >
                 <TwitterIcon className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-secondary-400 hover:text-primary-400 transition-colors duration-200">
+              </button>
+              <button 
+                type="button"
+                className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
+                onClick={() => window.open('https://linkedin.com', '_blank')}
+                aria-label="Visit our LinkedIn page"
+              >
                 <LinkedInIcon className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-secondary-400 hover:text-primary-400 transition-colors duration-200">
+              </button>
+              <button 
+                type="button"
+                className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
+                onClick={() => window.open('https://instagram.com', '_blank')}
+                aria-label="Visit our Instagram page"
+              >
                 <InstagramIcon className="w-5 h-5" />
-              </a>
+              </button>
             </div>
           </div>
 

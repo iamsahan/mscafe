@@ -4,7 +4,6 @@ import {
   UserGroupIcon,
   AcademicCapIcon,
   TrophyIcon,
-  ChartBarIcon,
   ClockIcon,
   ShieldCheckIcon,
   StarIcon,

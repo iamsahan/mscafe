@@ -19,7 +19,7 @@ export const AdminAuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkAuthStatus();
-  }, []);
+  }, [checkAuthStatus]);
 
   const checkAuthStatus = useCallback(async () => {
     try {
@@ -101,7 +101,7 @@ export const AdminAuthProvider = ({ children }) => {
     updateProfile,
     changePassword,
     checkAuthStatus
-  }), [admin, loading, isAuthenticated, checkAuthStatus]);
+  }), [admin, loading, isAuthenticated, login, logout, updateProfile, changePassword, checkAuthStatus]);
 
   return (
     <AdminAuthContext.Provider value={value}>

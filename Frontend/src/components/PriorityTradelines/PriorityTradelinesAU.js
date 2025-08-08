@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { priorityTradelinesAUAPI } from '../../services/api';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import zelleIcon from '../../images/z.png';
@@ -28,7 +28,7 @@ const PriorityTradelinesAU = () => {
   const [stats, setStats] = useState(null);
 
   // Fetch tradelines data
-  const fetchTradelines = async () => {
+  const fetchTradelines = useCallback(async () => {
     try {
       setLoading(true);
       const queryParams = {
@@ -55,7 +55,7 @@ const PriorityTradelinesAU = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.page, pagination.limit, filters]);
 
   // Fetch statistics
   const fetchStats = async () => {
@@ -86,7 +86,7 @@ const PriorityTradelinesAU = () => {
         document.head.removeChild(existingScript);
       }
     };
-  }, [pagination.page, pagination.limit]);
+  }, [fetchTradelines, pagination.page, pagination.limit]);
 
   // Auto-filter when filters change
   useEffect(() => {
@@ -96,7 +96,7 @@ const PriorityTradelinesAU = () => {
     }, 500); // 500ms delay for debouncing
 
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [filters, fetchTradelines]);
 
   // Handle filter changes
   const handleFilterChange = (e) => {
