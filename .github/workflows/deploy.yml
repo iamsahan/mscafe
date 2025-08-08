@@ -120,7 +120,7 @@ jobs:
             
             # Create PM2 ecosystem file
             cd ~/mscafe
-            cat > ecosystem.config.js << 'EOF'
+            cat > ecosystem.config.js << "EOF"
 module.exports = {
   apps: [{
     name: 'mscafe-backend',
@@ -147,7 +147,7 @@ EOF
             
             # Setup Nginx (web server) configuration
             echo "🌐 Setting up Nginx..."
-            sudo tee /etc/nginx/sites-available/mscafe << 'EOF'
+            sudo tee /etc/nginx/sites-available/mscafe << "EOF"
 server {
     listen 80;
     server_name your-domain.com www.your-domain.com;
