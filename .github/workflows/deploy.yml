@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           port: ${{ secrets.HOSTINGER_PORT || 22 }}
           source: "deploy/*"
-          target: "~/"
+          target: "/tmp/"
           strip_components: 1
           overwrite: true
 
@@ -85,8 +85,17 @@ jobs:
               mv ~/mscafe ~/mscafe_backup
             fi
 
-            # Move new app to production
-            mv ~/app ~/mscafe
+            # Create application directory
+            mkdir -p ~/mscafe
+
+            # Move files from tmp to home directory
+            if [ -d /tmp/app ]; then
+              cp -r /tmp/app/* ~/mscafe/
+              rm -rf /tmp/app
+            fi
+
+            # Set proper permissions
+            chmod -R 755 ~/mscafe
 
             # Install production dependencies
             cd ~/mscafe/backend
