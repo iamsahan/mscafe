@@ -2,18 +2,8 @@ name: Deploy React + Node App to VPS
 
 on:
   push:
-    # Step 6: Run deploy script on VPS via SSH
-    - name: Run deploy script on VPS
-      uses: appleboy/ssh-action@v1.3.0
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ secrets.SSH_PORT || 22 }}
-        script: |
-          chmod +x ~/deploy.sh
-          ~/deploy.shs:
-    - prod # run deploy only when pushing to main branch
+    branches:
+      - prod # run deploy only when pushing to main branch
   workflow_dispatch: # allow manual trigger from GitHub UI
 
 jobs:
