@@ -111,12 +111,16 @@ jobs:
             pm2 save
             pm2 startup
 
-            # Install simple HTTP server for frontend
-            npm install -g serve
+            # Stop any existing frontend process
+            pm2 stop mscafe-frontend || true
+            pm2 delete mscafe-frontend || true
 
-            # Start frontend server with PM2
+            # Install serve locally for frontend
             cd ~/mscafe/frontend
-            pm2 start "serve -s . -p 3000" --name mscafe-frontend
+            npm install serve
+
+            # Start frontend server with PM2 using local serve
+            pm2 start "npx serve -s . -p 3000" --name mscafe-frontend
 
             # Save PM2 configuration
             pm2 save
