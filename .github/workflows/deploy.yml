@@ -39,9 +39,9 @@ jobs:
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: "148.230.87.141"
-          username: "deploy"
-          key: "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACAUuoF+X5Re5UQWoCYrrF9kmeZ1VynslmKtHZG933DK8gAAAJiZ/PyBmfz8gQAAAAtzc2gtZWQyNTUxOQAAACAUuoF+X5Re5UQWoCYrrF9kmeZ1VynslmKtHZG933DK8gAAAEAHrsUM7alNdLCzK6I+OVyMc73CYdNB/JspvG3OCQhzzxS6gX5flF7lRBagJiusX2SZ5nVXKeyWYq0dkb3fcMryAAAADmdpdGh1Yi1hY3Rpb25zAQIDBAUGBw=="
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           source: "deploy_package/*"
           target: "${{ secrets.TARGET_DIR }}/_tmp_build"
