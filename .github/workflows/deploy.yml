@@ -2,8 +2,18 @@ name: Deploy React + Node App to VPS
 
 on:
   push:
-    branches:
-      - prod # run deploy only when pushing to main branch
+    # Step 6: Run deploy script on VPS via SSH
+    - name: Run deploy script on VPS
+      uses: appleboy/ssh-action@v1.3.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT || 22 }}
+        script: |
+          chmod +x ~/deploy.sh
+          ~/deploy.shs:
+    - prod # run deploy only when pushing to main branch
   workflow_dispatch: # allow manual trigger from GitHub UI
 
 jobs:
@@ -37,7 +47,7 @@ jobs:
 
       # Step 5: Copy files to VPS via SCP
       - name: Copy files to VPS
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@v0.1.8
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -45,6 +55,8 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           source: "deploy_package/*"
           target: "${{ secrets.TARGET_DIR }}/_tmp_build"
+          strip_components: 1
+          overwrite: true
 
       # Step 6: Run deploy.sh script on VPS via SSH
       - name: Run deploy script on VPS
