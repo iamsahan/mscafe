@@ -189,7 +189,13 @@ jobs:
 
             # Copy configuration to nginx directory and enable site
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
+            
+            # Remove ALL existing sites to avoid conflicts
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/default
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/cafe.com
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/*
+            
+            # Enable only our site
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/mscafe
 
             # Verify files exist and permissions
