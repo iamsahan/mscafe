@@ -115,21 +115,84 @@ jobs:
             pm2 stop mscafe-frontend || true
             pm2 delete mscafe-frontend || true
 
-            # Install serve locally for frontend
-            cd ~/mscafe/frontend
-            npm install serve
+            # Check if nginx is installed, install if not
+            if ! command -v nginx &> /dev/null; then
+              echo "Installing nginx..."
+              export DEBIAN_FRONTEND=noninteractive
+              sudo apt update
+              sudo apt install -y nginx
+            fi
 
-            # Start frontend server with PM2 using local serve
-            pm2 start "npx serve -s . -p 3000" --name mscafe-frontend
+            # Create nginx configuration
+            sudo tee /etc/nginx/sites-available/mscafe > /dev/null <<'EOF'
+            server {
+                listen 80;
+                listen [::]:80;
+                server_name _;
+                
+                # Serve React frontend
+                location / {
+                    root /home/USERNAME_PLACEHOLDER/mscafe/frontend;
+                    index index.html;
+                    try_files $uri $uri/ /index.html;
+                    
+                    # Cache static assets
+                    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+                        expires 1y;
+                        add_header Cache-Control "public, immutable";
+                    }
+                }
+                
+                # Proxy API requests to backend
+                location /api/ {
+                    proxy_pass http://localhost:5000;
+                    proxy_http_version 1.1;
+                    proxy_set_header Upgrade $http_upgrade;
+                    proxy_set_header Connection 'upgrade';
+                    proxy_set_header Host $host;
+                    proxy_set_header X-Real-IP $remote_addr;
+                    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto $scheme;
+                    proxy_cache_bypass $http_upgrade;
+                    proxy_read_timeout 300s;
+                    proxy_connect_timeout 75s;
+                }
+                
+                # Health check endpoint
+                location /health {
+                    proxy_pass http://localhost:5000/health;
+                    proxy_http_version 1.1;
+                    proxy_set_header Host $host;
+                }
+            }
+            EOF
 
-            # Save PM2 configuration
-            pm2 save
+            # Replace username placeholder with actual username
+            sudo sed -i "s/USERNAME_PLACEHOLDER/$(whoami)/g" /etc/nginx/sites-available/mscafe
+
+            # Enable the site and disable default
+            sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
+            sudo rm -f /etc/nginx/sites-enabled/default
+
+            # Test nginx configuration
+            sudo nginx -t
+
+            # Enable and start nginx
+            sudo systemctl enable nginx
+            sudo systemctl restart nginx
+
+            # Check nginx status
+            sudo systemctl status nginx --no-pager -l
 
             echo "Deployment completed!"
             echo ""
             echo "🚀 Your application is now running:"
-            echo "   Frontend: http://$(curl -s ifconfig.me):3000"
-            echo "   Backend:  http://$(curl -s ifconfig.me):5000"
+            echo "   Website: http://$(curl -s ifconfig.me)/"
+            echo "   API: http://$(curl -s ifconfig.me)/api/"
+            echo "   Backend Direct: http://$(curl -s ifconfig.me):5000"
             echo ""
             echo "📊 PM2 Status:"
             pm2 status
+            echo ""
+            echo "📊 Nginx Status:"
+            sudo systemctl is-active nginx
