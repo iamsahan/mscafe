@@ -5,7 +5,7 @@ require("dotenv").config();
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   "mscafe_user",
-  "SecurePassword123",
+  "SecurePassword@123",
   {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
