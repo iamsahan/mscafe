@@ -182,12 +182,24 @@ jobs:
 
             # Replace username in config
             sed -i "s/REPLACE_USERNAME/$(whoami)/g" ~/nginx-config/mscafe.conf
+            
+            # Verify the config file content
+            echo "Nginx config content:"
+            cat ~/nginx-config/mscafe.conf | head -20
 
             # Copy configuration to nginx directory and enable site
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
-            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/default
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/mscafe
 
+            # Verify files exist and permissions
+            echo "Checking frontend files..."
+            ls -la ~/mscafe/frontend/ || echo "Frontend directory not found!"
+            
+            # Check which sites are enabled
+            echo "Enabled nginx sites:"
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ls -la /etc/nginx/sites-enabled/
+            
             # Test nginx configuration
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S nginx -t
 
