@@ -1,4 +1,4 @@
-name: Deploy to Hostinger VPS
+name: Deploy to Hostinger VPS with Nginx
 
 on:
   push:
@@ -111,28 +111,33 @@ jobs:
             pm2 save
             pm2 startup
 
-            # Stop any existing frontend process
-            pm2 stop mscafe-frontend || true
-            pm2 delete mscafe-frontend || true
-
-            # Check if nginx is installed, install if not
+            # Install nginx if not present
             if ! command -v nginx &> /dev/null; then
-              echo "Installing nginx..."
-              export DEBIAN_FRONTEND=noninteractive
-              sudo apt update
-              sudo apt install -y nginx
+                echo "Installing nginx..."
+                export DEBIAN_FRONTEND=noninteractive
+                echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/systemctl, /usr/sbin/nginx" | sudo tee -a /etc/sudoers.d/deployment
+                sudo apt update
+                sudo apt install -y nginx
             fi
 
-            # Create nginx configuration
-            sudo tee /etc/nginx/sites-available/mscafe > /dev/null <<'EOF'
+            # Create nginx configuration directory in user space first
+            mkdir -p ~/nginx-config
+
+            # Create nginx configuration file
+            cat > ~/nginx-config/mscafe.conf <<'EOF'
             server {
                 listen 80;
                 listen [::]:80;
                 server_name _;
                 
+                # Security headers
+                add_header X-Frame-Options "SAMEORIGIN" always;
+                add_header X-XSS-Protection "1; mode=block" always;
+                add_header X-Content-Type-Options "nosniff" always;
+                
                 # Serve React frontend
                 location / {
-                    root /home/USERNAME_PLACEHOLDER/mscafe/frontend;
+                    root /home/REPLACE_USERNAME/mscafe/frontend;
                     index index.html;
                     try_files $uri $uri/ /index.html;
                     
@@ -140,6 +145,7 @@ jobs:
                     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
                         expires 1y;
                         add_header Cache-Control "public, immutable";
+                        access_log off;
                     }
                 }
                 
@@ -163,36 +169,52 @@ jobs:
                     proxy_pass http://localhost:5000/health;
                     proxy_http_version 1.1;
                     proxy_set_header Host $host;
+                    access_log off;
+                }
+                
+                # Block access to sensitive files
+                location ~ /\. {
+                    deny all;
+                    access_log off;
+                    log_not_found off;
                 }
             }
             EOF
 
-            # Replace username placeholder with actual username
-            sudo sed -i "s/USERNAME_PLACEHOLDER/$(whoami)/g" /etc/nginx/sites-available/mscafe
+            # Replace username in config
+            sed -i "s/REPLACE_USERNAME/$(whoami)/g" ~/nginx-config/mscafe.conf
 
-            # Enable the site and disable default
+            # Copy configuration to nginx directory and enable site
+            sudo cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
             sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
             sudo rm -f /etc/nginx/sites-enabled/default
 
             # Test nginx configuration
             sudo nginx -t
 
-            # Enable and start nginx
+            # Restart nginx to apply changes
             sudo systemctl enable nginx
             sudo systemctl restart nginx
 
-            # Check nginx status
-            sudo systemctl status nginx --no-pager -l
+            # Verify nginx is running
+            sleep 2
+            NGINX_STATUS=$(sudo systemctl is-active nginx)
+
+            # Get public IP
+            PUBLIC_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "YOUR_SERVER_IP")
 
             echo "Deployment completed!"
             echo ""
             echo "🚀 Your application is now running:"
-            echo "   Website: http://$(curl -s ifconfig.me)/"
-            echo "   API: http://$(curl -s ifconfig.me)/api/"
-            echo "   Backend Direct: http://$(curl -s ifconfig.me):5000"
+            echo "   Website: http://$PUBLIC_IP/"
+            echo "   API: http://$PUBLIC_IP/api/"
+            echo "   Backend Direct: http://$PUBLIC_IP:5000"
             echo ""
-            echo "📊 PM2 Status:"
+            echo "📊 Service Status:"
+            echo "   PM2: $(pm2 list | grep -o 'online\|stopped\|errored' | head -1 || echo 'checking...')"
+            echo "   Nginx: $NGINX_STATUS"
+            echo ""
+            echo "📊 PM2 Processes:"
             pm2 status
             echo ""
-            echo "📊 Nginx Status:"
-            sudo systemctl is-active nginx
+            echo "🔧 Nginx Configuration: /etc/nginx/sites-available/mscafe"
