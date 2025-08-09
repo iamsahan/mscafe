@@ -97,6 +97,13 @@ jobs:
             # Set proper permissions
             chmod -R 755 ~/mscafe
 
+            # Give nginx (www-data) access to the home directory and frontend files
+            chmod 755 ~
+            chmod -R 755 ~/mscafe/frontend
+
+            # Add www-data user to deploy group for file access
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S usermod -a -G $(whoami) www-data
+
             # Install production dependencies
             cd ~/mscafe/backend
             npm install --production
@@ -134,9 +141,9 @@ jobs:
                 add_header X-XSS-Protection "1; mode=block" always;
                 add_header X-Content-Type-Options "nosniff" always;
                 
-                # Serve React frontend
+                # Serve React frontend from /var/www/html (nginx default location)
                 location / {
-                    root /home/REPLACE_USERNAME/mscafe/frontend;
+                    root /var/www/html/mscafe;
                     index index.html;
                     try_files $uri $uri/ /index.html;
                     
@@ -180,15 +187,14 @@ jobs:
             }
             EOF
 
-            # Replace username in config
-            sed -i "s/REPLACE_USERNAME/$(whoami)/g" ~/nginx-config/mscafe.conf
-
-            # Verify the config file content
-            echo "Nginx config content:"
-            cat ~/nginx-config/mscafe.conf | head -20
-
             # Copy configuration to nginx directory and enable site
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
+
+            # Copy frontend files to nginx-accessible location
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S mkdir -p /var/www/html/mscafe
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S cp -r ~/mscafe/frontend/* /var/www/html/mscafe/
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S chown -R www-data:www-data /var/www/html/mscafe
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S chmod -R 755 /var/www/html/mscafe
 
             # Remove ALL existing sites first (before enabling new one)
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/*
@@ -197,16 +203,16 @@ jobs:
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/mscafe
 
             # Verify files exist and permissions
-            echo "Checking frontend files..."
-            ls -la ~/mscafe/frontend/ || echo "Frontend directory not found!"
+            echo "Checking frontend files in nginx location..."
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ls -la /var/www/html/mscafe/ || echo "Frontend directory not found!"
 
-            # Test if index.html is readable
-            echo "Testing frontend index.html accessibility..."
-            if [ -f ~/mscafe/frontend/index.html ]; then
-              echo "✅ index.html exists and is readable"
-              head -5 ~/mscafe/frontend/index.html
+            # Test if index.html is readable by nginx
+            echo "Testing nginx accessibility..."
+            if echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S test -f /var/www/html/mscafe/index.html; then
+              echo "✅ index.html exists in nginx location"
+              echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S head -5 /var/www/html/mscafe/index.html
             else
-              echo "❌ index.html not found!"
+              echo "❌ index.html not found in nginx location!"
             fi
 
             # Check which sites are enabled
