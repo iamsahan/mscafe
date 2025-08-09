@@ -222,9 +222,17 @@ jobs:
             # Test nginx configuration
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S nginx -t
 
+            # Clear old error logs
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S truncate -s 0 /var/log/nginx/error.log
+
             # Restart nginx to apply changes
             echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl enable nginx
-            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl restart nginx
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl stop nginx
+            sleep 2
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl start nginx
+
+            # Clear any nginx cache and force reload
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S nginx -s reload || true
 
             # Check nginx error logs for any issues
             echo "Checking nginx error logs..."
