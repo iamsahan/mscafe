@@ -38,7 +38,7 @@ const GetFinancialHelp = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await servicesAPI.getAll();
+      const response = await servicesAPI.getAll({ limit: 1000 });
       setServices(response.data.data || []);
     } catch (error) {
       console.error('Failed to fetch services:', error);
@@ -363,33 +363,25 @@ const GetFinancialHelp = () => {
                     </div>
 
                     <div className="p-6">
-                      <div className="mb-6">
+                      <div className="mb-4">
                         <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-3 bg-gradient-to-r from-gray-900 to-[#93268f] dark:from-white dark:to-purple-200 bg-clip-text text-transparent">
                           {selectedService.name}
                         </h3>
-                        <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-300">
+                        <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center bg-purple-100 dark:bg-purple-950 dark:bg-opacity-20 px-3 py-1.5 rounded-lg">
                             <ClockIcon className="w-4 h-4 mr-2 text-[#93268f]" />
                             <span className="font-medium">{selectedService.duration_minutes || selectedService.durationMinutes} minutes</span>
                           </div>
                         </div>
+                        {selectedService.description && (
+                          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                            {selectedService.description.length > 100 
+                              ? selectedService.description.substring(0, 100) + '...' 
+                              : selectedService.description
+                            }
+                          </p>
+                        )}
                       </div>
-
-                      <p className="text-gray-700 dark:text-gray-200 mb-8 leading-relaxed text-base font-light">
-                        {selectedService.description}
-                      </p>
-
-                      {selectedService.requirements && (
-                        <div className="mb-8 p-5 bg-gradient-to-r from-[#f4b342]/20 to-orange-100 dark:from-orange-950 dark:to-orange-950 dark:bg-opacity-20 rounded-xl border border-orange-200 dark:border-orange-900">
-                          <h4 className="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
-                            <CheckCircleIcon className="w-5 h-5 mr-2 text-[#f4b342]" />
-                            Requirements
-                          </h4>
-                          <div className="text-gray-700 dark:text-gray-200 leading-relaxed text-sm">
-                            {selectedService.requirements}
-                          </div>
-                        </div>
-                      )}
 
                       <div className="flex flex-col space-y-3">
                         <Link
