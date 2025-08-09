@@ -68,12 +68,12 @@ jobs:
 
             # Install Node.js if needed
             if ! command -v node &> /dev/null; then
-              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-              sudo apt-get install -y nodejs
+              curl -fsSL https://deb.nodesource.com/setup_20.x | echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S bash -
+              echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S apt-get install -y nodejs
             fi
 
             # Install PM2 globally
-            sudo npm install -g pm2
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S npm install -g pm2
 
             # Stop existing app
             pm2 stop mscafe-app || true
@@ -115,9 +115,8 @@ jobs:
             if ! command -v nginx &> /dev/null; then
                 echo "Installing nginx..."
                 export DEBIAN_FRONTEND=noninteractive
-                echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/apt, /usr/bin/systemctl, /usr/sbin/nginx" | sudo tee -a /etc/sudoers.d/deployment
-                sudo apt update
-                sudo apt install -y nginx
+                echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S apt update
+                echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S apt install -y nginx
             fi
 
             # Create nginx configuration directory in user space first
@@ -185,20 +184,20 @@ jobs:
             sed -i "s/REPLACE_USERNAME/$(whoami)/g" ~/nginx-config/mscafe.conf
 
             # Copy configuration to nginx directory and enable site
-            sudo cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
-            sudo ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
-            sudo rm -f /etc/nginx/sites-enabled/default
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S cp ~/nginx-config/mscafe.conf /etc/nginx/sites-available/mscafe
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S ln -sf /etc/nginx/sites-available/mscafe /etc/nginx/sites-enabled/
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S rm -f /etc/nginx/sites-enabled/default
 
             # Test nginx configuration
-            sudo nginx -t
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S nginx -t
 
             # Restart nginx to apply changes
-            sudo systemctl enable nginx
-            sudo systemctl restart nginx
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl enable nginx
+            echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl restart nginx
 
             # Verify nginx is running
             sleep 2
-            NGINX_STATUS=$(sudo systemctl is-active nginx)
+            NGINX_STATUS=$(echo "${{ secrets.HOSTINGER_PASSWORD }}" | sudo -S systemctl is-active nginx)
 
             # Get public IP
             PUBLIC_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "YOUR_SERVER_IP")
