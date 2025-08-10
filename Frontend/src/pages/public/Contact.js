@@ -20,7 +20,7 @@ const Contact = () => {
       value: '(478) 999-7456',
       href: 'tel:+14789997456',
       description: 'Call us for immediate assistance',
-      color: 'bg-green-100 text-green-600 dark:bg-green-900/20 dark:text-green-400'
+      color: 'bg-green-100 text-green-600'
     },
     {
       icon: EnvelopeIcon,
@@ -28,7 +28,7 @@ const Contact = () => {
       value: 'support@moneysolutioncafe.com',
       href: 'mailto:support@moneysolutioncafe.com',
       description: 'Send us a detailed message',
-      color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
+      color: 'bg-blue-100 text-blue-600'
     },
     {
       icon: MapPinIcon,
@@ -36,7 +36,7 @@ const Contact = () => {
       value: '900 Pio Nono Ave\nMacon, GA 31204',
       href: 'https://maps.google.com/?q=900+Pio+Nono+Ave+Macon+GA+31204',
       description: 'Visit our office location',
-      color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400'
+      color: 'bg-purple-100 text-purple-600'
     }
   ];
 
@@ -79,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-secondary-900">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-[#93268f] to-purple-900 py-24 lg:py-32">
         <div className="absolute inset-0">
@@ -160,17 +160,17 @@ const Contact = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl"
                      style={{background: `linear-gradient(135deg, #10b981, #059669)`}}></div>
-                <div className="relative bg-white dark:bg-secondary-800 p-8 rounded-2xl shadow-xl border border-secondary-100 dark:border-secondary-700 hover:shadow-2xl transition-all duration-300">
+                <div className="relative bg-white p-8 rounded-2xl shadow-xl border border-secondary-100 hover:shadow-2xl transition-all duration-300">
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${option.color} mb-6`}>
                     <option.icon className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-secondary-900 dark:text-white mb-3">
+                  <h3 className="text-2xl font-bold text-secondary-900 mb-3">
                     {option.title}
                   </h3>
-                  <p className="text-secondary-600 dark:text-secondary-400 mb-4 leading-relaxed">
+                  <p className="text-secondary-600 mb-4 leading-relaxed">
                     {option.description}
                   </p>
-                  <div className="flex items-center text-sm font-semibold text-green-600 dark:text-green-400">
+                  <div className="flex items-center text-sm font-semibold text-green-600">
                     <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
                     {option.available}
                   </div>
@@ -198,10 +198,10 @@ const Contact = () => {
                 >
                   <ChatBubbleLeftRightIcon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h2 className="text-4xl font-bold text-secondary-900 dark:text-white mb-4">
+                <h2 className="text-4xl font-bold text-secondary-900 mb-4">
                   Send Us a Message
                 </h2>
-                <p className="text-lg text-secondary-600 dark:text-secondary-400 leading-relaxed">
+                <p className="text-lg text-secondary-600 leading-relaxed">
                   Fill out the form below and we'll get back to you within 24 hours. 
                   Our team is ready to help you achieve your financial goals.
                 </p>
@@ -210,7 +210,7 @@ const Contact = () => {
               {/* Embedded Contact Form */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-purple-600/10 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-white dark:bg-secondary-800 p-8 rounded-3xl shadow-2xl border border-secondary-100 dark:border-secondary-700">
+                <div className="relative bg-white p-8 rounded-3xl shadow-2xl border border-secondary-100">
                   <div className="w-full" style={{ height: '882px' }}>
                     <iframe
                       src="https://api.leadconnectorhq.com/widget/form/TTqBTsHvipiLYIR0a28A"
@@ -249,10 +249,10 @@ const Contact = () => {
                 >
                   <PhoneIcon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h2 className="text-4xl font-bold text-secondary-900 dark:text-white mb-4">
+                <h2 className="text-4xl font-bold text-secondary-900 mb-4">
                   Contact Information
                 </h2>
-                <p className="text-lg text-secondary-600 dark:text-secondary-400">
+                <p className="text-lg text-secondary-600">
                   Multiple ways to reach our expert team
                 </p>
               </div>
@@ -275,14 +275,14 @@ const Contact = () => {
                     whileHover={{ scale: 1.02, y: -4 }}
                     className="block group"
                   >
-                    <div className="relative overflow-hidden bg-white dark:bg-secondary-800 p-8 rounded-2xl shadow-lg border border-secondary-100 dark:border-secondary-700 hover:shadow-2xl transition-all duration-300">
+                    <div className="relative overflow-hidden bg-white p-8 rounded-2xl shadow-lg border border-secondary-100 hover:shadow-2xl transition-all duration-300">
                       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-purple-600"></div>
                       <div className="flex items-start space-x-6">
                         <div className={`p-4 rounded-2xl ${item.color} transition-all duration-300 group-hover:scale-110`}>
                           <item.icon className="h-8 w-8" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-secondary-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          <h3 className="text-2xl font-bold text-secondary-900 mb-2 group-hover:text-primary-600 transition-colors">
                             {item.label}
                           </h3>
                           <p className="text-lg font-medium text-secondary-700 dark:text-secondary-300 mb-2 whitespace-pre-line">

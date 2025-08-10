@@ -83,7 +83,7 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-secondary-900">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-[#93268f] to-purple-900 py-24 lg:py-32">
         <div className="absolute inset-0">
@@ -152,7 +152,7 @@ const About = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-secondary-50 dark:bg-secondary-800">
+      <section className="py-16 bg-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             variants={staggerContainer}
@@ -174,10 +174,10 @@ const About = () => {
                       <Icon className="w-8 h-8" />
                     </div>
                   </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-secondary-900 dark:text-white mb-2">
+                  <div className="text-3xl lg:text-4xl font-bold text-secondary-900 mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-secondary-600 dark:text-secondary-300 font-medium">
+                  <div className="text-secondary-600 font-medium">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -197,26 +197,26 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 dark:text-white mb-6">
+              <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 mb-6">
                 Our Mission & Vision
               </h2>
               <div className="space-y-6">
-                <div className="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/20 dark:to-blue-900/20 p-6 rounded-2xl">
-                  <h3 className="text-xl font-semibold text-primary-700 dark:text-primary-300 mb-3">
+                <div className="bg-gradient-to-r from-primary-50 to-blue-50 p-6 rounded-2xl">
+                  <h3 className="text-xl font-semibold text-primary-700 mb-3">
                     🎯 Our Mission
                   </h3>
-                  <p className="text-secondary-700 dark:text-secondary-300 leading-relaxed">
+                  <p className="text-secondary-700 leading-relaxed">
                     To empower individuals and businesses with comprehensive tax education and professional 
                     financial services, helping them achieve financial success through expert guidance and 
                     innovative solutions.
                   </p>
                 </div>
                 
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-2xl">
-                  <h3 className="text-xl font-semibold text-purple-700 dark:text-purple-300 mb-3">
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl">
+                  <h3 className="text-xl font-semibold text-purple-700 mb-3">
                     🚀 Our Vision
                   </h3>
-                  <p className="text-secondary-700 dark:text-secondary-300 leading-relaxed">
+                  <p className="text-secondary-700 leading-relaxed">
                     To be the leading provider of tax education and financial services, recognized for 
                     excellence, innovation, and the positive impact we create in our clients' lives 
                     and careers.
@@ -270,7 +270,7 @@ const About = () => {
       </section>
 
       {/* Core Values Section */}
-      <section className="py-20 bg-secondary-50 dark:bg-secondary-800">
+      <section className="py-20 bg-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -279,10 +279,10 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 dark:text-white mb-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 mb-6">
               Our Core Values
             </h2>
-            <p className="text-xl text-secondary-600 dark:text-secondary-300 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
               The principles that guide everything we do and shape our commitment to excellence.
             </p>
           </motion.div>
@@ -300,15 +300,15 @@ const About = () => {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="bg-white dark:bg-secondary-700 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
+                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
                 >
                   <div className={`inline-flex p-4 rounded-2xl ${value.color} bg-opacity-10 mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className={`w-8 h-8 ${value.color}`} />
                   </div>
-                  <h3 className="text-xl font-bold text-secondary-900 dark:text-white mb-4">
+                  <h3 className="text-xl font-bold text-secondary-900 mb-4">
                     {value.title}
                   </h3>
-                  <p className="text-secondary-600 dark:text-secondary-300 leading-relaxed">
+                  <p className="text-secondary-600 leading-relaxed">
                     {value.description}
                   </p>
                 </motion.div>
@@ -328,10 +328,10 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 dark:text-white mb-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-secondary-900 mb-6">
               What We Offer
             </h2>
-            <p className="text-xl text-secondary-600 dark:text-secondary-300 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
               Comprehensive solutions designed to meet your financial education and professional development needs.
             </p>
           </motion.div>
@@ -347,12 +347,12 @@ const About = () => {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="bg-white dark:bg-secondary-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-secondary-100 dark:border-secondary-700"
+                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-secondary-100"
               >
-                <h3 className="text-2xl font-bold text-secondary-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-bold text-secondary-900 mb-4">
                   {service.title}
                 </h3>
-                <p className="text-secondary-600 dark:text-secondary-300 mb-6 leading-relaxed">
+                <p className="text-secondary-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
                 
@@ -360,7 +360,7 @@ const About = () => {
                   {service.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-center">
                       <StarIcon className="w-5 h-5 text-yellow-500 mr-3 flex-shrink-0" />
-                      <span className="text-secondary-700 dark:text-secondary-300">{feature}</span>
+                      <span className="text-secondary-700">{feature}</span>
                     </div>
                   ))}
                 </div>

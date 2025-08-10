@@ -114,7 +114,7 @@ const BuyService = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center">
+      <div className="min-h-screen bg-secondary-50 flex items-center justify-center">
         <LoadingSpinner size="w-12 h-12" />
       </div>
     );
@@ -122,12 +122,12 @@ const BuyService = () => {
 
   if (error || !service) {
     return (
-      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center pt-96">
+      <div className="min-h-screen bg-secondary-50 flex items-center justify-center pt-96">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-4">
+          <h2 className="text-2xl font-bold text-secondary-900 mb-4">
             Service Not Found
           </h2>
-          <p className="text-secondary-600 dark:text-secondary-400 mb-6">
+          <p className="text-secondary-600 mb-6">
             {error || 'The service you are looking for could not be found.'}
           </p>
           <Link
@@ -145,13 +145,13 @@ const BuyService = () => {
   const ServiceIcon = getServiceIcon(service.serviceType || service.service_type);
 
   return (
-    <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 pt-20">
+    <div className="min-h-screen bg-secondary-50 pt-20">
       {/* Header Navigation */}
-      <div className="bg-white dark:bg-secondary-800 shadow-sm">
+      <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             to="/financial-help"
-            className="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+            className="inline-flex items-center text-primary-600 hover:text-primary-700"
           >
             <ArrowLeftIcon className="w-5 h-5 mr-2" />
             Back to Services
@@ -172,20 +172,20 @@ const BuyService = () => {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="p-3 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
-                      <ServiceIcon className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                    <div className="p-3 bg-primary-100 rounded-lg">
+                      <ServiceIcon className="w-8 h-8 text-primary-600" />
                     </div>
                     {service.featured && (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                         <StarIcon className="w-3 h-3 mr-1" />
                         Featured
                       </span>
                     )}
                   </div>
-                  <h1 className="text-3xl font-bold text-secondary-900 dark:text-white mb-4">
+                  <h1 className="text-3xl font-bold text-secondary-900 mb-4">
                     {service.name}
                   </h1>
-                  <p className="text-lg text-secondary-600 dark:text-secondary-400 leading-relaxed">
+                  <p className="text-lg text-secondary-600 leading-relaxed">
                     {service.shortDescription || service.short_description}
                   </p>
                 </div>
@@ -205,18 +205,18 @@ const BuyService = () => {
 
               {/* Service Price & Duration */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="flex items-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-200 dark:border-primary-800">
-                  <CurrencyDollarIcon className="w-8 h-8 text-primary-600 dark:text-primary-400 mr-4" />
+                <div className="flex items-center p-4 bg-primary-50 rounded-lg border border-primary-200">
+                  <CurrencyDollarIcon className="w-8 h-8 text-primary-600 mr-4" />
                   <div>
-                    <div className="text-2xl font-bold text-primary-900 dark:text-primary-100">${service.price}</div>
-                    <div className="text-sm text-primary-700 dark:text-primary-300">Service Price</div>
+                    <div className="text-2xl font-bold text-primary-900">${service.price}</div>
+                    <div className="text-sm text-primary-700">Service Price</div>
                   </div>
                 </div>
-                <div className="flex items-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <ClockIcon className="w-8 h-8 text-blue-600 dark:text-blue-400 mr-4" />
+                <div className="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <ClockIcon className="w-8 h-8 text-blue-600 mr-4" />
                   <div>
-                    <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{service.durationMinutes || service.duration_minutes || 60} min</div>
-                    <div className="text-sm text-blue-700 dark:text-blue-300">Duration</div>
+                    <div className="text-2xl font-bold text-blue-900">{service.durationMinutes || service.duration_minutes || 60} min</div>
+                    <div className="text-sm text-blue-700">Duration</div>
                   </div>
                 </div>
               </div>
