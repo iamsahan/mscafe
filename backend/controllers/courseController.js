@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 // @route   GET /api/v1/courses
 // @access  Public
 const getCourses = asyncHandler(async (req, res) => {
-  const { category, featured, search, page = 1, limit = 20, includeInactive } = req.query;
+  const { category, featured, search, page = 1, limit = 1000, includeInactive } = req.query;
   
   // For admin requests, include inactive packages
   const where = {};

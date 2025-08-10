@@ -212,7 +212,7 @@ const getDashboardStats = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/admin/users
 // @access  Private (Super Admin)
 const getAdmins = asyncHandler(async (req, res) => {
-  const { page = 1, limit = 10, search = '', role = '' } = req.query;
+  const { page = 1, limit = 100, search = '', role = '' } = req.query;
 
   const where = {};
   
