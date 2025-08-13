@@ -7,7 +7,7 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 // Import database connection
-const { sequelize, testConnection } = require('./config/database');
+const { sequelize, testConnection, checkDatabaseHealth, closeDatabase } = require('./config/database');
 
 // Import middleware
 const { errorHandler, notFound } = require('./middleware/error');
@@ -70,15 +70,22 @@ if (process.env.NODE_ENV === 'development') {
 app.use(generalLimiter);
 
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({
+app.get('/health', async (req, res) => {
+  const dbHealth = await checkDatabaseHealth();
+  
+  const healthStatus = {
     success: true,
     message: 'MSC API is running',
-
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
-    version: process.env.npm_package_version || '1.0.0'
-  });
+    version: process.env.npm_package_version || '1.0.0',
+    database: dbHealth,
+    uptime: process.uptime(),
+    memory: process.memoryUsage()
+  };
+  
+  const statusCode = dbHealth.healthy ? 200 : 503;
+  res.status(statusCode).json(healthStatus);
 });
 
 // API Routes
@@ -118,57 +125,124 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
+// Prevent multiple server instances on the same port
+let server;
+
 // Database connection and server startup
 const startServer = async () => {
   try {
-    // Test database connection
-    await testConnection();
+    // Test database connection with retry logic
+    const dbConnected = await testConnection();
     
-    // Sync database models (only in development)
-    if (process.env.NODE_ENV === 'development') {
-      await sequelize.sync({ alter: false });
-      logger.info('Database models synchronized');
+    if (!dbConnected) {
+      logger.warn('Database connection failed, but starting server anyway...');
+      console.warn('⚠️ Database connection failed, but starting server anyway...');
     }
     
-    // Start server
-    app.listen(PORT, () => {
+    // Sync database models (only in development and if DB is connected)
+    if (dbConnected && process.env.NODE_ENV === 'development') {
+      try {
+        await sequelize.sync({ alter: false });
+        logger.info('Database models synchronized');
+      } catch (syncError) {
+        logger.error('Database sync failed:', syncError);
+        console.error('❌ Database sync failed:', syncError.message);
+      }
+    }
+    
+    // Start server with error handling
+    server = app.listen(PORT, () => {
       logger.info(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
       console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
       console.log(`📚 API Documentation: http://localhost:${PORT}/api/${API_VERSION}`);
       console.log(`🏥 Health Check: http://localhost:${PORT}/health`);
     });
     
+    // Handle server errors
+    server.on('error', (error) => {
+      if (error.code === 'EADDRINUSE') {
+        logger.error(`Port ${PORT} is already in use`);
+        console.error(`❌ Port ${PORT} is already in use. Please kill existing process or use different port.`);
+        process.exit(1);
+      } else {
+        logger.error('Server error:', error);
+        console.error('❌ Server error:', error);
+      }
+    });
+    
+    // Set server timeout to handle slow requests
+    server.timeout = 120000; // 2 minutes
+    server.keepAliveTimeout = 65000; // 65 seconds
+    server.headersTimeout = 66000; // 66 seconds
+    
   } catch (error) {
     logger.error('Failed to start server:', error);
-    console.error('Failed to start server:', error);
+    console.error('❌ Failed to start server:', error);
     process.exit(1);
   }
 };
 
 // Graceful shutdown
-process.on('SIGTERM', async () => {
-  logger.info('SIGTERM received, shutting down gracefully');
-  await sequelize.close();
-  process.exit(0);
-});
+const gracefulShutdown = async (signal) => {
+  logger.info(`${signal} received, shutting down gracefully`);
+  console.log(`🔄 ${signal} received, shutting down gracefully...`);
+  
+  if (server) {
+    server.close(async () => {
+      logger.info('HTTP server closed');
+      console.log('✅ HTTP server closed');
+      
+      // Close database connections
+      await closeDatabase();
+      
+      logger.info('Graceful shutdown completed');
+      console.log('✅ Graceful shutdown completed');
+      process.exit(0);
+    });
+    
+    // Force close after 30 seconds
+    setTimeout(() => {
+      logger.error('Could not close connections in time, forcefully shutting down');
+      console.error('❌ Could not close connections in time, forcefully shutting down');
+      process.exit(1);
+    }, 30000);
+  } else {
+    await closeDatabase();
+    process.exit(0);
+  }
+};
 
-process.on('SIGINT', async () => {
-  logger.info('SIGINT received, shutting down gracefully');
-  await sequelize.close();
-  process.exit(0);
-});
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  logger.error('Unhandled Promise Rejection:', err);
-  console.error('Unhandled Promise Rejection:', err);
+process.on('unhandledRejection', (err, promise) => {
+  logger.error('Unhandled Promise Rejection at:', promise, 'reason:', err);
+  console.error('❌ Unhandled Promise Rejection:', err);
+  
+  // Close server gracefully
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
 });
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
   logger.error('Uncaught Exception:', err);
-  console.error('Uncaught Exception:', err);
-  process.exit(1);
+  console.error('❌ Uncaught Exception:', err);
+  
+  // Close server gracefully
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
 });
 
 startServer();

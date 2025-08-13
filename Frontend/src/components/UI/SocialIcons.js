@@ -36,7 +36,7 @@ export const StarRating = ({ rating, maxStars = 5, size = 'w-5 h-5', className =
           className={`${size} ${
             index < rating
               ? 'text-yellow-400 fill-current'
-              : 'text-secondary-300 dark:text-secondary-600'
+              : 'text-secondary-300'
           }`}
           viewBox="0 0 20 20"
         >
@@ -57,11 +57,11 @@ export const LoadingSpinner = ({ size = 'w-6 h-6', className = '' }) => (
 // Badge Component
 export const Badge = ({ children, variant = 'primary', size = 'md' }) => {
   const variants = {
-    primary: 'bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-300',
-    secondary: 'bg-secondary-100 text-secondary-800 dark:bg-secondary-900/30 dark:text-secondary-300',
-    success: 'bg-success-100 text-success-800 dark:bg-success-900/30 dark:text-success-300',
-    warning: 'bg-warning-100 text-warning-800 dark:bg-warning-900/30 dark:text-warning-300',
-    error: 'bg-error-100 text-error-800 dark:bg-error-900/30 dark:text-error-300',
+    primary: 'bg-primary-100 text-primary-800',
+    secondary: 'bg-secondary-100 text-secondary-800',
+    success: 'bg-success-100 text-success-800',
+    warning: 'bg-warning-100 text-warning-800',
+    error: 'bg-error-100 text-error-800',
   };
 
   const sizes = {
@@ -76,3 +76,5 @@ export const Badge = ({ children, variant = 'primary', size = 'md' }) => {
     </span>
   );
 };
+
+

@@ -71,7 +71,7 @@ const AdminSidebar = ({
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo Section */}
-      <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+      <div className="flex items-center justify-between p-6 border-b border-slate-200">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl flex items-center justify-center">
             <ShieldCheckIcon className="w-6 h-6 text-white" />
@@ -80,13 +80,13 @@ const AdminSidebar = ({
             <h2 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
               MSG Admin
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Management Portal</p>
+            <p className="text-xs text-slate-500">Management Portal</p>
           </div>
         </div>
         {mobile && (
           <button
             onClick={() => setSidebarOpen(false)}
-            className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+            className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
@@ -94,7 +94,7 @@ const AdminSidebar = ({
       </div>
 
       {/* Admin Info */}
-      <div className="p-6 border-b border-slate-200 dark:border-slate-700">
+      <div className="p-6 border-b border-slate-200">
         <div className="flex items-center space-x-3">
           <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
             <span className="text-white font-semibold text-lg">
@@ -102,17 +102,17 @@ const AdminSidebar = ({
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+            <p className="text-sm font-medium text-slate-900 truncate">
               {admin?.firstName} {admin?.lastName}
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+            <p className="text-xs text-slate-500 truncate">
               {admin?.email}
             </p>
             <div className="flex items-center mt-1">
               <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                 admin?.role === 'super_admin' 
-                  ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
-                  : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                  ? 'bg-purple-100 text-purple-800'
+                  : 'bg-blue-100 text-blue-800'
               }`}>
                 {admin?.role === 'super_admin' ? 'Super Admin' : 'Admin'}
               </span>
@@ -135,16 +135,16 @@ const AdminSidebar = ({
               className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
                 isActive
                   ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/25'
-                  : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
+                  : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
               }`}
             >
               <Icon className={`mr-3 h-5 w-5 transition-colors ${
-                isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300'
+                isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
               }`} />
               <div className="flex-1 min-w-0">
                 <div className="truncate">{item.name}</div>
                 <div className={`text-xs truncate ${
-                  isActive ? 'text-white/80' : 'text-slate-500 dark:text-slate-400'
+                  isActive ? 'text-white/80' : 'text-slate-500'
                 }`}>
                   {item.description}
                 </div>
@@ -155,10 +155,10 @@ const AdminSidebar = ({
       </nav>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-slate-200 dark:border-slate-700">
+      <div className="p-4 border-t border-slate-200">
         <button
           onClick={onLogout}
-          className="w-full flex items-center px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 group"
+          className="w-full flex items-center px-4 py-3 text-sm font-medium text-slate-700 rounded-xl hover:bg-red-50 hover:text-red-600 transition-all duration-200 group"
         >
           <ArrowRightOnRectangleIcon className="mr-3 h-5 w-5 text-slate-400 group-hover:text-red-500" />
           <span>Sign Out</span>
@@ -185,7 +185,7 @@ const AdminSidebar = ({
               initial={{ x: -300 }}
               animate={{ x: 0 }}
               exit={{ x: -300 }}
-              className="relative flex-1 flex flex-col max-w-xs w-full bg-white dark:bg-slate-800 shadow-xl"
+              className="relative flex-1 flex flex-col max-w-xs w-full bg-white shadow-xl"
             >
               <SidebarContent />
             </motion.div>
@@ -198,7 +198,7 @@ const AdminSidebar = ({
   return (
     <div className="hidden lg:flex lg:flex-shrink-0 lg:fixed lg:inset-y-0 lg:z-30">
       <div className="flex flex-col w-80">
-        <div className="flex flex-col h-full bg-white dark:bg-slate-800 shadow-xl border-r border-slate-200 dark:border-slate-700">
+        <div className="flex flex-col h-full bg-white shadow-xl border-r border-slate-200">
           <SidebarContent />
         </div>
       </div>
@@ -207,3 +207,5 @@ const AdminSidebar = ({
 };
 
 export default AdminSidebar;
+
+

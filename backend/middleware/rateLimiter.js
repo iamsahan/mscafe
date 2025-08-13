@@ -3,10 +3,18 @@ const rateLimit = require('express-rate-limit');
 // Skip rate limiting in development environment
 const skipInDevelopment = process.env.NODE_ENV === 'development';
 
+// Store for rate limiting (use Redis in production)
+const store = process.env.REDIS_URL ? 
+  new (require('rate-limit-redis'))({
+    client: require('redis').createClient({ url: process.env.REDIS_URL }),
+    prefix: 'rl:'
+  }) : undefined;
+
 // Auth rate limiter - stricter for authentication endpoints
 const authLimiter = skipInDevelopment ? (req, res, next) => next() : rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) * 60 * 1000 || 15 * 60 * 1000, // 15 minutes
   max: 5, // limit each IP to 5 requests per windowMs for auth endpoints
+  store,
   message: {
     success: false,
     message: 'Too many authentication attempts, please try again later'
@@ -18,13 +26,22 @@ const authLimiter = skipInDevelopment ? (req, res, next) => next() : rateLimit({
       success: false,
       message: 'Too many authentication attempts, please try again later'
     });
+  },
+  skip: (req) => {
+    // Skip rate limiting for health checks
+    return req.path === '/health';
   }
 });
 
-// General API rate limiter
+// General API rate limiter with dynamic limits based on user type
 const generalLimiter = skipInDevelopment ? (req, res, next) => next() : rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) * 60 * 1000 || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX) || 100, // limit each IP to 100 requests per windowMs
+  max: (req) => {
+    // Higher limits for authenticated users
+    if (req.user) return 200;
+    return parseInt(process.env.RATE_LIMIT_MAX) || 100;
+  },
+  store,
   message: {
     success: false,
     message: 'Too many requests, please try again later'
@@ -36,6 +53,10 @@ const generalLimiter = skipInDevelopment ? (req, res, next) => next() : rateLimi
       success: false,
       message: 'Too many requests, please try again later'
     });
+  },
+  skip: (req) => {
+    // Skip rate limiting for health checks and static files
+    return req.path === '/health' || req.path.startsWith('/uploads');
   }
 });
 

@@ -16,16 +16,16 @@ const AdminStatsCard = ({ title, value, change, changeType, icon: Icon, color = 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+      className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{title}</p>
-          <p className="text-3xl font-bold text-slate-900 dark:text-white mt-2">{value}</p>
+          <p className="text-sm font-medium text-slate-600">{title}</p>
+          <p className="text-3xl font-bold text-slate-900 mt-2">{value}</p>
           {change && (
             <div className={`flex items-center mt-2 text-sm ${changeColor}`}>
               <span>{changeType === 'increase' ? '↗' : '↘'} {change}</span>
-              <span className="text-slate-500 dark:text-slate-400 ml-1">vs last month</span>
+              <span className="text-slate-500 ml-1">vs last month</span>
             </div>
           )}
         </div>
@@ -48,3 +48,5 @@ const AdminStatsGrid = ({ stats }) => {
 };
 
 export { AdminStatsCard, AdminStatsGrid };
+
+

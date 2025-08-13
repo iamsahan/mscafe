@@ -45,14 +45,14 @@ const AdminBreadcrumb = ({ customPaths = [] }) => {
               <ChevronRightIcon className="flex-shrink-0 h-4 w-4 text-slate-400 mx-2" />
             )}
             {breadcrumb.current ? (
-              <span className="text-sm font-medium text-slate-900 dark:text-white flex items-center">
+              <span className="text-sm font-medium text-slate-900 flex items-center">
                 {breadcrumb.icon && <breadcrumb.icon className="h-4 w-4 mr-1" />}
                 {breadcrumb.name}
               </span>
             ) : (
               <Link
                 to={breadcrumb.href}
-                className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 flex items-center transition-colors"
+                className="text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center transition-colors"
               >
                 {breadcrumb.icon && <breadcrumb.icon className="h-4 w-4 mr-1" />}
                 {breadcrumb.name}
@@ -66,3 +66,5 @@ const AdminBreadcrumb = ({ customPaths = [] }) => {
 };
 
 export default AdminBreadcrumb;
+
+

@@ -53,3 +53,5 @@ const ProtectedAdminRoute = ({ children, requiredRole = null, requiredPermission
 };
 
 export default ProtectedAdminRoute;
+
+
