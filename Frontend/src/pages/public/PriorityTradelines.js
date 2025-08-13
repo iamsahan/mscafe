@@ -1,5 +1,5 @@
-import React from 'react';
-import PriorityTradelinesAU from '../../components/PriorityTradelines/PriorityTradelinesAU';
+import React from "react";
+import PriorityTradelinesAU from "../../components/PriorityTradelines/PriorityTradelinesAU";
 
 const PriorityTradelinesPage = () => {
   return (

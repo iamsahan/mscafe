@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 import {
   PlusIcon,
   PencilIcon,
@@ -14,27 +14,27 @@ import {
   CubeIcon,
   StarIcon,
   XMarkIcon,
-  CheckCircleIcon
-} from '@heroicons/react/24/outline';
-import LoadingSpinner from '../../components/UI/LoadingSpinner';
-import AdminBreadcrumb from '../../components/Layout/AdminBreadcrumb';
-import { coursesAPI } from '../../services/api';
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import AdminBreadcrumb from "../../components/Layout/AdminBreadcrumb";
+import { coursesAPI } from "../../services/api";
 
 // Form Modal Component - moved outside to prevent re-creation
-const FormModal = ({ 
-  isOpen, 
-  onClose, 
-  onSubmit, 
-  title, 
-  isEdit = false, 
-  formData, 
-  onInputChange, 
-  onIncludesChange, 
-  onAddInclude, 
+const FormModal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  title,
+  isEdit = false,
+  formData,
+  onInputChange,
+  onIncludesChange,
+  onAddInclude,
   onRemoveInclude,
   onProcessChange,
   onAddProcess,
-  onRemoveProcess
+  onRemoveProcess,
 }) => (
   <AnimatePresence>
     {isOpen && (
@@ -51,7 +51,9 @@ const FormModal = ({
           className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+              {title}
+            </h3>
             <button
               onClick={onClose}
               className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
@@ -138,18 +140,18 @@ const FormModal = ({
                         if (file) {
                           onInputChange({
                             target: {
-                              name: 'imageFile',
-                              value: file
-                            }
+                              name: "imageFile",
+                              value: file,
+                            },
                           });
                           // Create preview URL
                           const reader = new FileReader();
                           reader.onload = (e) => {
                             onInputChange({
                               target: {
-                                name: 'imagePreview',
-                                value: e.target.result
-                              }
+                                name: "imagePreview",
+                                value: e.target.result,
+                              },
                             });
                           };
                           reader.readAsDataURL(file);
@@ -174,13 +176,13 @@ const FormModal = ({
                             onClick={(e) => {
                               e.preventDefault();
                               onInputChange({
-                                target: { name: 'imageFile', value: null }
+                                target: { name: "imageFile", value: null },
                               });
                               onInputChange({
-                                target: { name: 'imagePreview', value: '' }
+                                target: { name: "imagePreview", value: "" },
                               });
                               onInputChange({
-                                target: { name: 'imageUrl', value: '' }
+                                target: { name: "imageUrl", value: "" },
                               });
                             }}
                             className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600 transition-colors"
@@ -191,8 +193,18 @@ const FormModal = ({
                       ) : (
                         <>
                           <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-3">
-                            <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <svg
+                              className="w-6 h-6 text-slate-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                              />
                             </svg>
                           </div>
                           <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
@@ -205,17 +217,19 @@ const FormModal = ({
                       )}
                     </label>
                   </div>
-                  
+
                   {/* Alternative: Image URL */}
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t border-slate-300 dark:border-slate-600" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white dark:bg-slate-800 text-slate-500">Or use image URL</span>
+                      <span className="px-2 bg-white dark:bg-slate-800 text-slate-500">
+                        Or use image URL
+                      </span>
                     </div>
                   </div>
-                  
+
                   <input
                     type="url"
                     name="imageUrl"
@@ -451,7 +465,7 @@ const FormModal = ({
                 type="submit"
                 className="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg"
               >
-                {isEdit ? 'Update Package' : 'Create Package'}
+                {isEdit ? "Update Package" : "Create Package"}
               </button>
             </div>
           </form>
@@ -464,35 +478,35 @@ const FormModal = ({
 const AdminPackages = () => {
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('created_at');
-  const [sortOrder, setSortOrder] = useState('desc');
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [filterCategory, setFilterCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("created_at");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterCategory, setFilterCategory] = useState("all");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    price: '',
-    includes: [''],
-    process: [''],
-    category: '',
-    revenueShare: '',
-    imageUrl: '',
+    title: "",
+    description: "",
+    price: "",
+    includes: [""],
+    process: [""],
+    category: "",
+    revenueShare: "",
+    imageUrl: "",
     imageFile: null,
-    imagePreview: '',
+    imagePreview: "",
     efinRequired: false,
-    efinDescription: '',
+    efinDescription: "",
     ptinRequired: false,
-    ptinDescription: '',
+    ptinDescription: "",
     minReturns: 0,
-    minReturnsDescription: '',
-    link: '',
+    minReturnsDescription: "",
+    link: "",
     isActive: true,
-    featured: false
+    featured: false,
   });
 
   useEffect(() => {
@@ -503,24 +517,33 @@ const AdminPackages = () => {
     try {
       setLoading(true);
       // Include inactive packages for admin view
+
       const response = await coursesAPI.getAll({ includeInactive: 'true', limit: 1000 });
       console.log('Fetched packages response:', response.data);
       
+
       if (response.data && response.data.success) {
         const packagesData = response.data.data || [];
-        console.log('Packages data:', packagesData.map(p => ({ id: p.id, title: p.title, isActive: p.isActive })));
+        console.log(
+          "Packages data:",
+          packagesData.map((p) => ({
+            id: p.id,
+            title: p.title,
+            isActive: p.isActive,
+          }))
+        );
         setPackages(packagesData);
       } else {
         setPackages([]);
-        toast.info('No packages found');
+        toast.info("No packages found");
       }
     } catch (error) {
-      console.error('Error fetching packages:', error);
+      console.error("Error fetching packages:", error);
       if (error.response?.status === 404) {
         setPackages([]);
-        toast.info('No packages found');
+        toast.info("No packages found");
       } else {
-        toast.error('Failed to load packages');
+        toast.error("Failed to load packages");
       }
     } finally {
       setLoading(false);
@@ -529,134 +552,148 @@ const AdminPackages = () => {
 
   const handleInputChange = useCallback((e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   }, []);
 
-  const handleIncludesChange = useCallback((index, value) => {
-    const newIncludes = [...formData.includes];
-    newIncludes[index] = value;
-    setFormData(prev => ({ ...prev, includes: newIncludes }));
-  }, [formData.includes]);
+  const handleIncludesChange = useCallback(
+    (index, value) => {
+      const newIncludes = [...formData.includes];
+      newIncludes[index] = value;
+      setFormData((prev) => ({ ...prev, includes: newIncludes }));
+    },
+    [formData.includes]
+  );
 
   const addInclude = useCallback(() => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      includes: [...prev.includes, '']
+      includes: [...prev.includes, ""],
     }));
   }, []);
 
   const removeInclude = useCallback((index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      includes: prev.includes.filter((_, i) => i !== index)
+      includes: prev.includes.filter((_, i) => i !== index),
     }));
   }, []);
 
-  const handleProcessChange = useCallback((index, value) => {
-    const newProcess = [...formData.process];
-    newProcess[index] = value;
-    setFormData(prev => ({ ...prev, process: newProcess }));
-  }, [formData.process]);
+  const handleProcessChange = useCallback(
+    (index, value) => {
+      const newProcess = [...formData.process];
+      newProcess[index] = value;
+      setFormData((prev) => ({ ...prev, process: newProcess }));
+    },
+    [formData.process]
+  );
 
   const addProcess = useCallback(() => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      process: [...prev.process, '']
+      process: [...prev.process, ""],
     }));
   }, []);
 
   const removeProcess = useCallback((index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      process: prev.process.filter((_, i) => i !== index)
+      process: prev.process.filter((_, i) => i !== index),
     }));
   }, []);
 
   // Helper function to get full image URL
   const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return '';
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+    if (!imageUrl) return "";
+    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl; // Already full URL
     }
-    return `http://localhost:5000${imageUrl}`; // Prepend backend URL
+    return `http://148.230.87.141${imageUrl}`; // Prepend backend URL
   };
 
   const uploadImage = async (imageFile) => {
     if (!imageFile) return null;
-    
-    console.log('Uploading image file:', imageFile.name, imageFile.type, imageFile.size);
-    
+
+    console.log(
+      "Uploading image file:",
+      imageFile.name,
+      imageFile.type,
+      imageFile.size
+    );
+
     const formData = new FormData();
-    formData.append('image', imageFile);
-    
+    formData.append("image", imageFile);
+
     try {
-      const adminToken = Cookies.get('adminToken');
-      console.log('Admin token for upload:', !!adminToken);
-      
+      const adminToken = Cookies.get("adminToken");
+      console.log("Admin token for upload:", !!adminToken);
+
       if (!adminToken) {
-        toast.error('Authentication required for image upload');
+        toast.error("Authentication required for image upload");
         return null;
       }
 
-      console.log('Starting image upload...');
-      
+      console.log("Starting image upload...");
+
       // Use adminApi instance that already handles authentication
-      const response = await fetch('http://localhost:5000/api/v1/courses/upload-image', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${adminToken}`
-        },
-        body: formData
-      });
-      
-      console.log('Upload response status:', response.status);
-      
+      const response = await fetch(
+        "http://148.230.87.141/api/v1/courses/upload-image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+          body: formData,
+        }
+      );
+
+      console.log("Upload response status:", response.status);
+
       if (response.ok) {
         const result = await response.json();
-        console.log('Image upload successful:', result);
-        toast.success('Image uploaded successfully');
+        console.log("Image upload successful:", result);
+        toast.success("Image uploaded successfully");
         return result.imageUrl;
       } else {
         const errorData = await response.json();
-        console.error('Upload error response:', errorData);
-        throw new Error(errorData.message || 'Image upload failed');
+        console.error("Upload error response:", errorData);
+        throw new Error(errorData.message || "Image upload failed");
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
-      toast.error('Failed to upload image: ' + error.message);
+      console.error("Error uploading image:", error);
+      toast.error("Failed to upload image: " + error.message);
       return null;
     }
   };
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    
+
     try {
       // Check admin authentication
-      const adminToken = Cookies.get('adminToken');
-      console.log('Admin token exists:', !!adminToken);
-      
+      const adminToken = Cookies.get("adminToken");
+      console.log("Admin token exists:", !!adminToken);
+
       if (!adminToken) {
-        toast.error('Authentication required. Please log in again.');
+        toast.error("Authentication required. Please log in again.");
         return;
       }
 
-      console.log('Form data before processing:', formData);
-      
+      console.log("Form data before processing:", formData);
+
       // Basic validation
-      if (!(formData.title || '').trim()) {
-        toast.error('Package title is required');
+      if (!(formData.title || "").trim()) {
+        toast.error("Package title is required");
         return;
       }
-      
+
       if (!formData.price || parseFloat(formData.price) <= 0) {
-        toast.error('Valid price is required');
+        toast.error("Valid price is required");
         return;
       }
-      
+
       // Handle image upload if file is selected
       let imageUrl = formData.imageUrl;
       if (formData.imageFile) {
@@ -665,22 +702,22 @@ const AdminPackages = () => {
           imageUrl = uploadedImageUrl;
         }
       }
-      
+
       // Prepare data for API - match backend validation schema exactly
       const packageData = {
-        title: (formData.title || '').trim(),
+        title: (formData.title || "").trim(),
         price: `$${parseFloat(formData.price || 0).toFixed(2)}`,
         efinRequired: Boolean(formData.efinRequired),
         ptinRequired: Boolean(formData.ptinRequired),
         minReturns: parseInt(formData.minReturns) || 0,
-        includes: formData.includes.filter(f => (f || '').trim() !== ''),
-        process: formData.process.filter(p => (p || '').trim() !== ''),
+        includes: formData.includes.filter((f) => (f || "").trim() !== ""),
+        process: formData.process.filter((p) => (p || "").trim() !== ""),
         isActive: Boolean(formData.isActive),
-        featured: Boolean(formData.featured)
+        featured: Boolean(formData.featured),
       };
 
       // Add optional fields only if they have valid non-empty values
-      const description = (formData.description || '').trim();
+      const description = (formData.description || "").trim();
       if (description) {
         packageData.description = description;
       }
@@ -688,71 +725,73 @@ const AdminPackages = () => {
       if (formData.category && parseInt(formData.category) > 0) {
         packageData.categoryId = parseInt(formData.category);
       }
-      
-      const revenueShare = (formData.revenueShare || '').trim();
+
+      const revenueShare = (formData.revenueShare || "").trim();
       if (revenueShare) {
         packageData.revenueShare = revenueShare;
       }
-      
-      const efinDescription = (formData.efinDescription || '').trim();
+
+      const efinDescription = (formData.efinDescription || "").trim();
       if (efinDescription) {
         packageData.efinDescription = efinDescription;
       }
-      
-      const ptinDescription = (formData.ptinDescription || '').trim();
+
+      const ptinDescription = (formData.ptinDescription || "").trim();
       if (ptinDescription) {
         packageData.ptinDescription = ptinDescription;
       }
-      
-      const minReturnsDescription = (formData.minReturnsDescription || '').trim();
+
+      const minReturnsDescription = (
+        formData.minReturnsDescription || ""
+      ).trim();
       if (minReturnsDescription) {
         packageData.minReturnsDescription = minReturnsDescription;
       }
-      
-      const imageUrlValue = (imageUrl || '').trim();
+
+      const imageUrlValue = (imageUrl || "").trim();
       if (imageUrlValue) {
         packageData.imageUrl = imageUrlValue;
       }
-      
+
       // Validate and add link only if it's a valid URL
-      const linkValue = (formData.link || '').trim();
+      const linkValue = (formData.link || "").trim();
       if (linkValue) {
         try {
           new URL(linkValue); // Test if it's a valid URL
           packageData.link = linkValue;
         } catch (urlError) {
-          toast.error('Please enter a valid URL for the external link');
+          toast.error("Please enter a valid URL for the external link");
           return;
         }
       }
 
-      console.log('Sending to API:', packageData);
-      console.log('Package data JSON:', JSON.stringify(packageData, null, 2));
+      console.log("Sending to API:", packageData);
+      console.log("Package data JSON:", JSON.stringify(packageData, null, 2));
 
       const response = await coursesAPI.create(packageData);
-      console.log('Full API response:', response);
-      
+      console.log("Full API response:", response);
+
       if (response.data && response.data.success) {
-        toast.success('Package created successfully');
+        toast.success("Package created successfully");
         setShowCreateModal(false);
         resetForm();
         fetchPackages();
       } else {
-        console.error('API returned false success:', response.data);
-        toast.error(response.data?.message || 'Failed to create package');
+        console.error("API returned false success:", response.data);
+        toast.error(response.data?.message || "Failed to create package");
       }
     } catch (error) {
-      console.error('Error creating package:', error);
-      console.error('Error response data:', error.response?.data);
-      console.error('Error status:', error.response?.status);
-      
-      let errorMessage = 'Failed to create package';
+      console.error("Error creating package:", error);
+      console.error("Error response data:", error.response?.data);
+      console.error("Error status:", error.response?.status);
+
+      let errorMessage = "Failed to create package";
       if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       } else if (error.response?.data?.errors) {
-        errorMessage = error.response.data.errors.join(', ');
+        errorMessage = error.response.data.errors.join(", ");
       }
-      
+
       toast.error(errorMessage);
     }
   };
@@ -763,71 +802,74 @@ const AdminPackages = () => {
       // Handle image upload if file is selected
       let imageUrl = formData.imageUrl;
       if (formData.imageFile) {
-        console.log('Uploading new image for edit...');
+        console.log("Uploading new image for edit...");
         const uploadedImageUrl = await uploadImage(formData.imageFile);
         if (uploadedImageUrl) {
           imageUrl = getImageUrl(uploadedImageUrl); // Ensure full URL
-          console.log('New image uploaded:', imageUrl);
+          console.log("New image uploaded:", imageUrl);
         }
       }
 
       // Prepare data for API - match backend validation schema exactly
       const packageData = {
-        title: (formData.title || '').trim(),
-        description: (formData.description || '').trim(),
-        price: formData.price.startsWith('$') ? formData.price : `$${formData.price}`,
+        title: (formData.title || "").trim(),
+        description: (formData.description || "").trim(),
+        price: formData.price.startsWith("$")
+          ? formData.price
+          : `$${formData.price}`,
         efinRequired: Boolean(formData.efinRequired),
         ptinRequired: Boolean(formData.ptinRequired),
         minReturns: parseInt(formData.minReturns) || 0,
-        includes: formData.includes.filter(f => (f || '').trim() !== ''),
-        process: formData.process.filter(p => (p || '').trim() !== ''),
+        includes: formData.includes.filter((f) => (f || "").trim() !== ""),
+        process: formData.process.filter((p) => (p || "").trim() !== ""),
         isActive: Boolean(formData.isActive),
-        featured: Boolean(formData.featured)
+        featured: Boolean(formData.featured),
       };
 
       // Add optional fields only if they have valid values
       if (formData.category && parseInt(formData.category) > 0) {
         packageData.categoryId = parseInt(formData.category);
       }
-      
-      if ((formData.revenueShare || '').trim()) {
+
+      if ((formData.revenueShare || "").trim()) {
         packageData.revenueShare = formData.revenueShare.trim();
       }
-      
-      if ((formData.efinDescription || '').trim()) {
+
+      if ((formData.efinDescription || "").trim()) {
         packageData.efinDescription = formData.efinDescription.trim();
       }
-      
-      if ((formData.ptinDescription || '').trim()) {
+
+      if ((formData.ptinDescription || "").trim()) {
         packageData.ptinDescription = formData.ptinDescription.trim();
       }
-      
-      if ((formData.minReturnsDescription || '').trim()) {
-        packageData.minReturnsDescription = formData.minReturnsDescription.trim();
+
+      if ((formData.minReturnsDescription || "").trim()) {
+        packageData.minReturnsDescription =
+          formData.minReturnsDescription.trim();
       }
-      
-      if ((imageUrl || '').trim()) {
+
+      if ((imageUrl || "").trim()) {
         packageData.imageUrl = imageUrl.trim();
       }
-      
+
       // Validate and add link only if it's a valid URL
-      const linkValue = (formData.link || '').trim();
+      const linkValue = (formData.link || "").trim();
       if (linkValue) {
         try {
           new URL(linkValue); // Test if it's a valid URL
           packageData.link = linkValue;
         } catch (urlError) {
-          toast.error('Please enter a valid URL for the external link');
+          toast.error("Please enter a valid URL for the external link");
           return;
         }
       }
 
-      console.log('Updating package with data:', packageData);
+      console.log("Updating package with data:", packageData);
       const response = await coursesAPI.update(selectedPackage.id, packageData);
-      console.log('Update response:', response.data);
-      
+      console.log("Update response:", response.data);
+
       if (response.data && response.data.success) {
-        toast.success('Package updated successfully');
+        toast.success("Package updated successfully");
         setShowEditModal(false);
         resetForm();
         // Add a small delay to ensure database has committed the transaction
@@ -835,11 +877,11 @@ const AdminPackages = () => {
           await fetchPackages();
         }, 500);
       } else {
-        toast.error('Failed to update package');
+        toast.error("Failed to update package");
       }
     } catch (error) {
-      console.error('Error updating package:', error);
-      toast.error(error.response?.data?.message || 'Failed to update package');
+      console.error("Error updating package:", error);
+      toast.error(error.response?.data?.message || "Failed to update package");
     }
   };
 
@@ -847,82 +889,82 @@ const AdminPackages = () => {
     try {
       const response = await coursesAPI.delete(selectedPackage.id);
       if (response.data && response.data.success) {
-        toast.success('Package deleted successfully');
+        toast.success("Package deleted successfully");
         setShowDeleteModal(false);
         setSelectedPackage(null);
         fetchPackages();
       } else {
-        toast.error('Failed to delete package');
+        toast.error("Failed to delete package");
       }
     } catch (error) {
-      console.error('Error deleting package:', error);
-      toast.error(error.response?.data?.message || 'Failed to delete package');
+      console.error("Error deleting package:", error);
+      toast.error(error.response?.data?.message || "Failed to delete package");
     }
   };
 
   const resetForm = () => {
     setFormData({
-      title: '',
-      description: '',
-      price: '',
-      includes: [''],
-      process: [''],
-      category: '',
-      revenueShare: '',
-      imageUrl: '',
+      title: "",
+      description: "",
+      price: "",
+      includes: [""],
+      process: [""],
+      category: "",
+      revenueShare: "",
+      imageUrl: "",
       imageFile: null,
-      imagePreview: '',
+      imagePreview: "",
       efinRequired: false,
-      efinDescription: '',
+      efinDescription: "",
       ptinRequired: false,
-      ptinDescription: '',
+      ptinDescription: "",
       minReturns: 0,
-      minReturnsDescription: '',
-      link: '',
+      minReturnsDescription: "",
+      link: "",
       isActive: true,
-      featured: false
+      featured: false,
     });
     setSelectedPackage(null);
   };
 
   const openEditModal = (pkg) => {
     setSelectedPackage(pkg);
-    
+
     // Helper function to convert includes/process to array format
     const parseArrayField = (field) => {
       if (Array.isArray(field)) {
-        return field.length > 0 ? field : [''];
-      } else if (typeof field === 'string' && field.trim()) {
+        return field.length > 0 ? field : [""];
+      } else if (typeof field === "string" && field.trim()) {
         try {
           const parsed = JSON.parse(field);
-          return Array.isArray(parsed) && parsed.length > 0 ? parsed : [''];
+          return Array.isArray(parsed) && parsed.length > 0 ? parsed : [""];
         } catch (e) {
           return [field]; // If not JSON, treat as single item
         }
       }
-      return [''];
+      return [""];
     };
 
     setFormData({
-      title: pkg.title || '',
-      description: pkg.description || '',
-      price: pkg.price ? pkg.price.replace('$', '') : '',
+      title: pkg.title || "",
+      description: pkg.description || "",
+      price: pkg.price ? pkg.price.replace("$", "") : "",
       includes: parseArrayField(pkg.includes),
       process: parseArrayField(pkg.process),
-      category: pkg.categoryId ? pkg.categoryId.toString() : '',
-      revenueShare: pkg.revenueShare || '',
-      imageUrl: getImageUrl(pkg.imageUrl || pkg.image_url || ''),
+      category: pkg.categoryId ? pkg.categoryId.toString() : "",
+      revenueShare: pkg.revenueShare || "",
+      imageUrl: getImageUrl(pkg.imageUrl || pkg.image_url || ""),
       imageFile: null,
-      imagePreview: '',
+      imagePreview: "",
       efinRequired: pkg.efinRequired === 1 || pkg.efinRequired === true,
-      efinDescription: pkg.efinDescription || '',
+      efinDescription: pkg.efinDescription || "",
       ptinRequired: pkg.ptinRequired === 1 || pkg.ptinRequired === true,
-      ptinDescription: pkg.ptinDescription || '',
+      ptinDescription: pkg.ptinDescription || "",
       minReturns: pkg.minReturns || 0,
-      minReturnsDescription: pkg.minReturnsDescription || '',
-      link: pkg.link || '',
+      minReturnsDescription: pkg.minReturnsDescription || "",
+      link: pkg.link || "",
       isActive: pkg.isActive === 1 || pkg.isActive === true,
-      featured: pkg.featured === 1 || pkg.featured === true
+      featured: pkg.featured === 1 || pkg.featured === true,
     });
     setShowEditModal(true);
   };
@@ -933,64 +975,69 @@ const AdminPackages = () => {
   };
 
   const filteredPackages = packages
-    .filter(pkg => {
-      const matchesSearch = (pkg.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           (pkg.description || '').toLowerCase().includes(searchTerm.toLowerCase());
-      
+    .filter((pkg) => {
+      const matchesSearch =
+        (pkg.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (pkg.description || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+
       // Handle database values: 1 = active, 0 = inactive
       const isPackageActive = pkg.isActive === 1 || pkg.isActive === true;
-      const matchesStatus = filterStatus === 'all' || 
-                           (filterStatus === 'active' && isPackageActive) ||
-                           (filterStatus === 'inactive' && !isPackageActive);
-      
-      const matchesCategory = filterCategory === 'all' || 
-                             (pkg.categoryId && pkg.categoryId.toString() === filterCategory);
-      
+      const matchesStatus =
+        filterStatus === "all" ||
+        (filterStatus === "active" && isPackageActive) ||
+        (filterStatus === "inactive" && !isPackageActive);
+
+      const matchesCategory =
+        filterCategory === "all" ||
+        (pkg.categoryId && pkg.categoryId.toString() === filterCategory);
+
       return matchesSearch && matchesStatus && matchesCategory;
     })
     .sort((a, b) => {
       let aValue, bValue;
-      
+
       switch (sortBy) {
-        case 'price':
+        case "price":
           // Handle price as string with $ symbol
-          aValue = parseFloat((a.price || '0').replace('$', '')) || 0;
-          bValue = parseFloat((b.price || '0').replace('$', '')) || 0;
+          aValue = parseFloat((a.price || "0").replace("$", "")) || 0;
+          bValue = parseFloat((b.price || "0").replace("$", "")) || 0;
           break;
-          
-        case 'title':
-          aValue = (a.title || '').toLowerCase();
-          bValue = (b.title || '').toLowerCase();
+
+        case "title":
+          aValue = (a.title || "").toLowerCase();
+          bValue = (b.title || "").toLowerCase();
           break;
-          
-        case 'featured':
+
+        case "featured":
           // Featured items first, then by creation date
           if (a.featured !== b.featured) {
             return b.featured - a.featured; // Featured first
           }
-          aValue = new Date(a.created_at || a.updated_at || '1970-01-01');
-          bValue = new Date(b.created_at || b.updated_at || '1970-01-01');
+          aValue = new Date(a.created_at || a.updated_at || "1970-01-01");
+          bValue = new Date(b.created_at || b.updated_at || "1970-01-01");
           break;
-          
-        case 'created_at':
+
+        case "created_at":
         default:
           // Handle date sorting with fallbacks
-          aValue = new Date(a.created_at || a.updated_at || '1970-01-01');
-          bValue = new Date(b.created_at || b.updated_at || '1970-01-01');
+          aValue = new Date(a.created_at || a.updated_at || "1970-01-01");
+          bValue = new Date(b.created_at || b.updated_at || "1970-01-01");
           break;
       }
-      
+
       // Handle different data types for comparison
       if (aValue instanceof Date && bValue instanceof Date) {
         const result = aValue.getTime() - bValue.getTime();
-        return sortOrder === 'asc' ? result : -result;
-      } else if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return sortOrder === "asc" ? result : -result;
+      } else if (typeof aValue === "string" && typeof bValue === "string") {
         const result = aValue.localeCompare(bValue);
-        return sortOrder === 'asc' ? result : -result;
+        return sortOrder === "asc" ? result : -result;
       } else {
         // Numeric comparison
         const result = (aValue || 0) - (bValue || 0);
-        return sortOrder === 'asc' ? result : -result;
+        return sortOrder === "asc" ? result : -result;
       }
     });
 
@@ -1006,11 +1053,13 @@ const AdminPackages = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <AdminBreadcrumb />
-      
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Package Management</h1>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+            Package Management
+          </h1>
           <p className="text-slate-600 dark:text-slate-400 mt-1">
             Manage your tax packages and courses
           </p>
@@ -1039,7 +1088,7 @@ const AdminPackages = () => {
                 className="w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
               />
             </div>
-            
+
             <div className="flex items-center gap-3">
               <select
                 value={filterStatus}
@@ -1050,7 +1099,7 @@ const AdminPackages = () => {
                 <option value="active">Active Only</option>
                 <option value="inactive">Inactive Only</option>
               </select>
-              
+
               <select
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
@@ -1061,14 +1110,16 @@ const AdminPackages = () => {
                 <option value="2">Category 2</option>
                 <option value="3">Category 3</option>
               </select>
-              
+
               {/* Clear Filters Button */}
-              {(searchTerm || filterStatus !== 'all' || filterCategory !== 'all') && (
+              {(searchTerm ||
+                filterStatus !== "all" ||
+                filterCategory !== "all") && (
                 <button
                   onClick={() => {
-                    setSearchTerm('');
-                    setFilterStatus('all');
-                    setFilterCategory('all');
+                    setSearchTerm("");
+                    setFilterStatus("all");
+                    setFilterCategory("all");
                   }}
                   className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
@@ -1084,7 +1135,7 @@ const AdminPackages = () => {
               <FunnelIcon className="h-4 w-4" />
               <span>Sort by:</span>
             </div>
-            
+
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -1095,21 +1146,21 @@ const AdminPackages = () => {
               <option value="price">Price</option>
               <option value="featured">Featured First</option>
             </select>
-            
+
             <button
-              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
               className={`p-2 border rounded-lg transition-colors ${
-                sortOrder === 'asc' 
-                  ? 'border-violet-300 bg-violet-50 text-violet-600 dark:border-violet-600 dark:bg-violet-900/20 dark:text-violet-400' 
-                  : 'border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400'
+                sortOrder === "asc"
+                  ? "border-violet-300 bg-violet-50 text-violet-600 dark:border-violet-600 dark:bg-violet-900/20 dark:text-violet-400"
+                  : "border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400"
               }`}
-              title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
+              title={`Sort ${sortOrder === "asc" ? "Descending" : "Ascending"}`}
             >
               <ChevronUpDownIcon className="h-4 w-4" />
             </button>
           </div>
         </div>
-        
+
         {/* Results Summary */}
         <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
           <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
@@ -1120,12 +1171,12 @@ const AdminPackages = () => {
                   matching "{searchTerm}"
                 </span>
               )}
-              {filterStatus !== 'all' && (
+              {filterStatus !== "all" && (
                 <span className="ml-2 px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-xs">
                   {filterStatus}
                 </span>
               )}
-              {filterCategory !== 'all' && (
+              {filterCategory !== "all" && (
                 <span className="ml-2 px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded text-xs">
                   Category {filterCategory}
                 </span>
@@ -1135,15 +1186,30 @@ const AdminPackages = () => {
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                  {packages.filter(p => p.isActive === 1 || p.isActive === true).length} Active
+                  {
+                    packages.filter(
+                      (p) => p.isActive === 1 || p.isActive === true
+                    ).length
+                  }{" "}
+                  Active
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                  {packages.filter(p => !(p.isActive === 1 || p.isActive === true)).length} Inactive
+                  {
+                    packages.filter(
+                      (p) => !(p.isActive === 1 || p.isActive === true)
+                    ).length
+                  }{" "}
+                  Inactive
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                  {packages.filter(p => p.featured === 1 || p.featured === true).length} Featured
+                  {
+                    packages.filter(
+                      (p) => p.featured === 1 || p.featured === true
+                    ).length
+                  }{" "}
+                  Featured
                 </span>
               </div>
             )}
@@ -1197,7 +1263,7 @@ const AdminPackages = () => {
                   alt={pkg.title}
                   className="w-full h-32 object-cover rounded-lg"
                   onError={(e) => {
-                    e.target.style.display = 'none';
+                    e.target.style.display = "none";
                   }}
                 />
               </div>
@@ -1217,19 +1283,25 @@ const AdminPackages = () => {
                 <span className="text-2xl font-bold text-violet-600">
                   {pkg.price}
                 </span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  (pkg.isActive === 1 || pkg.isActive === true)
-                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                }`}>
-                  {(pkg.isActive === 1 || pkg.isActive === true) ? 'Active' : 'Inactive'}
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    pkg.isActive === 1 || pkg.isActive === true
+                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                      : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                  }`}
+                >
+                  {pkg.isActive === 1 || pkg.isActive === true
+                    ? "Active"
+                    : "Inactive"}
                 </span>
               </div>
-              
+
               {/* Revenue Share */}
               {pkg.revenueShare && (
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-600 dark:text-slate-400">Revenue Share:</span>
+                  <span className="text-slate-600 dark:text-slate-400">
+                    Revenue Share:
+                  </span>
                   <span className="font-semibold text-green-600 dark:text-green-400">
                     {pkg.revenueShare}
                   </span>
@@ -1239,10 +1311,12 @@ const AdminPackages = () => {
               {/* External Link */}
               {pkg.link && (
                 <div className="text-sm">
-                  <span className="text-slate-600 dark:text-slate-400">External Link: </span>
-                  <a 
-                    href={pkg.link} 
-                    target="_blank" 
+                  <span className="text-slate-600 dark:text-slate-400">
+                    External Link:{" "}
+                  </span>
+                  <a
+                    href={pkg.link}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
@@ -1264,9 +1338,13 @@ const AdminPackages = () => {
             </div>
 
             {/* Requirements Section */}
-            {(pkg.efinRequired || pkg.ptinRequired || (pkg.minReturns && pkg.minReturns > 0)) && (
+            {(pkg.efinRequired ||
+              pkg.ptinRequired ||
+              (pkg.minReturns && pkg.minReturns > 0)) && (
               <div className="mb-4 p-3 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">Requirements:</p>
+                <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
+                  Requirements:
+                </p>
                 <div className="space-y-1">
                   {pkg.efinRequired && (
                     <div className="flex items-center text-xs text-slate-600 dark:text-slate-400">
@@ -1291,7 +1369,9 @@ const AdminPackages = () => {
                       <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
                       Min {pkg.minReturns} Returns
                       {pkg.minReturnsDescription && (
-                        <span className="ml-1">- {pkg.minReturnsDescription}</span>
+                        <span className="ml-1">
+                          - {pkg.minReturnsDescription}
+                        </span>
                       )}
                     </div>
                   )}
@@ -1303,20 +1383,22 @@ const AdminPackages = () => {
             {(() => {
               const includes = pkg.includes;
               let includesArray = [];
-              
+
               if (Array.isArray(includes)) {
                 includesArray = includes;
-              } else if (typeof includes === 'string' && includes.trim()) {
+              } else if (typeof includes === "string" && includes.trim()) {
                 try {
                   includesArray = JSON.parse(includes);
                 } catch (e) {
                   includesArray = [includes]; // If not JSON, treat as single item
                 }
               }
-              
+
               return includesArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">What's Included:</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
+                    What's Included:
+                  </p>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     {includesArray.slice(0, 3).map((item, index) => (
                       <li key={index} className="flex items-start">
@@ -1338,27 +1420,32 @@ const AdminPackages = () => {
             {(() => {
               const process = pkg.process;
               let processArray = [];
-              
+
               if (Array.isArray(process)) {
                 processArray = process;
-              } else if (typeof process === 'string' && process.trim()) {
+              } else if (typeof process === "string" && process.trim()) {
                 try {
                   processArray = JSON.parse(process);
                 } catch (e) {
                   processArray = [process]; // If not JSON, treat as single item
                 }
               }
-              
+
               return processArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">Process Steps:</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
+                    Process Steps:
+                  </p>
                   <div className="space-y-1">
                     {processArray.slice(0, 2).map((step, index) => (
-                      <div key={index} className="flex items-start text-xs text-slate-600 dark:text-slate-400">
+                      <div
+                        key={index}
+                        className="flex items-start text-xs text-slate-600 dark:text-slate-400"
+                      >
                         <span className="w-4 h-4 bg-violet-500 text-white rounded-full flex items-center justify-center text-xs mr-2 flex-shrink-0">
                           {index + 1}
                         </span>
-                        {typeof step === 'object' ? step.title || step : step}
+                        {typeof step === "object" ? step.title || step : step}
                       </div>
                     ))}
                     {processArray.length > 2 && (
@@ -1381,7 +1468,9 @@ const AdminPackages = () => {
             No packages found
           </h3>
           <p className="text-slate-600 dark:text-slate-400">
-            {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first package'}
+            {searchTerm
+              ? "Try adjusting your search criteria"
+              : "Get started by creating your first package"}
           </p>
         </div>
       )}
@@ -1447,7 +1536,8 @@ const AdminPackages = () => {
                   Delete Package
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-                  Are you sure you want to delete "{selectedPackage?.title}"? This action cannot be undone.
+                  Are you sure you want to delete "{selectedPackage?.title}"?
+                  This action cannot be undone.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button

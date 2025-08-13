@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { servicesAPI } from '../../services/api';
-import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { servicesAPI } from "../../services/api";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import {
   StarIcon,
   ClockIcon,
@@ -15,8 +15,8 @@ import {
   CalculatorIcon,
   CreditCardIcon,
   DocumentMagnifyingGlassIcon,
-  SparklesIcon
-} from '@heroicons/react/24/outline';
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 
 const BuyService = () => {
   const { id } = useParams();
@@ -34,8 +34,8 @@ const BuyService = () => {
       const response = await servicesAPI.getById(id);
       setService(response.data.data);
     } catch (error) {
-      console.error('Failed to fetch service:', error);
-      setError('Service not found or unavailable.');
+      console.error("Failed to fetch service:", error);
+      setError("Service not found or unavailable.");
     } finally {
       setLoading(false);
     }
@@ -53,29 +53,29 @@ const BuyService = () => {
     if (!service) return null;
     const imageUrl = service.image_url || service.imageUrl;
     if (!imageUrl) return null;
-    
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+
+    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl;
     }
-    
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1';
-    
-    if (imageUrl.startsWith('/uploads/')) {
+
+    const baseUrl = "http://148.230.87.141/api/v1";
+
+    if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;
     }
-    
-    return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+
+    return `${baseUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
   };
 
   const getServiceIcon = (serviceType) => {
     switch (serviceType) {
-      case 'tax_preparation':
+      case "tax_preparation":
         return DocumentTextIcon;
-      case 'financial_planning':
+      case "financial_planning":
         return CreditCardIcon;
-      case 'consultation':
+      case "consultation":
         return CalculatorIcon;
-      case 'business_advisory':
+      case "business_advisory":
         return DocumentMagnifyingGlassIcon;
       default:
         return SparklesIcon;
@@ -85,28 +85,29 @@ const BuyService = () => {
   const handleBookNow = async () => {
     try {
       setIsBooking(true);
-      
+
       // If service has a link, redirect to external booking page
       if (service.link) {
-        window.open(service.link, '_blank');
+        window.open(service.link, "_blank");
         return;
       }
-      
+
       // Here you would typically integrate with a booking/payment system
       // For now, we'll simulate the booking process
-      
-      console.log('Processing booking for service:', service.id);
-      
+
+      console.log("Processing booking for service:", service.id);
+
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // For demo purposes, show success and redirect
-      alert('Booking successful! We will contact you shortly to confirm your appointment.');
-      navigate('/dashboard/bookings'); // Redirect to user dashboard
-      
+      alert(
+        "Booking successful! We will contact you shortly to confirm your appointment."
+      );
+      navigate("/dashboard/bookings"); // Redirect to user dashboard
     } catch (error) {
-      console.error('Booking failed:', error);
-      alert('Booking failed. Please try again.');
+      console.error("Booking failed:", error);
+      alert("Booking failed. Please try again.");
     } finally {
       setIsBooking(false);
     }
@@ -127,8 +128,10 @@ const BuyService = () => {
           <h2 className="text-2xl font-bold text-secondary-900 mb-4">
             Service Not Found
           </h2>
+
           <p className="text-secondary-600 mb-6">
             {error || 'The service you are looking for could not be found.'}
+
           </p>
           <Link
             to="/financial-help"
@@ -142,7 +145,9 @@ const BuyService = () => {
     );
   }
 
-  const ServiceIcon = getServiceIcon(service.serviceType || service.service_type);
+  const ServiceIcon = getServiceIcon(
+    service.serviceType || service.service_type
+  );
 
   return (
     <div className="min-h-screen bg-secondary-50 pt-20">
@@ -208,15 +213,19 @@ const BuyService = () => {
                 <div className="flex items-center p-4 bg-primary-50 rounded-lg border border-primary-200">
                   <CurrencyDollarIcon className="w-8 h-8 text-primary-600 mr-4" />
                   <div>
+
                     <div className="text-2xl font-bold text-primary-900">${service.price}</div>
                     <div className="text-sm text-primary-700">Service Price</div>
+
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <ClockIcon className="w-8 h-8 text-blue-600 mr-4" />
                   <div>
+
                     <div className="text-2xl font-bold text-blue-900">{service.durationMinutes || service.duration_minutes || 60} min</div>
                     <div className="text-sm text-blue-700">Duration</div>
+
                   </div>
                 </div>
               </div>
@@ -238,7 +247,9 @@ const BuyService = () => {
                 </p>
                 {service.requirements && (
                   <div className="mt-6">
-                    <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-3">Requirements</h3>
+                    <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-3">
+                      Requirements
+                    </h3>
                     <p className="text-secondary-600 dark:text-secondary-400">
                       {service.requirements}
                     </p>
@@ -262,7 +273,8 @@ const BuyService = () => {
                     ${service.price}
                   </div>
                   <div className="text-sm text-secondary-600 dark:text-secondary-400">
-                    {service.durationMinutes || service.duration_minutes || 60} minutes consultation
+                    {service.durationMinutes || service.duration_minutes || 60}{" "}
+                    minutes consultation
                   </div>
                 </div>
 

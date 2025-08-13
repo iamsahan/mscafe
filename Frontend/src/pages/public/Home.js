@@ -99,8 +99,7 @@ const Home = () => {
     }
 
     // Use the same API base URL as the API service
-    const baseUrl =
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
+    const baseUrl = "http://148.230.87.141/api/v1";
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {
