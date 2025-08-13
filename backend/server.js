@@ -26,7 +26,8 @@ const logger = require("./utils/logger");
 const app = express();
 
 // Trust proxy - required when behind nginx reverse proxy
-app.set("trust proxy", true);
+// Only trust the first proxy (nginx)
+app.set("trust proxy", 1);
 
 // Security middleware
 app.use(
