@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { coursesAPI } from '../../services/api';
-import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { coursesAPI } from "../../services/api";
+import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import {
   CheckCircleIcon,
   StarIcon,
@@ -14,8 +14,8 @@ import {
   GiftIcon,
   ShieldCheckIcon,
   ChatBubbleLeftRightIcon,
-  TrophyIcon
-} from '@heroicons/react/24/outline';
+  TrophyIcon,
+} from "@heroicons/react/24/outline";
 
 const BuyCourse = () => {
   const { id } = useParams();
@@ -33,8 +33,8 @@ const BuyCourse = () => {
       const response = await coursesAPI.getById(id);
       setCourse(response.data.data);
     } catch (error) {
-      console.error('Failed to fetch course:', error);
-      setError('Course not found or unavailable.');
+      console.error("Failed to fetch course:", error);
+      setError("Course not found or unavailable.");
     } finally {
       setLoading(false);
     }
@@ -52,42 +52,41 @@ const BuyCourse = () => {
     if (!course) return null;
     const imageUrl = course.image_url || course.imageUrl;
     if (!imageUrl) return null;
-    
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+
+    if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl;
     }
-    
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1';
-    
-    if (imageUrl.startsWith('/uploads/')) {
+
+    const baseUrl = "http://148.230.87.141/api/v1";
+
+    if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;
     }
-    
-    return `${baseUrl}${imageUrl.startsWith('/') ? '' : '/'}${imageUrl}`;
+
+    return `${baseUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
   };
 
   const handleBuyNow = async () => {
     try {
       setIsEnrolling(true);
-    
+
       // If course has a link, redirect to external enrollment page
       if (course.link) {
-        window.open(course.link, '_blank');
+        window.open(course.link, "_blank");
         return;
       }
-      
-      console.log('Processing enrollment for course:', course.id);
-      
+
+      console.log("Processing enrollment for course:", course.id);
+
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // For demo purposes, show success and redirect
-      alert('Enrollment successful! Welcome to the course.');
-      navigate('/dashboard/courses'); // Redirect to user dashboard
-      
+      alert("Enrollment successful! Welcome to the course.");
+      navigate("/dashboard/courses"); // Redirect to user dashboard
     } catch (error) {
-      console.error('Enrollment failed:', error);
-      alert('Enrollment failed. Please try again.');
+      console.error("Enrollment failed:", error);
+      alert("Enrollment failed. Please try again.");
     } finally {
       setIsEnrolling(false);
     }
@@ -109,7 +108,7 @@ const BuyCourse = () => {
             Course Not Found
           </h2>
           <p className="text-secondary-600 dark:text-secondary-400 mb-6">
-            {error || 'The course you are looking for could not be found.'}
+            {error || "The course you are looking for could not be found."}
           </p>
           <Link
             to="/tax-professional"
@@ -186,16 +185,24 @@ const BuyCourse = () => {
                 <div className="flex items-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-[#93268f] dark:border-[#93268f]">
                   <CurrencyDollarIcon className="w-8 h-8 text-[#93268f] dark:[#93268f]-400 mr-4" />
                   <div>
-                    <div className="text-2xl font-bold text-primary-900 dark:text-primary-100">{course.price}</div>
-                    <div className="text-sm text-primary-700 dark:text-primary-300">Course Price</div>
+                    <div className="text-2xl font-bold text-primary-900 dark:text-primary-100">
+                      {course.price}
+                    </div>
+                    <div className="text-sm text-primary-700 dark:text-primary-300">
+                      Course Price
+                    </div>
                   </div>
                 </div>
                 {course.revenueShare && (
                   <div className="flex items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
                     <TrophyIcon className="w-8 h-8 text-green-600 dark:text-green-400 mr-4" />
                     <div>
-                      <div className="text-2xl font-bold text-green-900 dark:text-green-100">{course.revenueShare}</div>
-                      <div className="text-sm text-green-700 dark:text-green-300">Revenue Share</div>
+                      <div className="text-2xl font-bold text-green-900 dark:text-green-100">
+                        {course.revenueShare}
+                      </div>
+                      <div className="text-sm text-green-700 dark:text-green-300">
+                        Revenue Share
+                      </div>
                     </div>
                   </div>
                 )}
@@ -206,17 +213,17 @@ const BuyCourse = () => {
             {(() => {
               const includes = course.includes;
               let includesArray = [];
-              
+
               if (Array.isArray(includes)) {
                 includesArray = includes;
-              } else if (typeof includes === 'string' && includes.trim()) {
+              } else if (typeof includes === "string" && includes.trim()) {
                 try {
                   includesArray = JSON.parse(includes);
                 } catch (e) {
                   includesArray = [includes]; // If not JSON, treat as single item
                 }
               }
-              
+
               return includesArray.length > 0 ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -231,7 +238,9 @@ const BuyCourse = () => {
                     {includesArray.map((feature, index) => (
                       <div key={index} className="flex items-start space-x-3">
                         <CheckCircleIcon className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-secondary-700 dark:text-secondary-300">{feature}</span>
+                        <span className="text-secondary-700 dark:text-secondary-300">
+                          {feature}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -243,17 +252,17 @@ const BuyCourse = () => {
             {(() => {
               const process = course.process;
               let processArray = [];
-              
+
               if (Array.isArray(process)) {
                 processArray = process;
-              } else if (typeof process === 'string' && process.trim()) {
+              } else if (typeof process === "string" && process.trim()) {
                 try {
                   processArray = JSON.parse(process);
                 } catch (e) {
                   processArray = [process]; // If not JSON, treat as single item
                 }
               }
-              
+
               return processArray.length > 0 ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -272,9 +281,11 @@ const BuyCourse = () => {
                         </div>
                         <div>
                           <h3 className="font-semibold text-secondary-900 dark:text-white mb-2">
-                            {typeof step === 'object' ? step.title || step : step}
+                            {typeof step === "object"
+                              ? step.title || step
+                              : step}
                           </h3>
-                          {typeof step === 'object' && step.description && (
+                          {typeof step === "object" && step.description && (
                             <p className="text-secondary-600 dark:text-secondary-400">
                               {step.description}
                             </p>
@@ -288,7 +299,9 @@ const BuyCourse = () => {
             })()}
 
             {/* Requirements */}
-            {(course.efinRequired || course.ptinRequired || course.minReturns > 0) && (
+            {(course.efinRequired ||
+              course.ptinRequired ||
+              course.minReturns > 0) && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -303,8 +316,12 @@ const BuyCourse = () => {
                     <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <ShieldCheckIcon className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-blue-900 dark:text-blue-100">EFIN Required</h3>
-                        <p className="text-blue-700 dark:text-blue-300">{course.efinDescription}</p>
+                        <h3 className="font-semibold text-blue-900 dark:text-blue-100">
+                          EFIN Required
+                        </h3>
+                        <p className="text-blue-700 dark:text-blue-300">
+                          {course.efinDescription}
+                        </p>
                       </div>
                     </div>
                   )}
@@ -312,8 +329,12 @@ const BuyCourse = () => {
                     <div className="flex items-start space-x-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                       <DocumentTextIcon className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-orange-900 dark:text-orange-100">PTIN Required</h3>
-                        <p className="text-orange-700 dark:text-orange-300">{course.ptinDescription}</p>
+                        <h3 className="font-semibold text-orange-900 dark:text-orange-100">
+                          PTIN Required
+                        </h3>
+                        <p className="text-orange-700 dark:text-orange-300">
+                          {course.ptinDescription}
+                        </p>
                       </div>
                     </div>
                   )}
@@ -324,7 +345,9 @@ const BuyCourse = () => {
                         <h3 className="font-semibold text-green-900 dark:text-green-100">
                           Minimum {course.minReturns} Returns Experience
                         </h3>
-                        <p className="text-green-700 dark:text-green-300">{course.minReturnsDescription}</p>
+                        <p className="text-green-700 dark:text-green-300">
+                          {course.minReturnsDescription}
+                        </p>
                       </div>
                     </div>
                   )}
