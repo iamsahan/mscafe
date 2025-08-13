@@ -5,6 +5,28 @@ import homeImage from "../../images/home.jpg";
 import elyseImage from "../../images/Elyse.jpg";
 import about from "../../images/about.jpg";
 
+// Add gradient animation CSS
+const gradientAnimationCSS = `
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+`;
+
+// Inject CSS into the document
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = gradientAnimationCSS;
+  document.head.appendChild(style);
+}
+
 const Home = () => {
   const [services, setServices] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -18,8 +40,8 @@ const Home = () => {
         setLoading(true);
 
         const [servicesRes, coursesRes] = await Promise.all([
-          servicesAPI.getAll(),
-          coursesAPI.getAll(),
+          servicesAPI.getAll({ limit: 1000 }),
+          coursesAPI.getAll({ limit: 1000 }),
         ]);
 
         console.log("Courses response:", coursesRes.data);
@@ -403,7 +425,7 @@ const Home = () => {
             <div className="grid lg:grid-cols-2 min-h-[600px]">
               {/* Image Section */}
               <div
-                className="relative overflow-hidden flex items-center justify-center p-12 
+                className="relative overflow-hidden flex items-center justify-center p-6 lg:p-12 
                         bg-gradient-to-br from-[#93268f]/20 to-[#f4b342]/20"
               >
                 <motion.div
@@ -422,7 +444,7 @@ const Home = () => {
                     <img
                       src={about}
                       alt="Money Solution Cafe Team"
-                      className="w-[350px] h-[350px] object-cover rounded-full border-6 border-black/30
+                      className="w-[250px] lg:w-[350px] h-[250px] lg:h-[350px] object-cover rounded-full border-4 lg:border-6 border-black/30
                            shadow-[0_20px_40px_rgba(0,0,0,0.3),0_0_0_20px_rgba(255,255,255,0.05),0_0_0_40px_rgba(255,255,255,0.02)]
                            transition-all duration-500 group-hover:rounded-[40%_60%_30%_70%/60%_30%_70%_40%]"
                     />
@@ -435,7 +457,7 @@ const Home = () => {
               </div>
 
               {/* Content Section */}
-              <div className="p-12 flex flex-col justify-center relative">
+              <div className="p-6 lg:p-12 flex flex-col justify-center relative">
                 <div className="absolute inset-[20px] border-2 border-transparent rounded-[40px] bg-gradient-to-br from-[#93268f]/30 via-[#764ba2]/30 to-[#f093fb]/30 opacity-30 animate-pulse" />
 
                 <div className="relative space-y-6">
@@ -525,7 +547,7 @@ const Home = () => {
       </section>
 
       {/* Mission & Vision - Modern Split Design with Enhanced Animations */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative min-h-screen lg:h-screen overflow-hidden">
         {/* Background with diagonal split and animated gradient */}
         <div className="absolute inset-0">
           {/* Purple Vision Side with Animated Gradient */}
@@ -533,7 +555,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
-            className="absolute inset-0 bg-gradient-to-br from-[#93268f] to-[#93268f]/90"
+            className="absolute inset-0 bg-gradient-to-br from-[#93268f] to-[#93268f]/90 lg:block hidden"
             style={{
               clipPath: "polygon(0 0, 60% 0, 40% 100%, 0 100%)",
               background:
@@ -547,7 +569,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
-            className="absolute inset-0"
+            className="absolute inset-0 lg:block hidden"
             style={{
               clipPath: "polygon(40% 0, 100% 0, 100% 100%, 60% 100%)",
               background:
@@ -555,6 +577,14 @@ const Home = () => {
               backgroundSize: "400% 400%",
               animation: "gradient 15s ease infinite",
             }}
+          />
+          
+          {/* Mobile Background */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 lg:hidden bg-gradient-to-br from-[#93268f] to-[#f4b342]"
           />
 
           {/* Animated Floating Elements */}
@@ -569,7 +599,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute top-20 left-20 w-32 h-32 border-4 border-white/10 rounded-full 
+            className="absolute top-20 left-20 w-16 lg:w-32 h-16 lg:h-32 border-4 border-white/10 rounded-full 
                        backdrop-blur-sm shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           />
           <motion.div
@@ -583,7 +613,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute top-40 right-32 w-24 h-24 border-4 border-white/10 rounded-full 
+            className="absolute top-40 right-8 lg:right-32 w-12 lg:w-24 h-12 lg:h-24 border-4 border-white/10 rounded-full 
                        backdrop-blur-sm shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           />
 
@@ -598,7 +628,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute bottom-32 left-1/4 w-16 h-16 bg-white/5 rounded-full 
+            className="absolute bottom-32 left-1/4 w-8 lg:w-16 h-8 lg:h-16 bg-white/5 rounded-full 
                        backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           />
           <motion.div
@@ -611,7 +641,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-32 right-1/4 w-20 h-20 bg-white/5 rounded-full 
+            className="absolute top-32 right-1/4 w-10 lg:w-20 h-10 lg:h-20 bg-white/5 rounded-full 
                        backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.1)]"
           />
 
@@ -654,14 +684,14 @@ const Home = () => {
         />
 
         {/* Content */}
-        <div className="relative z-10 h-full flex">
+        <div className="relative z-10 h-full flex flex-col lg:flex-row">
           {/* Vision Section - Left Side */}
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-1/2 flex flex-col justify-center pl-16 pr-8 group"
+            className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:pl-16 lg:pr-8 py-12 lg:py-0 group"
           >
             {/* Vision Icon with Complex Animation */}
             <motion.div
@@ -674,7 +704,7 @@ const Home = () => {
                 type: "spring",
                 stiffness: 200,
               }}
-              className="mb-8 relative"
+              className="mb-8 relative hidden lg:block"
             >
               <motion.div
                 animate={{
@@ -689,7 +719,7 @@ const Home = () => {
                 className="absolute inset-0 bg-white/10 rounded-full blur-xl"
               />
               <div
-                className="w-24 h-24 bg-white bg-opacity-30 rounded-full flex items-center justify-center
+                className="w-12 lg:w-24 h-12 lg:h-24 bg-white bg-opacity-30 rounded-full flex items-center justify-center
                             backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]
                             transition-all duration-500 relative"
               >
@@ -704,7 +734,70 @@ const Home = () => {
                   }}
                 >
                   <svg
-                    className="w-12 h-12 text-white transform group-hover:scale-110 transition-transform duration-500"
+                    className="w-6 lg:w-12 h-6 lg:h-12 text-white transform group-hover:scale-110 transition-transform duration-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Vision Icon with Complex Animation - Mobile */}
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                type: "spring",
+                stiffness: 200,
+              }}
+              className="mb-8 relative lg:hidden mx-auto"
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 180, 360],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute inset-0 bg-white/10 rounded-full blur-xl"
+              />
+              <div
+                className="w-12 h-12 bg-white bg-opacity-30 rounded-full flex items-center justify-center
+                            backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]
+                            transition-all duration-500 relative"
+              >
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  <svg
+                    className="w-6 h-6 text-white transform group-hover:scale-110 transition-transform duration-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -733,7 +826,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-7xl font-black text-white leading-none tracking-tight relative"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight relative text-center lg:text-left"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -769,7 +862,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-xl leading-relaxed max-w-lg opacity-90 relative group"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg opacity-90 relative group text-center lg:text-left mx-auto lg:mx-0"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -807,9 +900,9 @@ const Home = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-1/2 flex flex-col justify-center pl-20 pr-16 group"
+            className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:pl-20 lg:pr-16 py-12 lg:py-0 group"
           >
-            {/* Mission Icon with Complex Animation */}
+            {/* Mission Icon with Complex Animation - Desktop */}
             <motion.div
               initial={{ scale: 0, rotate: 180 }}
               whileInView={{ scale: 1, rotate: 0 }}
@@ -820,7 +913,7 @@ const Home = () => {
                 type: "spring",
                 stiffness: 200,
               }}
-              className="mb-8 ml-auto relative"
+              className="mb-8 ml-auto hidden lg:block relative"
             >
               <motion.div
                 animate={{
@@ -835,7 +928,7 @@ const Home = () => {
                 className="absolute inset-0 bg-white/10 rounded-full blur-xl"
               />
               <div
-                className="w-24 h-24 bg-white bg-opacity-30 rounded-full flex items-center justify-center
+                className="w-12 lg:w-24 h-12 lg:h-24 bg-white bg-opacity-30 rounded-full flex items-center justify-center
                             backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]
                             transition-all duration-500 relative"
               >
@@ -850,7 +943,64 @@ const Home = () => {
                   }}
                 >
                   <svg
-                    className="w-12 h-12 text-white transform group-hover:scale-110 transition-transform duration-500"
+                    className="w-6 lg:w-12 h-6 lg:h-12 text-white transform group-hover:scale-110 transition-transform duration-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Mission Icon with Complex Animation - Mobile */}
+            <motion.div
+              initial={{ scale: 0, rotate: 180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                type: "spring",
+                stiffness: 200,
+              }}
+              className="mb-8 mx-auto lg:hidden relative"
+            >
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, -180, -360],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute inset-0 bg-white/10 rounded-full blur-xl"
+              />
+              <div
+                className="w-12 h-12 bg-white bg-opacity-30 rounded-full flex items-center justify-center
+                            backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]
+                            transition-all duration-500 relative"
+              >
+                <motion.div
+                  animate={{
+                    rotate: [0, -360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  <svg
+                    className="w-6 h-6 text-white transform group-hover:scale-110 transition-transform duration-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -873,7 +1023,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-7xl font-black text-white leading-none tracking-tight text-right relative"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight text-center lg:text-right relative"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -909,7 +1059,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-xl leading-relaxed max-w-lg ml-auto text-right relative group"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg ml-auto text-center lg:text-right relative group mx-auto lg:mx-0 lg:ml-auto"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -989,7 +1139,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {services.map((service, index) => {
+              {services.slice(0, 6).map((service, index) => {
                 const imageUrl = getImageUrl(service);
                 const hasImageError = imageErrors[service.id];
                 const shouldShowImage = imageUrl && !hasImageError;
@@ -1097,6 +1247,39 @@ const Home = () => {
               })}
             </motion.div>
           )}
+
+          {/* See More Button for Services */}
+          {!loading && services.length > 6 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center mt-12"
+            >
+              <motion.a
+                href="/financial-help"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#93268f] to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300"
+              >
+                <span>See All Services</span>
+                <svg
+                  className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </motion.a>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -1145,7 +1328,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {courses.map((course, index) => {
+              {courses.slice(0, 6).map((course, index) => {
                 const imageUrl = getImageUrl(course);
                 const hasImageError = imageErrors[course.id];
                 const shouldShowImage = imageUrl && !hasImageError;
@@ -1292,6 +1475,39 @@ const Home = () => {
               })}
             </motion.div>
           )}
+
+          {/* See More Button for Courses */}
+          {!loading && courses.length > 6 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center mt-12"
+            >
+              <motion.a
+                href="/tax-professional"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#f4b342] to-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300"
+              >
+                <span>See All Courses</span>
+                <svg
+                  className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </motion.a>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -1391,17 +1607,17 @@ const Home = () => {
                     <img
                       src={elyseImage}
                       alt="Elyse Whisby"
-                      className="w-full h-[600px] object-cover"
+                      className="w-full h-[400px] lg:h-[600px] object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                     {/* Bottom Info Panel */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20">
-                        <h3 className="text-3xl font-bold mb-2 text-white">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-8">
+                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 lg:p-6 border border-white/20">
+                        <h3 className="text-2xl lg:text-3xl font-bold mb-2 text-white">
                           Elyse Whisby
                         </h3>
-                        <p className="text-white/90">Founder & CEO</p>
+                        <p className="text-white/90 text-sm lg:text-base">Founder & CEO</p>
                       </div>
                     </div>
                   </div>
@@ -1414,11 +1630,11 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, duration: 0.8 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="absolute -left-8 top-1/4 z-30"
+                  className="absolute -left-4 lg:-left-8 top-1/4 z-30 hidden lg:block"
                 >
-                  <div className="bg-white rounded-xl p-6 shadow-[0_20px_50px_rgba(147,38,143,0.2)] border border-[#93268f]/10">
-                    <div className="text-5xl font-bold text-[#93268f]">25+</div>
-                    <div className="text-sm text-gray-600 mt-1">
+                  <div className="bg-white rounded-xl p-4 lg:p-6 shadow-[0_20px_50px_rgba(147,38,143,0.2)] border border-[#93268f]/10">
+                    <div className="text-3xl lg:text-5xl font-bold text-[#93268f]">25+</div>
+                    <div className="text-xs lg:text-sm text-gray-600 mt-1">
                       Years Experience
                     </div>
                   </div>
@@ -1430,17 +1646,47 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.8 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="absolute -right-8 bottom-1/4 z-30"
+                  className="absolute -right-4 lg:-right-8 bottom-1/4 z-30 hidden lg:block"
                 >
-                  <div className="bg-white rounded-xl p-6 shadow-[0_20px_50px_rgba(244,179,66,0.2)] border border-[#f4b342]/10">
-                    <div className="text-5xl font-bold text-[#f4b342]">
+                  <div className="bg-white rounded-xl p-4 lg:p-6 shadow-[0_20px_50px_rgba(244,179,66,0.2)] border border-[#f4b342]/10">
+                    <div className="text-3xl lg:text-5xl font-bold text-[#f4b342]">
                       1000+
                     </div>
-                    <div className="text-sm text-gray-600 mt-1">
+                    <div className="text-xs lg:text-sm text-gray-600 mt-1">
                       Clients Helped
                     </div>
                   </div>
                 </motion.div>
+                
+                {/* Mobile Stats Cards */}
+                <div className="lg:hidden mt-6 grid grid-cols-2 gap-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    className="bg-white rounded-xl p-4 shadow-[0_20px_50px_rgba(147,38,143,0.2)] border border-[#93268f]/10 text-center"
+                  >
+                    <div className="text-3xl font-bold text-[#93268f]">25+</div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      Years Experience
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="bg-white rounded-xl p-4 shadow-[0_20px_50px_rgba(244,179,66,0.2)] border border-[#f4b342]/10 text-center"
+                  >
+                    <div className="text-3xl font-bold text-[#f4b342]">
+                      1000+
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      Clients Helped
+                    </div>
+                  </motion.div>
+                </div>
               </motion.div>
             </motion.div>
 
@@ -1463,7 +1709,7 @@ const Home = () => {
                 <span className="inline-block px-4 py-2 bg-[#93268f]/10 text-[#93268f] rounded-full text-sm font-semibold mb-4">
                   Meet Our Founder
                 </span>
-                <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#93268f] to-[#f4b342] bg-clip-text text-transparent">
+                <h2 className="text-3xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-[#93268f] to-[#f4b342] bg-clip-text text-transparent">
                   Visionary Leadership
                 </h2>
                 <div className="h-1 w-24 bg-gradient-to-r from-[#93268f] to-[#f4b342] rounded-full" />
@@ -1561,24 +1807,24 @@ const Home = () => {
       </motion.section>
 
       {/* Reviews Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-12 lg:py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-8 lg:mb-16"
           >
             <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#93268f]/10 to-[#f4b342]/10 text-[#93268f] rounded-full text-sm font-semibold mb-4">
               Client Reviews
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6">
               What Our{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#93268f] to-[#f4b342]">
                 Clients Say
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
               Read genuine feedback from our valued clients and their
               experiences with our services.
             </p>
@@ -1591,18 +1837,31 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="relative z-10"
           >
-            {/* Review Widget */}
+            {/* Review Widget with better mobile styling /// */}
             <div
-              className="w-full"
+              className="w-full overflow-hidden rounded-2xl shadow-lg"
               dangerouslySetInnerHTML={{
                 __html: `
+                  <style>
+                    .lc_reviews_widget {
+                      min-width: 100%;
+                      width: 100%;
+                      min-height: 800px;
+                      height: 100%;
+                      border-radius: 16px;
+                    }
+                    @media (min-width: 1024px) {
+                      .lc_reviews_widget {
+                        min-height: 540px;
+                      }
+                    }
+                  </style>
                   <script type='text/javascript' src='https://reputationhub.site/reputation/assets/review-widget.js'></script>
                   <iframe 
                     class='lc_reviews_widget' 
                     src='https://reputationhub.site/reputation/widgets/review_widget/NYApyDzbavj6XMhd5VPP' 
                     frameborder='0' 
-                    scrolling='no' 
-                    style='min-width: 100%; width: 100%; min-height: 520px; height: 100%;'>
+                    scrolling='no'>
                   </iframe>
                 `,
               }}
@@ -1612,7 +1871,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action - Premium CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-[#93268f] to-[#93268f]/90 relative overflow-hidden">
+      <section className="py-12 lg:py-24 bg-gradient-to-r from-[#93268f] to-[#93268f]/90 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#f4b342]/20 to-transparent" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#f4b342]/10 to-transparent" />
@@ -1628,7 +1887,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute top-10 right-20 w-32 h-32 border-4 border-white/10 rounded-full"
+            className="absolute top-10 right-8 lg:right-20 w-16 lg:w-32 h-16 lg:h-32 border-4 border-white/10 rounded-full"
           />
           <motion.div
             animate={{
@@ -1640,7 +1899,7 @@ const Home = () => {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute bottom-10 left-20 w-24 h-24 border-4 border-[#f4b342]/20 rounded-full"
+            className="absolute bottom-10 left-8 lg:left-20 w-12 lg:w-24 h-12 lg:h-24 border-4 border-[#f4b342]/20 rounded-full"
           />
         </div>
 
@@ -1651,29 +1910,29 @@ const Home = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+            <h2 className="text-3xl lg:text-4xl xl:text-6xl font-bold text-white mb-6 lg:mb-8 leading-tight">
               Ready to Transform Your{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f4b342] to-[#f4b342]/80">
                 Financial Future?
               </span>
             </h2>
-            <p className="text-xl text-white/90 mb-12 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-white/90 mb-8 lg:mb-12 leading-relaxed max-w-2xl mx-auto">
               Join thousands who have already started their journey to financial
               freedom and career success. Your transformation begins with a
               single step.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center items-center">
               <motion.a
                 href="/financial-help" // Changed from "/services"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative overflow-hidden bg-[#f4b342] text-white px-10 py-5 rounded-2xl font-semibold text-lg shadow-2xl transition-all duration-300 hover:shadow-[#f4b342]/25"
+                className="group relative overflow-hidden bg-[#f4b342] text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg shadow-2xl transition-all duration-300 hover:shadow-[#f4b342]/25 w-full sm:w-auto"
               >
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
                 <span className="relative z-10">Start Your Journey</span>
                 <svg
-                  className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1"
+                  className="inline-block ml-2 w-4 lg:w-5 h-4 lg:h-5 transition-transform group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -1691,11 +1950,11 @@ const Home = () => {
                 href="/contact"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-semibold text-lg shadow-2xl transition-all duration-300 hover:bg-white/20"
+                className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-semibold text-base lg:text-lg shadow-2xl transition-all duration-300 hover:bg-white/20 w-full sm:w-auto"
               >
                 <span className="relative z-10">Schedule Consultation</span>
                 <svg
-                  className="inline-block ml-2 w-5 h-5 transition-transform group-hover:translate-x-1"
+                  className="inline-block ml-2 w-4 lg:w-5 h-4 lg:h-5 transition-transform group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

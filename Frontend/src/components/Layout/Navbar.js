@@ -226,18 +226,7 @@ const Navbar = () => {
               </motion.div>
             </motion.button>
 
-            {/* Demo Auth Toggle for Mobile */}
-            <motion.button
-              onClick={toggleAuth}
-              className={`text-xs px-3 py-2 rounded-xl font-medium transition-all duration-300 ${
-                isScrolled
-                  ? 'text-white bg-gradient-to-r from-[#93268f] to-[#93268f] hover:from-[#842f81] hover:to-[#e256d6]'
-                  : 'text-white bg-white/20 backdrop-blur-md hover:bg-white/30 border border-white/30'
-              }`}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isAuthenticated ? 'Logout' : 'Login'}
-            </motion.button>
+        
           </div>
         </div>
       </div>
@@ -250,7 +239,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="lg:hidden overflow-hidden bg-white/98 backdrop-blur-xl border-t border-gray-200/50"
+            className="lg:hidden overflow-hidden bg-gray-100 border-t border-gray-200/50"
           >
             <div className="px-6 py-8 space-y-3">
               {navigation.map((item, index) => {

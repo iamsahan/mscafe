@@ -7,7 +7,7 @@ const { sequelize: dbSequelize } = require('../config/database');
 // @route   GET /api/v1/priority-tradelines-au
 // @access  Public
 const getPriorityTradelinesAU = asyncHandler(async (req, res) => {
-  const { bank, minAge, maxAge, minPrice, maxPrice, minCreditLimit, maxCreditLimit, search, page = 1, limit = 10 } = req.query;
+  const { bank, minAge, maxAge, minPrice, maxPrice, minCreditLimit, maxCreditLimit, search, page = 1, limit = 1000 } = req.query;
   
   const where = { isActive: true };
   

@@ -19,8 +19,10 @@ const BecomeTaxProfessional = () => {
       setLoading(true);
       setError(null);
 
-      const response = await coursesAPI.getAll();
-      console.log("Courses response:", response.data);
+      
+      const response = await coursesAPI.getAll({ limit: 1000 });
+      console.log('Courses response:', response.data);
+      
 
       const fetchedCourses = response.data.data || [];
       setCourses(fetchedCourses);

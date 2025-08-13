@@ -9,7 +9,7 @@ const fs = require('fs');
 // @route   GET /api/v1/services
 // @access  Public
 const getServices = asyncHandler(async (req, res) => {
-  const { serviceType, featured, search, page = 1, limit = 10, includeInactive } = req.query;
+  const { serviceType, featured, search, page = 1, limit = 1000, includeInactive } = req.query;
   
   // For admin requests, include inactive services
   const where = {};

@@ -94,7 +94,7 @@ const BuyCourse = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center">
+      <div className="min-h-screen bg-secondary-50 flex items-center justify-center">
         <LoadingSpinner size="w-12 h-12" />
       </div>
     );
@@ -102,13 +102,15 @@ const BuyCourse = () => {
 
   if (error || !course) {
     return (
-      <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 flex items-center justify-center ">
+      <div className="min-h-screen bg-secondary-50 flex items-center justify-center ">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-secondary-900 dark:text-white ">
+          <h2 className="text-2xl font-bold text-secondary-900 ">
             Course Not Found
           </h2>
-          <p className="text-secondary-600 dark:text-secondary-400 mb-6">
-            {error || "The course you are looking for could not be found."}
+
+          <p className="text-secondary-600 mb-6">
+            {error || 'The course you are looking for could not be found.'}
+
           </p>
           <Link
             to="/tax-professional"
@@ -123,13 +125,13 @@ const BuyCourse = () => {
   }
 
   return (
-    <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 pt-20">
+    <div className="min-h-screen bg-secondary-50 pt-20">
       {/* Header Navigation */}
-      <div className="bg-white dark:bg-secondary-800 shadow-sm">
+      <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             to="/tax-professional"
-            className="inline-flex items-center text-[#93268f] hover:text-[#93268f] dark:text-[#93268f] dark:hover:text-primary-300"
+            className="inline-flex items-center text-[#93268f] hover:text-[#93268f]"
           >
             <ArrowLeftIcon className="w-5 h-5 mr-2" />
             Back to Courses
@@ -151,18 +153,18 @@ const BuyCourse = () => {
                 <div className="flex-1">
                   <div className="flex items-center space-x-4 mb-4">
                     {course.category && (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-[#93268f] dark:bg-primary-900/30 dark:text-primary-300">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-[#93268f]">
                         {course.category.name}
                       </span>
                     )}
                     {course.featured && (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                         <StarIcon className="w-3 h-3 mr-1" />
                         Featured
                       </span>
                     )}
                   </div>
-                  <h1 className="text-3xl font-bold text-secondary-900 dark:text-white mb-4">
+                  <h1 className="text-3xl font-bold text-secondary-900 mb-4">
                     {course.title}
                   </h1>
                 </div>
@@ -182,27 +184,23 @@ const BuyCourse = () => {
 
               {/* Course Highlights */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="flex items-center p-4 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-[#93268f] dark:border-[#93268f]">
-                  <CurrencyDollarIcon className="w-8 h-8 text-[#93268f] dark:[#93268f]-400 mr-4" />
+                <div className="flex items-center p-4 bg-primary-50 rounded-lg border border-[#93268f]">
+                  <CurrencyDollarIcon className="w-8 h-8 text-[#93268f] mr-4" />
                   <div>
-                    <div className="text-2xl font-bold text-primary-900 dark:text-primary-100">
-                      {course.price}
-                    </div>
-                    <div className="text-sm text-primary-700 dark:text-primary-300">
-                      Course Price
-                    </div>
+
+                    <div className="text-2xl font-bold text-primary-900">{course.price}</div>
+                    <div className="text-sm text-primary-700">Course Price</div>
+
                   </div>
                 </div>
                 {course.revenueShare && (
-                  <div className="flex items-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                    <TrophyIcon className="w-8 h-8 text-green-600 dark:text-green-400 mr-4" />
+                  <div className="flex items-center p-4 bg-green-50 rounded-lg border border-green-200">
+                    <TrophyIcon className="w-8 h-8 text-green-600 mr-4" />
                     <div>
-                      <div className="text-2xl font-bold text-green-900 dark:text-green-100">
-                        {course.revenueShare}
-                      </div>
-                      <div className="text-sm text-green-700 dark:text-green-300">
-                        Revenue Share
-                      </div>
+
+                      <div className="text-2xl font-bold text-green-900">{course.revenueShare}</div>
+                      <div className="text-sm text-green-700">Revenue Share</div>
+
                     </div>
                   </div>
                 )}

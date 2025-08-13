@@ -38,7 +38,7 @@ const GetFinancialHelp = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await servicesAPI.getAll();
+      const response = await servicesAPI.getAll({ limit: 1000 });
       setServices(response.data.data || []);
     } catch (error) {
       console.error("Failed to fetch services:", error);
@@ -105,7 +105,7 @@ const GetFinancialHelp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-purple-100 dark:from-gray-950 dark:via-gray-900 dark:to-purple-950">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-purple-100">
       {/* Hero Section - Modern Glass Design */}
       <section className="relative min-h-screen overflow-hidden flex items-center">
         <div
@@ -208,16 +208,17 @@ const GetFinancialHelp = () => {
             transition={{ duration: 0.9 }}
             className="text-center mb-20"
           >
-            <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-200 to-[#93268f]/20 dark:from-purple-950 dark:to-[#93268f]/20 border border-purple-300 dark:border-purple-900 rounded-full text-[#93268f] dark:text-purple-300 text-sm font-semibold mb-8">
+            <div className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-200 to-[#93268f]/20 border border-purple-300 rounded-full text-[#93268f] text-sm font-semibold mb-8">
               <SparklesIcon className="w-5 h-5 mr-2" />
               Our Expertise
             </div>
-            <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-[#93268f] to-purple-900 dark:from-white dark:via-purple-200 dark:to-purple-200 bg-clip-text text-transparent mb-6">
+            <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-[#93268f] to-purple-900 bg-clip-text text-transparent mb-6">
               Premium Financial Services
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto font-light">
-              Tailored solutions to secure your wealth and empower your
-              financial journey.
+
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+              Tailored solutions to secure your wealth and empower your financial journey.
+
             </p>
           </motion.div>
 
@@ -230,14 +231,14 @@ const GetFinancialHelp = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20 bg-red-100 dark:bg-red-950 dark:bg-opacity-20 rounded-xl border border-red-200 dark:border-red-900"
+              className="text-center py-20 bg-red-100 rounded-xl border border-red-200"
             >
-              <div className="w-16 h-16 bg-red-200 dark:bg-red-900 dark:bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-red-200 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-3xl">⚠️</span>
               </div>
-              <p className="text-red-700 dark:text-red-300 mb-8 text-lg font-medium">
-                {error}
-              </p>
+
+              <p className="text-red-700 mb-8 text-lg font-medium">{error}</p>
+
               <button
                 onClick={fetchServices}
                 className="px-10 py-4 bg-gradient-to-r from-red-600 to-pink-700 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-200"
@@ -249,12 +250,12 @@ const GetFinancialHelp = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20 bg-gradient-to-br from-gray-100 to-purple-100 dark:from-gray-900 dark:to-purple-900 rounded-xl border border-gray-200 dark:border-gray-800"
+              className="text-center py-20 bg-gradient-to-br from-gray-100 to-purple-100 rounded-xl border border-gray-200"
             >
-              <div className="w-16 h-16 bg-purple-200 dark:bg-purple-950 dark:bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center mx-auto mb-6">
                 <SparklesIcon className="w-10 h-10 text-[#93268f]" />
               </div>
-              <p className="text-gray-600 dark:text-gray-300 text-lg">
+              <p className="text-gray-600 text-lg">
                 No services available at the moment.
               </p>
             </motion.div>
@@ -383,11 +384,11 @@ const GetFinancialHelp = () => {
                     </div>
 
                     <div className="p-6">
-                      <div className="mb-6">
+                      <div className="mb-4">
                         <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-3 bg-gradient-to-r from-gray-900 to-[#93268f] dark:from-white dark:to-purple-200 bg-clip-text text-transparent">
                           {selectedService.name}
                         </h3>
-                        <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-300">
+                        <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center bg-purple-100 dark:bg-purple-950 dark:bg-opacity-20 px-3 py-1.5 rounded-lg">
                             <ClockIcon className="w-4 h-4 mr-2 text-[#93268f]" />
                             <span className="font-medium">
@@ -397,23 +398,15 @@ const GetFinancialHelp = () => {
                             </span>
                           </div>
                         </div>
+                        {selectedService.description && (
+                          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                            {selectedService.description.length > 100 
+                              ? selectedService.description.substring(0, 100) + '...' 
+                              : selectedService.description
+                            }
+                          </p>
+                        )}
                       </div>
-
-                      <p className="text-gray-700 dark:text-gray-200 mb-8 leading-relaxed text-base font-light">
-                        {selectedService.description}
-                      </p>
-
-                      {selectedService.requirements && (
-                        <div className="mb-8 p-5 bg-gradient-to-r from-[#f4b342]/20 to-orange-100 dark:from-orange-950 dark:to-orange-950 dark:bg-opacity-20 rounded-xl border border-orange-200 dark:border-orange-900">
-                          <h4 className="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
-                            <CheckCircleIcon className="w-5 h-5 mr-2 text-[#f4b342]" />
-                            Requirements
-                          </h4>
-                          <div className="text-gray-700 dark:text-gray-200 leading-relaxed text-sm">
-                            {selectedService.requirements}
-                          </div>
-                        </div>
-                      )}
 
                       <div className="flex flex-col space-y-3">
                         <Link
