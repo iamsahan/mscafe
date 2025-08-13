@@ -378,40 +378,24 @@ const ServicesManagement = () => {
         setServices(servicesData);
       } else {
         setServices([]);
-        if (services.length === 0) { // Only show message if no services were previously loaded
-          toast.info('No services found');
-        }
+        toast.info('No services found');
       }
     } catch (error) {
       console.error('Error fetching services:', error);
       if (error.response?.status === 404) {
         setServices([]);
-        if (services.length === 0) {
-          toast.info('No services found');
-        }
+        toast.info('No services found');
       } else {
         toast.error('Failed to load services');
       }
     } finally {
       setLoading(false);
     }
-  }, [services]);
+  }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    
-    const loadServices = async () => {
-      if (isMounted) {
-        await fetchServices();
-      }
-    };
-    
-    loadServices();
-    
-    return () => {
-      isMounted = false;
-    };
-  }, [fetchServices]); // Add fetchServices to dependency array
+    fetchServices();
+  }, [fetchServices]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
