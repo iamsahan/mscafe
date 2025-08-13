@@ -88,15 +88,14 @@ const PriorityTradelinesAU = () => {
     };
   }, [fetchTradelines, pagination.page, pagination.limit]);
 
-  // Auto-filter when filters change
+  // Auto-filter when filters change (but not when page changes)
   useEffect(() => {
     const timer = setTimeout(() => {
       setPagination(prev => ({ ...prev, page: 1 }));
-      fetchTradelines();
     }, 500); // 500ms delay for debouncing
 
     return () => clearTimeout(timer);
-  }, [filters, fetchTradelines]);
+  }, [filters]);
 
   // Handle filter changes
   const handleFilterChange = (e) => {
