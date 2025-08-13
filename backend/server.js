@@ -43,11 +43,15 @@ app.use(
           "https:",
           "http://localhost:5000",
           "http://localhost:3000",
+          "http://148.230.87.141",
+          "https://148.230.87.141",
         ],
         connectSrc: [
           "'self'",
           "http://localhost:5000",
           "http://localhost:3000",
+          "http://148.230.87.141",
+          "https://148.230.87.141",
         ],
       },
     },
@@ -63,7 +67,11 @@ app.use(
 // CORS configuration
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: [
+      process.env.FRONTEND_URL || "http://localhost:3000",
+      "http://148.230.87.141",
+      "https://148.230.87.141",
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -119,10 +127,15 @@ app.use(`/api/${API_VERSION}/admin/auth`, adminAuthRoutes);
 app.use(
   `/api/${API_VERSION}/uploads`,
   (req, res, next) => {
-    res.header(
-      "Access-Control-Allow-Origin",
-      process.env.FRONTEND_URL || "http://localhost:3000"
-    );
+    const allowedOrigins = [
+      process.env.FRONTEND_URL || "http://localhost:3000",
+      "http://148.230.87.141",
+      "https://148.230.87.141",
+    ];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+    }
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
@@ -139,10 +152,15 @@ app.use(
 app.use(
   "/uploads",
   (req, res, next) => {
-    res.header(
-      "Access-Control-Allow-Origin",
-      process.env.FRONTEND_URL || "http://localhost:3000"
-    );
+    const allowedOrigins = [
+      process.env.FRONTEND_URL || "http://localhost:3000",
+      "http://148.230.87.141",
+      "https://148.230.87.141",
+    ];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+    }
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
