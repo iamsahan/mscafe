@@ -1838,7 +1838,7 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="relative z-10"
           >
-            {/* Review Widget with better mobile styling */}
+            {/* Review Widget with better mobile styling /// */}
             <div
               className="w-full overflow-hidden rounded-2xl shadow-lg"
               dangerouslySetInnerHTML={{
