@@ -202,16 +202,16 @@ const AdminDashboard = () => {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+          className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h3 className="text-xl font-semibold text-slate-900">
               Growth Trends
             </h3>
             <select
               value={timeRange}
               onChange={(e) => setTimeRange(e.target.value)}
-              className="px-3 py-2 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-sm focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+              className="px-3 py-2 bg-slate-100 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             >
               <option value="7d">Last 7 days</option>
               <option value="30d">Last 30 days</option>
@@ -264,9 +264,9 @@ const AdminDashboard = () => {
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+          className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
         >
-          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
+          <h3 className="text-xl font-semibold text-slate-900 mb-6">
             Distribution Overview
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -292,7 +292,7 @@ const AdminDashboard = () => {
                   className="w-3 h-3 rounded-full mr-2"
                   style={{ backgroundColor: item.color }}
                 ></div>
-                <span className="text-sm text-slate-600 dark:text-slate-400">
+                <span className="text-sm text-slate-600">
                   {item.name}: {item.value}
                 </span>
               </div>
@@ -307,9 +307,9 @@ const AdminDashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+          className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
         >
-          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
+          <h3 className="text-xl font-semibold text-slate-900 mb-6">
             Recent Activity (Last 30 Days)
           </h3>
           <div className="space-y-4">
@@ -317,18 +317,18 @@ const AdminDashboard = () => {
               const Icon = stat.icon;
               const percentage = ((stat.value / stat.total) * 100).toFixed(1);
               return (
-                <div key={index} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700 rounded-xl">
+                <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
                   <div className="flex items-center space-x-3">
                     <Icon className={`h-5 w-5 ${stat.color}`} />
-                    <span className="font-medium text-slate-900 dark:text-white">
+                    <span className="font-medium text-slate-900">
                       {stat.name}
                     </span>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-semibold text-slate-900 dark:text-white">
+                    <div className="text-lg font-semibold text-slate-900">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-slate-500 dark:text-slate-400">
+                    <div className="text-sm text-slate-500">
                       {percentage}% of total
                     </div>
                   </div>
@@ -342,9 +342,9 @@ const AdminDashboard = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+          className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
         >
-          <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
+          <h3 className="text-xl font-semibold text-slate-900 mb-6">
             Quick Actions
           </h3>
           <div className="grid grid-cols-2 gap-4">
@@ -372,9 +372,9 @@ const AdminDashboard = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+        className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200"
       >
-        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
+        <h3 className="text-xl font-semibold text-slate-900 mb-6">
           System Status
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -385,7 +385,7 @@ const AdminDashboard = () => {
               <ExclamationTriangleIcon className="h-8 w-8 text-red-500" />
             )}
             <div>
-              <div className="font-semibold text-slate-900 dark:text-white">API Status</div>
+              <div className="font-semibold text-slate-900">API Status</div>
               <div className={`text-sm ${stats?.systemStatus?.api ? 'text-green-600' : 'text-red-600'}`}>
                 {stats?.systemStatus?.apiMessage || 'Checking status...'}
               </div>
@@ -398,7 +398,7 @@ const AdminDashboard = () => {
               <ExclamationTriangleIcon className="h-8 w-8 text-red-500" />
             )}
             <div>
-              <div className="font-semibold text-slate-900 dark:text-white">Database</div>
+              <div className="font-semibold text-slate-900">Database</div>
               <div className={`text-sm ${stats?.systemStatus?.database ? 'text-green-600' : 'text-red-600'}`}>
                 {stats?.systemStatus?.databaseMessage || 'Checking connection...'}
               </div>
@@ -411,7 +411,7 @@ const AdminDashboard = () => {
               <ExclamationTriangleIcon className="h-8 w-8 text-red-500" />
             )}
             <div>
-              <div className="font-semibold text-slate-900 dark:text-white">Storage</div>
+              <div className="font-semibold text-slate-900">Storage</div>
               <div className={`text-sm ${stats?.systemStatus?.storage ? 'text-green-600' : 'text-red-600'}`}>
                 {stats?.systemStatus?.storageMessage || 'Checking storage...'}
               </div>

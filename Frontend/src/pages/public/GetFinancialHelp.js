@@ -260,7 +260,7 @@ const GetFinancialHelp = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Side - Service List */}
               <div className="space-y-4">
-                <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 flex items-center">
+                <h3 className="text-3xl font-extrabold text-gray-900 mb-8 flex items-center">
                   <div className="w-1 h-10 bg-gradient-to-b from-[#93268f] to-[#93268f] rounded-full mr-4"></div>
                   Available Services
                 </h3>
@@ -279,8 +279,8 @@ const GetFinancialHelp = () => {
                       onClick={() => setSelectedService(service)}
                       className={`group relative overflow-hidden p-4 rounded-xl cursor-pointer transition-all duration-500 border-2 ${
                         selectedService?.id === service.id
-                          ? 'bg-gradient-to-r from-purple-100 to-[#93268f]/10 dark:from-purple-950 dark:to-purple-950 border-[#93268f] dark:border-purple-700 shadow-lg transform scale-105'
-                          : 'bg-white dark:bg-gray-900 backdrop-blur-md border-gray-200 dark:border-gray-800 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 dark:hover:from-purple-950 dark:hover:to-purple-950 hover:border-purple-300 dark:hover:border-purple-700 hover:scale-105 hover:shadow-md'
+                          ? 'bg-gradient-to-r from-purple-100 to-[#93268f]/10 border-[#93268f] shadow-lg transform scale-105'
+                          : 'bg-white backdrop-blur-md border-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-300 hover:scale-105 hover:shadow-md'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
@@ -303,8 +303,8 @@ const GetFinancialHelp = () => {
                         </div>
                         <h4 className={`text-base font-bold transition-colors duration-200 ${
                           selectedService?.id === service.id 
-                            ? 'text-[#93268f] dark:text-purple-300' 
-                            : 'text-gray-900 dark:text-white group-hover:text-[#93268f] dark:group-hover:text-purple-400'
+                            ? 'text-[#93268f]' 
+                            : 'text-gray-900 group-hover:text-[#93268f]'
                         }`}>
                           {service.name}
                         </h4>
@@ -322,7 +322,7 @@ const GetFinancialHelp = () => {
                     initial={{ opacity: 0, y: 40, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
-                    className="group relative overflow-hidden bg-white dark:bg-gray-900 backdrop-blur-xl border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
+                    className="group relative overflow-hidden bg-white backdrop-blur-xl border border-gray-200 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
                   >
                     {/* Service Header */}
                     <div className="relative h-56 overflow-hidden">
@@ -364,17 +364,17 @@ const GetFinancialHelp = () => {
 
                     <div className="p-6">
                       <div className="mb-4">
-                        <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-3 bg-gradient-to-r from-gray-900 to-[#93268f] dark:from-white dark:to-purple-200 bg-clip-text text-transparent">
+                        <h3 className="text-2xl font-extrabold text-gray-900 mb-3 bg-gradient-to-r from-gray-900 to-[#93268f] bg-clip-text text-transparent">
                           {selectedService.name}
                         </h3>
                         <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center bg-purple-100 dark:bg-purple-950 dark:bg-opacity-20 px-3 py-1.5 rounded-lg">
+                          <div className="flex items-center bg-purple-100 px-3 py-1.5 rounded-lg">
                             <ClockIcon className="w-4 h-4 mr-2 text-[#93268f]" />
                             <span className="font-medium">{selectedService.duration_minutes || selectedService.durationMinutes} minutes</span>
                           </div>
                         </div>
                         {selectedService.description && (
-                          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
                             {selectedService.description.length > 100 
                               ? selectedService.description.substring(0, 100) + '...' 
                               : selectedService.description
@@ -395,7 +395,7 @@ const GetFinancialHelp = () => {
                         </Link>
                         <Link
                           to="/contact"
-                          className="w-full border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold py-4 px-8 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 dark:hover:from-purple-950 dark:hover:to-purple-950 hover:border-purple-400 dark:hover:border-purple-700 transition-all duration-300 text-center"
+                          className="w-full border-2 border-gray-300 text-gray-700 font-semibold py-4 px-8 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-400 transition-all duration-300 text-center"
                         >
                           <span className="text-lg">Ask a Question</span>
                         </Link>
@@ -406,15 +406,15 @@ const GetFinancialHelp = () => {
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="bg-white dark:bg-gray-900 backdrop-blur-xl border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl p-12 text-center"
+                    className="bg-white backdrop-blur-xl border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <DocumentTextIcon className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <DocumentTextIcon className="w-8 h-8 text-gray-400" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300 mb-3">
+                    <h3 className="text-xl font-bold text-gray-600 mb-3">
                       Select a Service
                     </h3>
-                    <p className="text-gray-500 dark:text-gray-400 text-base">
+                    <p className="text-gray-500 text-base">
                       Choose a service to view details and book your consultation
                     </p>
                   </motion.div>

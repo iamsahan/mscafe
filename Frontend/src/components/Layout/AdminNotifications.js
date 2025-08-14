@@ -46,25 +46,25 @@ const AdminNotifications = ({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 z-50"
+          className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-200 z-50"
         >
           {/* Header */}
-          <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-            <h3 className="text-sm font-medium text-slate-900 dark:text-white">
+          <div className="px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+            <h3 className="text-sm font-medium text-slate-900">
               Notifications
             </h3>
             <div className="flex items-center space-x-2">
               {notifications.length > 0 && (
                 <button
                   onClick={onClearAll}
-                  className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+                  className="text-xs text-slate-500 hover:text-slate-700"
                 >
                   Clear all
                 </button>
               )}
               <button
                 onClick={onClose}
-                className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                className="p-1 text-slate-400 hover:text-slate-600"
               >
                 <XMarkIcon className="h-4 w-4" />
               </button>
@@ -75,10 +75,10 @@ const AdminNotifications = ({
           <div className="max-h-64 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="px-4 py-8 text-center">
-                <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
                   <InformationCircleIcon className="h-6 w-6 text-slate-400" />
                 </div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+                <p className="text-sm text-slate-500">
                   No new notifications
                 </p>
               </div>
@@ -88,8 +88,8 @@ const AdminNotifications = ({
                   key={notification.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className={`px-4 py-3 border-b border-slate-100 dark:border-slate-700 last:border-b-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer ${
-                    !notification.read ? 'bg-blue-50 dark:bg-blue-900/10' : ''
+                  className={`px-4 py-3 border-b border-slate-100 last:border-b-0 hover:bg-slate-50 cursor-pointer ${
+                    !notification.read ? 'bg-blue-50' : ''
                   }`}
                   onClick={() => onMarkAsRead && onMarkAsRead(notification.id)}
                 >
@@ -98,13 +98,13 @@ const AdminNotifications = ({
                       {getNotificationIcon(notification.type)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">
+                      <p className="text-sm font-medium text-slate-900">
                         {notification.title}
                       </p>
-                      <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                      <p className="text-sm text-slate-600 mt-1">
                         {notification.message}
                       </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-500 mt-2">
+                      <p className="text-xs text-slate-500 mt-2">
                         {getTimeAgo(notification.timestamp)}
                       </p>
                     </div>
@@ -119,8 +119,8 @@ const AdminNotifications = ({
 
           {/* Footer */}
           {notifications.length > 0 && (
-            <div className="px-4 py-2 border-t border-slate-200 dark:border-slate-700">
-              <button className="w-full text-sm text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium">
+            <div className="px-4 py-2 border-t border-slate-200">
+              <button className="w-full text-sm text-violet-600 hover:text-violet-700 font-medium">
                 View all notifications
               </button>
             </div>

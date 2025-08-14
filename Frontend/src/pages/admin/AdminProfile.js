@@ -206,8 +206,8 @@ const AdminProfile = () => {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-        <div className="border-b border-slate-200 dark:border-slate-700">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200">
+        <div className="border-b border-slate-200">
           <div className="flex space-x-8 px-6">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -217,8 +217,8 @@ const AdminProfile = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
                     activeTab === tab.id
-                      ? 'border-violet-500 text-violet-600 dark:text-violet-400'
-                      : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300'
+                      ? 'border-violet-500 text-violet-600'
+                      : 'border-transparent text-slate-500 hover:text-slate-700'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -238,10 +238,10 @@ const AdminProfile = () => {
               className="space-y-6"
             >
               <div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">
                   Personal Information
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-slate-600">
                   Update your personal details and profile information
                 </p>
               </div>
@@ -249,7 +249,7 @@ const AdminProfile = () => {
               <form onSubmit={handleProfileSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       First Name
                     </label>
                     <input
@@ -258,12 +258,12 @@ const AdminProfile = () => {
                       value={profileData.firstName}
                       onChange={handleProfileChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Last Name
                     </label>
                     <input
@@ -272,12 +272,12 @@ const AdminProfile = () => {
                       value={profileData.lastName}
                       onChange={handleProfileChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Email Address
                     </label>
                     <input
@@ -286,12 +286,12 @@ const AdminProfile = () => {
                       value={profileData.email}
                       onChange={handleProfileChange}
                       required
-                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Phone Number
                     </label>
                     <input
@@ -299,14 +299,14 @@ const AdminProfile = () => {
                       name="phone"
                       value={profileData.phone}
                       onChange={handleProfileChange}
-                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                       placeholder="Optional"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Bio
                   </label>
                   <textarea
@@ -314,7 +314,7 @@ const AdminProfile = () => {
                     value={profileData.bio}
                     onChange={handleProfileChange}
                     rows={4}
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Tell us about yourself..."
                   />
                 </div>
@@ -341,16 +341,16 @@ const AdminProfile = () => {
             >
               {/* Change Password */}
               <div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">
                   Change Password
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-6">
+                <p className="text-slate-600 mb-6">
                   Update your password to keep your account secure
                 </p>
 
                 <form onSubmit={handlePasswordSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Current Password
                     </label>
                     <div className="relative">
@@ -360,7 +360,7 @@ const AdminProfile = () => {
                         value={passwordData.currentPassword}
                         onChange={handlePasswordChange}
                         required
-                        className="w-full px-4 py-3 pr-12 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                        className="w-full px-4 py-3 pr-12 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                       />
                       <button
                         type="button"
@@ -378,7 +378,7 @@ const AdminProfile = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
                         New Password
                       </label>
                       <div className="relative">
@@ -388,7 +388,7 @@ const AdminProfile = () => {
                           value={passwordData.newPassword}
                           onChange={handlePasswordChange}
                           required
-                          className="w-full px-4 py-3 pr-12 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                          className="w-full px-4 py-3 pr-12 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                         />
                         <button
                           type="button"
@@ -405,7 +405,7 @@ const AdminProfile = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
                         Confirm New Password
                       </label>
                       <div className="relative">
@@ -415,7 +415,7 @@ const AdminProfile = () => {
                           value={passwordData.confirmPassword}
                           onChange={handlePasswordChange}
                           required
-                          className="w-full px-4 py-3 pr-12 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                          className="w-full px-4 py-3 pr-12 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                         />
                         <button
                           type="button"
@@ -445,28 +445,28 @@ const AdminProfile = () => {
               </div>
 
               {/* Recent Activity */}
-              <div className="border-t border-slate-200 dark:border-slate-700 pt-8">
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
+              <div className="border-t border-slate-200 pt-8">
+                <h3 className="text-xl font-semibold text-slate-900 mb-6">
                   Recent Security Activity
                 </h3>
                 <div className="space-y-4">
                   {recentActivity.map((activity, index) => {
                     const Icon = activity.icon;
                     return (
-                      <div key={index} className="flex items-center space-x-4 p-4 bg-slate-50 dark:bg-slate-700 rounded-xl">
-                        <div className="w-10 h-10 bg-violet-100 dark:bg-violet-900/20 rounded-full flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                      <div key={index} className="flex items-center space-x-4 p-4 bg-slate-50 rounded-xl">
+                        <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-violet-600" />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
-                            <h4 className="font-medium text-slate-900 dark:text-white">
+                            <h4 className="font-medium text-slate-900">
                               {activity.action}
                             </h4>
-                            <span className="text-sm text-slate-500 dark:text-slate-400">
+                            <span className="text-sm text-slate-500">
                               {activity.timestamp}
                             </span>
                           </div>
-                          <div className="text-sm text-slate-600 dark:text-slate-400">
+                          <div className="text-sm text-slate-600">
                             {activity.device} • {activity.location}
                           </div>
                         </div>
@@ -486,10 +486,10 @@ const AdminProfile = () => {
               className="space-y-6"
             >
               <div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">
                   Notification Preferences
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-slate-600">
                   Manage how you receive notifications and updates
                 </p>
               </div>
@@ -528,12 +528,12 @@ const AdminProfile = () => {
                       description: 'Notifications about system maintenance and updates'
                     }
                   ].map((setting) => (
-                    <div key={setting.key} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700 rounded-xl">
+                    <div key={setting.key} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
                       <div>
-                        <h4 className="font-medium text-slate-900 dark:text-white">
+                        <h4 className="font-medium text-slate-900">
                           {setting.title}
                         </h4>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
+                        <p className="text-sm text-slate-600">
                           {setting.description}
                         </p>
                       </div>
@@ -545,7 +545,7 @@ const AdminProfile = () => {
                           onChange={handleNotificationChange}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-violet-300 dark:peer-focus:ring-violet-800 rounded-full peer dark:bg-slate-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-violet-600"></div>
+                        <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-violet-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-violet-600"></div>
                       </label>
                     </div>
                   ))}

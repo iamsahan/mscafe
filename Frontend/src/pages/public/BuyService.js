@@ -229,17 +229,17 @@ const BuyService = () => {
               transition={{ delay: 0.1 }}
               className="card p-8"
             >
-              <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-6">
+              <h2 className="text-2xl font-bold text-secondary-900 mb-6">
                 Service Details
               </h2>
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-secondary-600 dark:text-secondary-400 leading-relaxed">
+              <div className="prose prose-lg">
+                <p className="text-secondary-600 leading-relaxed">
                   {service.description}
                 </p>
                 {service.requirements && (
                   <div className="mt-6">
-                    <h3 className="text-lg font-semibold text-secondary-900 dark:text-white mb-3">Requirements</h3>
-                    <p className="text-secondary-600 dark:text-secondary-400">
+                    <h3 className="text-lg font-semibold text-secondary-900 mb-3">Requirements</h3>
+                    <p className="text-secondary-600">
                       {service.requirements}
                     </p>
                   </div>
@@ -258,10 +258,10 @@ const BuyService = () => {
               <div className="card p-6 space-y-6">
                 {/* Service Price */}
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-secondary-900 dark:text-white mb-2">
+                  <div className="text-4xl font-bold text-secondary-900 mb-2">
                     ${service.price}
                   </div>
-                  <div className="text-sm text-secondary-600 dark:text-secondary-400">
+                  <div className="text-sm text-secondary-600">
                     {service.durationMinutes || service.duration_minutes || 60} minutes consultation
                   </div>
                 </div>
@@ -286,29 +286,29 @@ const BuyService = () => {
                 </button>
 
                 {/* Service Features */}
-                <div className="space-y-3 pt-4 border-t border-secondary-200 dark:border-secondary-700">
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                <div className="space-y-3 pt-4 border-t border-secondary-200">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <ShieldCheckIcon className="w-5 h-5 text-green-500" />
                     <span>Professional service guarantee</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <ClockIcon className="w-5 h-5 text-blue-500" />
                     <span>Timely delivery</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <ChatBubbleLeftRightIcon className="w-5 h-5 text-purple-500" />
                     <span>Expert support</span>
                   </div>
                 </div>
 
                 {/* Contact Support */}
-                <div className="pt-4 border-t border-secondary-200 dark:border-secondary-700">
-                  <p className="text-sm text-secondary-600 dark:text-secondary-400 text-center">
+                <div className="pt-4 border-t border-secondary-200">
+                  <p className="text-sm text-secondary-600 text-center">
                     Questions about this service?
                   </p>
                   <Link
                     to="/contact"
-                    className="block text-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm mt-2"
+                    className="block text-center text-primary-600 hover:text-primary-700 font-medium text-sm mt-2"
                   >
                     Contact our experts
                   </Link>
