@@ -378,13 +378,13 @@ const PriorityTradelinesManagement = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   <XMarkIcon className="w-5 h-5" />
                 </button>
@@ -393,7 +393,7 @@ const PriorityTradelinesManagement = () => {
               <form ref={formRef} onSubmit={onSubmit} className="space-y-6" autoComplete="off">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Spots Available
                     </label>
                     <input
@@ -401,13 +401,13 @@ const PriorityTradelinesManagement = () => {
                       name="spots"
                       required
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="e.g., 5 spots available"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Account Year
                     </label>
                     <input
@@ -417,13 +417,13 @@ const PriorityTradelinesManagement = () => {
                       min="1990"
                       max="2025"
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="2020"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Bank Institution
                     </label>
                     <input
@@ -432,13 +432,13 @@ const PriorityTradelinesManagement = () => {
                       required
                       maxLength="255"
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="e.g., Chase Bank"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Credit Limit ($)
                     </label>
                     <input
@@ -448,13 +448,13 @@ const PriorityTradelinesManagement = () => {
                       min="0"
                       step="0.01"
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="25000"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Statement Information
                     </label>
                     <input
@@ -462,13 +462,13 @@ const PriorityTradelinesManagement = () => {
                       name="statement"
                       maxLength="255"
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="e.g., Monthly statement (optional)"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Closing Date
                     </label>
                     <input
@@ -476,12 +476,12 @@ const PriorityTradelinesManagement = () => {
                       name="closingDate"
                       required
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Investment Price ($)
                     </label>
                     <input
@@ -491,7 +491,7 @@ const PriorityTradelinesManagement = () => {
                       min="0"
                       step="0.01"
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                       placeholder="1500.00"
                     />
                   </div>
@@ -512,18 +512,18 @@ const PriorityTradelinesManagement = () => {
                       }}
                       className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                     />
-                    <span className="ml-2 text-sm font-medium text-slate-700">
+                    <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
                       Active
                     </span>
                   </label>
                 </div>
 
-                <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200">
+                <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200 dark:border-slate-700">
                   <button
                     type="button"
                     onClick={onClose}
                     disabled={submitting}
-                    className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium disabled:opacity-50"
+                    className="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium disabled:opacity-50"
                   >
                     Cancel
                   </button>
@@ -563,8 +563,8 @@ const PriorityTradelinesManagement = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Priority Tradelines Management</h1>
-          <p className="text-slate-600 mt-1">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Priority Tradelines Management</h1>
+          <p className="text-slate-600 dark:text-slate-400 mt-1">
             Manage your tradeline offerings and inventory
           </p>
         </div>
@@ -581,7 +581,7 @@ const PriorityTradelinesManagement = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 gap-4">
           {/* Search and Status Filter */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-1">
@@ -592,7 +592,7 @@ const PriorityTradelinesManagement = () => {
                 placeholder="Search tradelines by bank institution or account year..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
               />
             </div>
             
@@ -600,7 +600,7 @@ const PriorityTradelinesManagement = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm min-w-[120px]"
+                className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm min-w-[120px]"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active Only</option>
@@ -614,7 +614,7 @@ const PriorityTradelinesManagement = () => {
                     setSearchTerm('');
                     setFilterStatus('all');
                   }}
-                  className="px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   Clear
                 </button>
@@ -624,7 +624,7 @@ const PriorityTradelinesManagement = () => {
 
           {/* Sort Controls */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
               <FunnelIcon className="h-4 w-4" />
               <span>Sort by:</span>
             </div>
@@ -632,7 +632,7 @@ const PriorityTradelinesManagement = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
+              className="px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
             >
               <option value="createdAt">Date Created</option>
               <option value="bank">Bank Institution</option>
@@ -647,8 +647,8 @@ const PriorityTradelinesManagement = () => {
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               className={`p-2 border rounded-lg transition-colors ${
                 sortOrder === 'asc' 
-                  ? 'border-violet-300 bg-violet-50 text-violet-600' 
-                  : 'border-slate-300 hover:bg-slate-50 text-slate-600'
+                  ? 'border-violet-300 bg-violet-50 text-violet-600 dark:border-violet-600 dark:bg-violet-900/20 dark:text-violet-400' 
+                  : 'border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400'
               }`}
               title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
             >
@@ -658,17 +658,17 @@ const PriorityTradelinesManagement = () => {
         </div>
         
         {/* Results Summary */}
-        <div className="mt-4 pt-4 border-t border-slate-200">
-          <div className="flex items-center justify-between text-sm text-slate-600">
+        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
             <span>
               Showing {filteredTradelines.length} of {tradelines.length} tradelines
               {searchTerm && (
-                <span className="ml-2 text-violet-600">
+                <span className="ml-2 text-violet-600 dark:text-violet-400">
                   matching "{searchTerm}"
                 </span>
               )}
               {filterStatus !== 'all' && (
-                <span className="ml-2 px-2 py-1 bg-slate-100 rounded text-xs">
+                <span className="ml-2 px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-xs">
                   {filterStatus}
                 </span>
               )}
@@ -694,38 +694,38 @@ const PriorityTradelinesManagement = () => {
       </div>
 
       {/* Tradelines Table */}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-slate-50">
+            <thead className="bg-slate-50 dark:bg-slate-700">
               <tr>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Spots Available
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Account Year
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Bank Institution
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Credit Limit
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Closing Date
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Investment Price
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-4 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-slate-200">
+            <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
               {filteredTradelines.map((tradeline) => {
                 const spots = tradeline.spots || '0';
                 const age = tradeline.age || '';
@@ -765,12 +765,12 @@ const PriorityTradelinesManagement = () => {
                     key={tradeline.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="hover:bg-slate-50 transition-colors"
+                    className="hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors"
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                        <div className="text-sm font-medium text-slate-900">
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">
                           {spots}
                         </div>
                       </div>
@@ -781,7 +781,7 @@ const PriorityTradelinesManagement = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-semibold text-slate-900">
+                      <div className="text-sm font-semibold text-slate-900 dark:text-white">
                         {bank}
                       </div>
                     </td>
@@ -791,7 +791,7 @@ const PriorityTradelinesManagement = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="bg-slate-100 px-3 py-1 rounded-lg text-xs font-medium text-slate-900">
+                      <span className="bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-lg text-xs font-medium text-slate-900 dark:text-slate-200">
                         {formatDate(closingDate)}
                       </span>
                     </td>
@@ -803,8 +803,8 @@ const PriorityTradelinesManagement = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         isActive 
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                       }`}>
                         {isActive ? 'Active' : 'Inactive'}
                       </span>
@@ -813,14 +813,14 @@ const PriorityTradelinesManagement = () => {
                       <div className="flex items-center justify-end space-x-2">
                         <button
                           onClick={() => openEditModal(tradeline)}
-                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
                           title="Edit tradeline"
                         >
                           <PencilIcon className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => openDeleteModal(tradeline)}
-                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                           title="Delete tradeline"
                         >
                           <TrashIcon className="h-4 w-4" />
@@ -837,10 +837,10 @@ const PriorityTradelinesManagement = () => {
         {filteredTradelines.length === 0 && (
           <div className="text-center py-12">
             <CreditCardIcon className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-            <h3 className="text-xl font-medium text-slate-900 mb-2">
+            <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
               No tradelines found
             </h3>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-400">
               {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first tradeline'}
             </p>
           </div>
@@ -885,22 +885,22 @@ const PriorityTradelinesManagement = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-md"
+              className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md"
             >
               <div className="text-center">
-                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
                   <TrashIcon className="h-6 w-6 text-red-600" />
                 </div>
-                <h3 className="text-lg font-medium text-slate-900 mb-2">
+                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                   Delete Tradeline
                 </h3>
-                <p className="text-sm text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
                   Are you sure you want to delete "{selectedTradeline?.bank} - {selectedTradeline?.age}"? This action cannot be undone.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
-                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
+                    className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
                   >
                     Cancel
                   </button>
@@ -921,5 +921,3 @@ const PriorityTradelinesManagement = () => {
 };
 
 export default PriorityTradelinesManagement;
-
-

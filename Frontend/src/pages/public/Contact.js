@@ -285,13 +285,13 @@ const Contact = () => {
                           <h3 className="text-2xl font-bold text-secondary-900 mb-2 group-hover:text-primary-600 transition-colors">
                             {item.label}
                           </h3>
-                          <p className="text-lg font-medium text-secondary-700 mb-2 whitespace-pre-line">
+                          <p className="text-lg font-medium text-secondary-700 dark:text-secondary-300 mb-2 whitespace-pre-line">
                             {item.value}
                           </p>
-                          <p className="text-secondary-500 text-sm">
+                          <p className="text-secondary-500 dark:text-secondary-400 text-sm">
                             {item.description}
                           </p>
-                          <div className="flex items-center mt-3 text-primary-600 group-hover:translate-x-2 transition-transform">
+                          <div className="flex items-center mt-3 text-primary-600 dark:text-primary-400 group-hover:translate-x-2 transition-transform">
                             <span className="text-sm font-medium">Get in touch</span>
                             <ArrowRightIcon className="ml-2 w-4 h-4" />
                           </div>
@@ -313,21 +313,21 @@ const Contact = () => {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-blue-600/10 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-secondary-100">
+                <div className="relative bg-white dark:bg-secondary-800 p-8 rounded-3xl shadow-xl border border-secondary-100 dark:border-secondary-700">
                   <div className="flex items-center space-x-4 mb-6">
                     <div className="p-3 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl">
                       <MapPinIcon className="h-8 w-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-secondary-900">
+                      <h3 className="text-2xl font-bold text-secondary-900 dark:text-white">
                         Our Location
                       </h3>
-                      <p className="text-secondary-600">
+                      <p className="text-secondary-600 dark:text-secondary-400">
                         Visit us in person
                       </p>
                     </div>
                   </div>
-                  <div className="aspect-video bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl overflow-hidden relative">
+                  <div className="aspect-video bg-gradient-to-br from-secondary-50 to-secondary-100 dark:from-secondary-700 dark:to-secondary-800 rounded-2xl overflow-hidden relative">
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3352.2491841860997!2d-83.66474862487563!3d32.83965338083459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f3fea4bce97a9f%3A0xd608d9a7fde10aec!2sMoney%20Solution%20Cafe!5e0!3m2!1sen!2slk!4v1753806816844!5m2!1sen!2slk"
                       width="100%"
@@ -348,7 +348,7 @@ const Contact = () => {
       </div>
 
       {/* Enhanced Support Section */}
-      <section className="relative py-24 bg-gradient-to-br from-secondary-50 via-white to-secondary-50 overflow-hidden">
+      <section className="relative py-24 bg-gradient-to-br from-secondary-50 via-white to-secondary-50 dark:from-secondary-800 dark:via-secondary-900 dark:to-secondary-800 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20 w-72 h-72 bg-primary-500 rounded-full blur-3xl"></div>
@@ -373,14 +373,14 @@ const Contact = () => {
               <UserGroupIcon className="w-10 h-10 text-white" />
             </motion.div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-secondary-900 dark:text-white mb-6">
               Why Choose{' '}
               <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
                 Our Support
               </span>
             </h2>
             
-            <p className="text-xl text-secondary-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-secondary-600 dark:text-secondary-400 max-w-3xl mx-auto leading-relaxed">
               Experience unparalleled customer service with multiple communication channels 
               designed to meet your unique needs and preferences.
             </p>
@@ -424,30 +424,30 @@ const Contact = () => {
               >
                 <div className="relative h-full">
                   <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl blur-xl`}></div>
-                  <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-secondary-100 h-full hover:shadow-2xl transition-all duration-300">
+                  <div className="relative bg-white dark:bg-secondary-800 p-8 rounded-3xl shadow-xl border border-secondary-100 dark:border-secondary-700 h-full hover:shadow-2xl transition-all duration-300">
                     <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${item.gradient} mb-6 group-hover:scale-110 transition-transform duration-300`}>
                       <item.icon className="h-8 w-8 text-white" />
                     </div>
                     
-                    <h3 className="text-2xl font-bold text-secondary-900 mb-4 group-hover:text-primary-600 transition-colors">
+                    <h3 className="text-2xl font-bold text-secondary-900 dark:text-white mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {item.title}
                     </h3>
                     
-                    <p className="text-secondary-600 mb-6 leading-relaxed">
+                    <p className="text-secondary-600 dark:text-secondary-400 mb-6 leading-relaxed">
                       {item.description}
                     </p>
                     
                     <ul className="space-y-3">
                       {item.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm font-medium text-secondary-700">
+                        <li key={featureIndex} className="flex items-center text-sm font-medium text-secondary-700 dark:text-secondary-300">
                           <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-purple-600 rounded-full mr-3 flex-shrink-0"></div>
                           {feature}
                         </li>
                       ))}
                     </ul>
                     
-                    <div className="mt-6 pt-6 border-t border-secondary-100">
-                      <div className="flex items-center text-primary-600 group-hover:translate-x-2 transition-transform">
+                    <div className="mt-6 pt-6 border-t border-secondary-100 dark:border-secondary-700">
+                      <div className="flex items-center text-primary-600 dark:text-primary-400 group-hover:translate-x-2 transition-transform">
                         <span className="text-sm font-semibold">Get Started</span>
                         <ArrowRightIcon className="ml-2 w-4 h-4" />
                       </div>
@@ -469,5 +469,3 @@ const Contact = () => {
 
 
 export default Contact;
-
-

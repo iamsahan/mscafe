@@ -8,7 +8,7 @@ import {
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-secondary-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-secondary-50 dark:bg-secondary-900 px-4">
       <div className="max-w-lg w-full text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,15 +19,15 @@ const NotFound = () => {
             <ExclamationTriangleIcon className="mx-auto h-24 w-24 text-warning-400" />
           </div>
           
-          <h1 className="text-6xl font-bold text-secondary-900 mb-4">
+          <h1 className="text-6xl font-bold text-secondary-900 dark:text-white mb-4">
             404
           </h1>
           
-          <h2 className="text-2xl font-semibold text-secondary-700 mb-4">
+          <h2 className="text-2xl font-semibold text-secondary-700 dark:text-secondary-300 mb-4">
             Page Not Found
           </h2>
           
-          <p className="text-secondary-600 mb-8">
+          <p className="text-secondary-600 dark:text-secondary-400 mb-8">
             Oops! The page you're looking for doesn't exist. It might have been moved, 
             deleted, or you entered the wrong URL.
           </p>
@@ -41,32 +41,32 @@ const NotFound = () => {
               Go Back Home
             </Link>
             
-            <div className="text-sm text-secondary-500">
+            <div className="text-sm text-secondary-500 dark:text-secondary-400">
               Or try one of these helpful links:
             </div>
             
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/about"
-                className="text-primary-600 hover:text-primary-700 text-sm hover:underline"
+                className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm hover:underline"
               >
                 About Us
               </Link>
               <Link
                 to="/book-now"
-                className="text-primary-600 hover:text-primary-700 text-sm hover:underline"
+                className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm hover:underline"
               >
                 Book Now
               </Link>
               <Link
                 to="/contact"
-                className="text-primary-600 hover:text-primary-700 text-sm hover:underline"
+                className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm hover:underline"
               >
                 Contact Us
               </Link>
               <Link
                 to="/resources"
-                className="text-primary-600 hover:text-primary-700 text-sm hover:underline"
+                className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm hover:underline"
               >
                 Resources
               </Link>
@@ -79,5 +79,3 @@ const NotFound = () => {
 };
 
 export default NotFound;
-
-

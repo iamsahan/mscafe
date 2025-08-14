@@ -42,13 +42,13 @@ const FormModal = ({
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+          className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
             >
               <XMarkIcon className="w-5 h-5" />
             </button>
@@ -66,7 +66,7 @@ const FormModal = ({
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Service Name
                 </label>
                 <input
@@ -77,13 +77,13 @@ const FormModal = ({
                   required
                   minLength={3}
                   maxLength={100}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                   placeholder="Enter service name (minimum 3 characters)"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Price ($)
                 </label>
                 <input
@@ -94,20 +94,20 @@ const FormModal = ({
                   required
                   min="0"
                   step="0.01"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                   placeholder="0.00"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Service Type
                 </label>
                 <select
                   name="serviceType"
                   value={formData.serviceType}
                   onChange={onInputChange}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                 >
                   <option value="consultation">Consultation</option>
                   <option value="tax_preparation">Tax Preparation</option>
@@ -117,7 +117,7 @@ const FormModal = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Duration (Minutes)
                 </label>
                 <input
@@ -128,18 +128,18 @@ const FormModal = ({
                   required
                   min="15"
                   step="15"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                   placeholder="e.g., 60"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Service Image
                 </label>
                 <div className="space-y-3">
                   {/* Image Upload Area */}
-                  <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-violet-500 transition-colors">
+                  <div className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg p-6 text-center hover:border-violet-500 transition-colors">
                     <input
                       type="file"
                       accept="image/*"
@@ -181,12 +181,12 @@ const FormModal = ({
                         </div>
                       ) : (
                         <>
-                          <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3">
+                          <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-3">
                             <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                           </div>
-                          <p className="text-sm text-slate-600 mb-1">
+                          <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
                             Click to upload an image
                           </p>
                           <p className="text-xs text-slate-500">
@@ -200,10 +200,10 @@ const FormModal = ({
                   {/* Alternative: Image URL */}
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-slate-300" />
+                      <div className="w-full border-t border-slate-300 dark:border-slate-600" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white text-slate-500">Or use image URL</span>
+                      <span className="px-2 bg-white dark:bg-slate-800 text-slate-500">Or use image URL</span>
                     </div>
                   </div>
                   
@@ -212,14 +212,14 @@ const FormModal = ({
                     name="imageUrl"
                     value={formData.imageUrl}
                     onChange={onInputChange}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                     placeholder="https://example.com/image.jpg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   External Link
                 </label>
                 <input
@@ -227,14 +227,14 @@ const FormModal = ({
                   name="link"
                   value={formData.link}
                   onChange={onInputChange}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                   placeholder="https://example.com/service"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Short Description
               </label>
               <input
@@ -245,13 +245,13 @@ const FormModal = ({
                 required
                 minLength={10}
                 maxLength={200}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                 placeholder="Brief description for listings (minimum 10 characters)"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Full Description
               </label>
               <textarea
@@ -261,13 +261,13 @@ const FormModal = ({
                 required
                 minLength={20}
                 rows={4}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                 placeholder="Enter detailed service description (minimum 20 characters)"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Requirements
               </label>
               <textarea
@@ -275,7 +275,7 @@ const FormModal = ({
                 value={formData.requirements}
                 onChange={onInputChange}
                 rows={3}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
                 placeholder="What clients need to provide or prepare"
               />
             </div>
@@ -289,7 +289,7 @@ const FormModal = ({
                   onChange={onInputChange}
                   className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                 />
-                <span className="ml-2 text-sm font-medium text-slate-700">
+                <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
                   Active
                 </span>
               </label>
@@ -301,18 +301,18 @@ const FormModal = ({
                   onChange={onInputChange}
                   className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                 />
-                <span className="ml-2 text-sm font-medium text-slate-700">
+                <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
                   Featured
                 </span>
               </label>
             </div>
 
-            <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200">
+            <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200 dark:border-slate-700">
               <button
                 type="button"
                 onClick={onClose}
                 disabled={submitting}
-                className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium disabled:opacity-50"
+                className="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium disabled:opacity-50"
               >
                 Cancel
               </button>
@@ -948,8 +948,8 @@ const ServicesManagement = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Services Management</h1>
-          <p className="text-slate-600 mt-1">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Services Management</h1>
+          <p className="text-slate-600 dark:text-slate-400 mt-1">
             Manage all your professional services
           </p>
         </div>
@@ -963,7 +963,7 @@ const ServicesManagement = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 gap-4">
           {/* Search and Status Filter */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-1">
@@ -974,7 +974,7 @@ const ServicesManagement = () => {
                 placeholder="Search services by name or description..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
               />
             </div>
             
@@ -982,7 +982,7 @@ const ServicesManagement = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm min-w-[120px]"
+                className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm min-w-[120px]"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active Only</option>
@@ -992,7 +992,7 @@ const ServicesManagement = () => {
               <select
                 value={filterServiceType}
                 onChange={(e) => setFilterServiceType(e.target.value)}
-                className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm min-w-[140px]"
+                className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm min-w-[140px]"
               >
                 <option value="all">All Types</option>
                 <option value="consultation">Consultation</option>
@@ -1009,7 +1009,7 @@ const ServicesManagement = () => {
                     setFilterStatus('all');
                     setFilterServiceType('all');
                   }}
-                  className="px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
                   Clear
                 </button>
@@ -1019,7 +1019,7 @@ const ServicesManagement = () => {
 
           {/* Sort Controls */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
               <FunnelIcon className="h-4 w-4" />
               <span>Sort by:</span>
             </div>
@@ -1027,7 +1027,7 @@ const ServicesManagement = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
+              className="px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
             >
               <option value="createdAt">Date Created</option>
               <option value="name">Name (A-Z)</option>
@@ -1039,8 +1039,8 @@ const ServicesManagement = () => {
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               className={`p-2 border rounded-lg transition-colors ${
                 sortOrder === 'asc' 
-                  ? 'border-violet-300 bg-violet-50 text-violet-600' 
-                  : 'border-slate-300 hover:bg-slate-50 text-slate-600'
+                  ? 'border-violet-300 bg-violet-50 text-violet-600 dark:border-violet-600 dark:bg-violet-900/20 dark:text-violet-400' 
+                  : 'border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400'
               }`}
               title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
             >
@@ -1050,22 +1050,22 @@ const ServicesManagement = () => {
         </div>
         
         {/* Results Summary */}
-        <div className="mt-4 pt-4 border-t border-slate-200">
-          <div className="flex items-center justify-between text-sm text-slate-600">
+        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
             <span>
               Showing {filteredServices.length} of {services.length} services
               {searchTerm && (
-                <span className="ml-2 text-violet-600">
+                <span className="ml-2 text-violet-600 dark:text-violet-400">
                   matching "{searchTerm}"
                 </span>
               )}
               {filterStatus !== 'all' && (
-                <span className="ml-2 px-2 py-1 bg-slate-100 rounded text-xs">
+                <span className="ml-2 px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-xs">
                   {filterStatus}
                 </span>
               )}
               {filterServiceType !== 'all' && (
-                <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+                <span className="ml-2 px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded text-xs">
                   {filterServiceType.replace('_', ' ')}
                 </span>
               )}
@@ -1097,7 +1097,7 @@ const ServicesManagement = () => {
             key={service.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300"
+            className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-2">
@@ -1109,13 +1109,13 @@ const ServicesManagement = () => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => openEditModal(service)}
-                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
                 >
                   <PencilIcon className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => openDeleteModal(service)}
-                  className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                 >
                   <TrashIcon className="h-4 w-4" />
                 </button>
@@ -1136,13 +1136,13 @@ const ServicesManagement = () => {
               </div>
             )}
 
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
               {service.name}
             </h3>
-            <p className="text-slate-600 text-sm mb-2">
+            <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
               {service.shortDescription || service.short_description}
             </p>
-            <p className="text-slate-600 text-sm mb-4 line-clamp-3">
+            <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
               {service.description}
             </p>
 
@@ -1153,25 +1153,25 @@ const ServicesManagement = () => {
                 </span>
                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                   (service.isActive === 1 || service.isActive === true)
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-red-100 text-red-800'
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                 }`}>
                   {(service.isActive === 1 || service.isActive === true) ? 'Active' : 'Inactive'}
                 </span>
               </div>
               
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-600 capitalize">
+                <span className="text-slate-600 dark:text-slate-400 capitalize">
                   {(service.serviceType || service.service_type || '').replace('_', ' ')}
                 </span>
                 {(service.featured === 1 || service.featured === true) && (
-                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
                     Featured
                   </span>
                 )}
               </div>
 
-              <div className="flex items-center justify-between text-sm text-slate-600">
+              <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
                 <span className="flex items-center">
                   <ClockIcon className="h-4 w-4 mr-1" />
                   {service.durationMinutes || service.duration_minutes} minutes
@@ -1181,7 +1181,7 @@ const ServicesManagement = () => {
                     href={service.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 text-xs"
+                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-xs"
                   >
                     External Link
                   </a>
@@ -1192,7 +1192,7 @@ const ServicesManagement = () => {
               <div className="mt-3">
                 <Link
                   to={`/buy-service/${service.id}`}
-                  className="inline-flex items-center px-3 py-2 text-xs font-medium text-violet-600 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
+                  className="inline-flex items-center px-3 py-2 text-xs font-medium text-violet-600 bg-violet-50 hover:bg-violet-100 dark:bg-violet-900/20 dark:text-violet-400 dark:hover:bg-violet-900/30 rounded-lg transition-colors"
                 >
                   <EyeIcon className="w-3 h-3 mr-1" />
                   View Service Page
@@ -1203,8 +1203,8 @@ const ServicesManagement = () => {
             <div className="space-y-3">
               {service.requirements && (
                 <div>
-                  <p className="text-sm font-medium text-slate-900 mb-2">Requirements:</p>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">Requirements:</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
                     {service.requirements}
                   </p>
                 </div>
@@ -1217,10 +1217,10 @@ const ServicesManagement = () => {
       {filteredServices.length === 0 && (
         <div className="text-center py-12">
           <WrenchScrewdriverIcon className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-          <h3 className="text-xl font-medium text-slate-900 mb-2">
+          <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
             No services found
           </h3>
-          <p className="text-slate-600">
+          <p className="text-slate-600 dark:text-slate-400">
             {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first service'}
           </p>
         </div>
@@ -1267,22 +1267,22 @@ const ServicesManagement = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl p-6 w-full max-w-md"
+              className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md"
             >
               <div className="text-center">
-                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
                   <TrashIcon className="h-6 w-6 text-red-600" />
                 </div>
-                <h3 className="text-lg font-medium text-slate-900 mb-2">
+                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                   Delete Service
                 </h3>
-                <p className="text-sm text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
                   Are you sure you want to delete "{selectedService?.name}"? This action cannot be undone.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
-                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
+                    className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
                   >
                     Cancel
                   </button>
@@ -1303,6 +1303,3 @@ const ServicesManagement = () => {
 };
 
 export default ServicesManagement;
-
-
-
