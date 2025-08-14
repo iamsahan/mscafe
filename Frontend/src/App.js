@@ -4,7 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Context Providers
-import { ThemeProvider } from './contexts/ThemeContext';
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
 
 // Layout Components
@@ -39,10 +38,9 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <ThemeProvider>
-      <AdminAuthProvider>
-        <Router>
-          <div className="min-h-screen bg-white dark:bg-secondary-900 transition-colors duration-200">
+    <AdminAuthProvider>
+      <Router>
+        <div className="min-h-screen bg-white transition-colors duration-200">
             <Routes>
               {/* Public Routes with Navbar and Footer */}
               <Route path="/" element={
@@ -207,7 +205,6 @@ function App() {
           </div>
         </Router>
       </AdminAuthProvider>
-    </ThemeProvider>
   );
 }
 

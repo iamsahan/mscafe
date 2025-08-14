@@ -195,8 +195,8 @@ const AdminManagement = () => {
 
   const getRoleColor = (role) => {
     return role === 'super_admin' 
-      ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200'
-      : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+      ? 'bg-purple-100 text-purple-800'
+      : 'bg-blue-100 text-blue-800';
   };
 
   const permissions = [
@@ -222,13 +222,13 @@ const AdminManagement = () => {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{title}</h3>
+              <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 <XMarkIcon className="w-5 h-5" />
               </button>
@@ -237,7 +237,7 @@ const AdminManagement = () => {
             <form onSubmit={onSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     First Name
                   </label>
                   <input
@@ -246,13 +246,13 @@ const AdminManagement = () => {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Enter first name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Last Name
                   </label>
                   <input
@@ -261,13 +261,13 @@ const AdminManagement = () => {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Enter last name"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Email Address
                   </label>
                   <input
@@ -276,13 +276,13 @@ const AdminManagement = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Enter email address"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     {isEdit ? 'New Password (optional)' : 'Password'}
                   </label>
                   <input
@@ -291,13 +291,13 @@ const AdminManagement = () => {
                     value={formData.password}
                     onChange={handleInputChange}
                     required={!isEdit}
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder={isEdit ? "Leave empty to keep current password" : "Enter password"}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Role
                   </label>
                   <select
@@ -305,7 +305,7 @@ const AdminManagement = () => {
                     value={formData.role}
                     onChange={handleInputChange}
                     disabled={currentAdmin?.role !== 'super_admin'}
-                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white disabled:opacity-50"
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent disabled:opacity-50"
                   >
                     <option value="admin">Admin</option>
                     {currentAdmin?.role === 'super_admin' && (
@@ -317,13 +317,13 @@ const AdminManagement = () => {
 
               {formData.role !== 'super_admin' && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
+                  <label className="block text-sm font-medium text-slate-700 mb-4">
                     Permissions
                   </label>
                   <div className="space-y-4">
                     {permissions.map((permission) => (
-                      <div key={permission.key} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700 rounded-xl">
-                        <span className="font-medium text-slate-900 dark:text-white">
+                      <div key={permission.key} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                        <span className="font-medium text-slate-900">
                           {permission.label}
                         </span>
                         <div className="flex space-x-2">
@@ -335,7 +335,7 @@ const AdminManagement = () => {
                               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                                 formData.permissions[permission.key] === level
                                   ? 'bg-violet-600 text-white'
-                                  : 'bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-500'
+                                  : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
                               }`}
                             >
                               {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -357,17 +357,17 @@ const AdminManagement = () => {
                     onChange={handleInputChange}
                     className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                   />
-                  <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <span className="ml-2 text-sm font-medium text-slate-700">
                     Active Account
                   </span>
                 </label>
               </div>
 
-              <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200 dark:border-slate-700">
+              <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium"
+                  className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
                 >
                   Cancel
                 </button>
@@ -398,8 +398,8 @@ const AdminManagement = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Admin Management</h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-1">
+          <h1 className="text-3xl font-bold text-slate-900">Admin Management</h1>
+          <p className="text-slate-600 mt-1">
             Manage administrator accounts and permissions
           </p>
         </div>
@@ -413,7 +413,7 @@ const AdminManagement = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
           <div className="flex items-center space-x-4">
             <div className="relative">
@@ -423,13 +423,13 @@ const AdminManagement = () => {
                 placeholder="Search admins..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <select
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
-              className="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+              className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             >
               <option value="all">All Roles</option>
               <option value="admin">Admin</option>
@@ -441,7 +441,7 @@ const AdminManagement = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+              className="px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             >
               <option value="createdAt">Created Date</option>
               <option value="name">Name</option>
@@ -450,7 +450,7 @@ const AdminManagement = () => {
             </select>
             <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="p-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+              className="p-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
             >
               <ChevronUpDownIcon className="h-5 w-5 text-slate-400" />
             </button>
@@ -459,35 +459,35 @@ const AdminManagement = () => {
       </div>
 
       {/* Admins List */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-            <thead className="bg-slate-50 dark:bg-slate-700">
+          <table className="min-w-full divide-y divide-slate-200">
+            <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Admin
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Role
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Last Login
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
+            <tbody className="bg-white divide-y divide-slate-200">
               {filteredAdmins.map((admin) => (
                 <motion.tr
                   key={admin.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                  className="hover:bg-slate-50 transition-colors"
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
@@ -495,10 +495,10 @@ const AdminManagement = () => {
                         {admin.firstName[0]}{admin.lastName[0]}
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-slate-900 dark:text-white">
+                        <div className="text-sm font-medium text-slate-900">
                           {admin.firstName} {admin.lastName}
                         </div>
-                        <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="text-sm text-slate-500">
                           {admin.email}
                         </div>
                       </div>
@@ -513,8 +513,8 @@ const AdminManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                       admin.isActive
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
                     }`}>
                       {admin.isActive ? (
                         <CheckCircleIcon className="w-3 h-3 mr-1" />
@@ -524,28 +524,28 @@ const AdminManagement = () => {
                       {admin.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-white">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900">
                     {admin.lastLogin ? (
                       <div className="flex items-center">
                         <ClockIcon className="w-4 h-4 mr-2 text-slate-400" />
                         {new Date(admin.lastLogin).toLocaleDateString()}
                       </div>
                     ) : (
-                      <span className="text-slate-500 dark:text-slate-400">Never</span>
+                      <span className="text-slate-500">Never</span>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => openEditModal(admin)}
-                        className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                        className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                       >
                         <PencilIcon className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => openDeleteModal(admin)}
                         disabled={admin.id === currentAdmin?.id}
-                        className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <TrashIcon className="h-4 w-4" />
                       </button>
@@ -560,10 +560,10 @@ const AdminManagement = () => {
         {filteredAdmins.length === 0 && (
           <div className="text-center py-12">
             <UsersIcon className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-            <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
+            <h3 className="text-xl font-medium text-slate-900 mb-2">
               No admins found
             </h3>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600">
               {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first admin'}
             </p>
           </div>
@@ -605,22 +605,22 @@ const AdminManagement = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md"
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
             >
               <div className="text-center">
-                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                   <ExclamationTriangleIcon className="h-6 w-6 text-red-600" />
                 </div>
-                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                <h3 className="text-lg font-medium text-slate-900 mb-2">
                   Delete Admin Account
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+                <p className="text-sm text-slate-600 mb-6">
                   Are you sure you want to delete "{selectedAdmin?.firstName} {selectedAdmin?.lastName}"? This action cannot be undone and will remove all associated data.
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
-                    className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     Cancel
                   </button>

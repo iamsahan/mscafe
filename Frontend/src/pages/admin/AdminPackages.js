@@ -48,15 +48,15 @@ const FormModal = ({
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+          className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
         >
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {title}
-            </h3>
+
+            <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
+
             <button
               onClick={onClose}
-              className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+              className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
             >
               <XMarkIcon className="w-5 h-5" />
             </button>
@@ -66,7 +66,7 @@ const FormModal = ({
             {/* Basic Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Package Title
                 </label>
                 <input
@@ -75,13 +75,13 @@ const FormModal = ({
                   value={formData.title}
                   onChange={onInputChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="Enter package title"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Price ($)
                 </label>
                 <input
@@ -92,13 +92,13 @@ const FormModal = ({
                   required
                   min="0"
                   step="0.01"
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="0.00"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Category ID
                 </label>
                 <input
@@ -106,13 +106,13 @@ const FormModal = ({
                   name="category"
                   value={formData.category}
                   onChange={onInputChange}
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="e.g., 1"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Revenue Share
                 </label>
                 <input
@@ -120,18 +120,18 @@ const FormModal = ({
                   name="revenueShare"
                   value={formData.revenueShare}
                   onChange={onInputChange}
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="e.g., 30%"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Package Image
                 </label>
                 <div className="space-y-3">
                   {/* Image Upload Area */}
-                  <div className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg p-6 text-center hover:border-violet-500 transition-colors">
+                  <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-violet-500 transition-colors">
                     <input
                       type="file"
                       accept="image/*"
@@ -192,22 +192,14 @@ const FormModal = ({
                         </div>
                       ) : (
                         <>
-                          <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-3">
-                            <svg
-                              className="w-6 h-6 text-slate-400"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
+
+                          <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3">
+                            <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+
                             </svg>
                           </div>
-                          <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">
+                          <p className="text-sm text-slate-600 mb-1">
                             Click to upload an image
                           </p>
                           <p className="text-xs text-slate-500">
@@ -221,12 +213,12 @@ const FormModal = ({
                   {/* Alternative: Image URL */}
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-slate-300 dark:border-slate-600" />
+                      <div className="w-full border-t border-slate-300" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white dark:bg-slate-800 text-slate-500">
-                        Or use image URL
-                      </span>
+
+                      <span className="px-2 bg-white text-slate-500">Or use image URL</span>
+
                     </div>
                   </div>
 
@@ -235,14 +227,14 @@ const FormModal = ({
                     name="imageUrl"
                     value={formData.imageUrl}
                     onChange={onInputChange}
-                    className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="https://example.com/image.jpg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   External Link
                 </label>
                 <input
@@ -250,7 +242,7 @@ const FormModal = ({
                   name="link"
                   value={formData.link}
                   onChange={onInputChange}
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="https://example.com/course"
                 />
               </div>
@@ -258,7 +250,7 @@ const FormModal = ({
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Description
               </label>
               <textarea
@@ -266,14 +258,14 @@ const FormModal = ({
                 value={formData.description}
                 onChange={onInputChange}
                 rows={4}
-                className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 placeholder="Enter detailed package description (optional)"
               />
             </div>
 
             {/* What's Included */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 What's Included
               </label>
               {formData.includes.map((include, index) => (
@@ -282,14 +274,14 @@ const FormModal = ({
                     type="text"
                     value={include}
                     onChange={(e) => onIncludesChange(index, e.target.value)}
-                    className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="What's included in this package"
                   />
                   {formData.includes.length > 1 && (
                     <button
                       type="button"
                       onClick={() => onRemoveInclude(index)}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                     >
                       <XMarkIcon className="w-4 h-4" />
                     </button>
@@ -299,7 +291,7 @@ const FormModal = ({
               <button
                 type="button"
                 onClick={onAddInclude}
-                className="mt-2 px-4 py-2 text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-lg transition-colors font-medium"
+                className="mt-2 px-4 py-2 text-violet-600 hover:bg-violet-50 rounded-lg transition-colors font-medium"
               >
                 + Add Include
               </button>
@@ -307,7 +299,7 @@ const FormModal = ({
 
             {/* Process Steps */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Process Steps
               </label>
               {formData.process.map((step, index) => (
@@ -316,14 +308,14 @@ const FormModal = ({
                     type="text"
                     value={step}
                     onChange={(e) => onProcessChange(index, e.target.value)}
-                    className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Describe this step in the process"
                   />
                   {formData.process.length > 1 && (
                     <button
                       type="button"
                       onClick={() => onRemoveProcess(index)}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                      className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                     >
                       <XMarkIcon className="w-4 h-4" />
                     </button>
@@ -333,7 +325,7 @@ const FormModal = ({
               <button
                 type="button"
                 onClick={onAddProcess}
-                className="mt-2 px-4 py-2 text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/20 rounded-lg transition-colors font-medium"
+                className="mt-2 px-4 py-2 text-violet-600 hover:bg-violet-50 rounded-lg transition-colors font-medium"
               >
                 + Add Process Step
               </button>
@@ -351,7 +343,7 @@ const FormModal = ({
                       onChange={onInputChange}
                       className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                     />
-                    <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <span className="ml-2 text-sm font-medium text-slate-700">
                       EFIN Required
                     </span>
                   </label>
@@ -362,7 +354,7 @@ const FormModal = ({
                     name="efinDescription"
                     value={formData.efinDescription}
                     onChange={onInputChange}
-                    className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="EFIN requirement description"
                   />
                 )}
@@ -378,7 +370,7 @@ const FormModal = ({
                       onChange={onInputChange}
                       className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                     />
-                    <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <span className="ml-2 text-sm font-medium text-slate-700">
                       PTIN Required
                     </span>
                   </label>
@@ -389,14 +381,14 @@ const FormModal = ({
                     name="ptinDescription"
                     value={formData.ptinDescription}
                     onChange={onInputChange}
-                    className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="PTIN requirement description"
                   />
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Minimum Returns
                 </label>
                 <input
@@ -405,13 +397,13 @@ const FormModal = ({
                   value={formData.minReturns}
                   onChange={onInputChange}
                   min="0"
-                  className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="0"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Min Returns Description
                 </label>
                 <input
@@ -419,7 +411,7 @@ const FormModal = ({
                   name="minReturnsDescription"
                   value={formData.minReturnsDescription}
                   onChange={onInputChange}
-                  className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                   placeholder="Description of minimum returns requirement"
                 />
               </div>
@@ -435,7 +427,7 @@ const FormModal = ({
                   onChange={onInputChange}
                   className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                 />
-                <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <span className="ml-2 text-sm font-medium text-slate-700">
                   Active
                 </span>
               </label>
@@ -447,17 +439,17 @@ const FormModal = ({
                   onChange={onInputChange}
                   className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
                 />
-                <span className="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <span className="ml-2 text-sm font-medium text-slate-700">
                   Featured
                 </span>
               </label>
             </div>
 
-            <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex justify-end space-x-4 pt-6 border-t border-slate-200">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-medium"
+                className="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
               >
                 Cancel
               </button>
@@ -1057,10 +1049,10 @@ const AdminPackages = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
-            Package Management
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-1">
+
+          <h1 className="text-3xl font-bold text-slate-900">Package Management</h1>
+          <p className="text-slate-600 mt-1">
+
             Manage your tax packages and courses
           </p>
         </div>
@@ -1074,7 +1066,7 @@ const AdminPackages = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 gap-4">
           {/* Search and Status Filter */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-1">
@@ -1085,7 +1077,7 @@ const AdminPackages = () => {
                 placeholder="Search packages by title or description..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
               />
             </div>
 
@@ -1093,7 +1085,7 @@ const AdminPackages = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm min-w-[120px]"
+                className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm min-w-[120px]"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active Only</option>
@@ -1103,7 +1095,7 @@ const AdminPackages = () => {
               <select
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
-                className="px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm min-w-[120px]"
+                className="px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm min-w-[120px]"
               >
                 <option value="all">All Categories</option>
                 <option value="1">Category 1</option>
@@ -1121,7 +1113,7 @@ const AdminPackages = () => {
                     setFilterStatus("all");
                     setFilterCategory("all");
                   }}
-                  className="px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                  className="px-3 py-2 text-sm text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
                 >
                   Clear
                 </button>
@@ -1131,7 +1123,7 @@ const AdminPackages = () => {
 
           {/* Sort Controls */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
               <FunnelIcon className="h-4 w-4" />
               <span>Sort by:</span>
             </div>
@@ -1139,7 +1131,7 @@ const AdminPackages = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm"
+              className="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
             >
               <option value="created_at">Date Created</option>
               <option value="title">Title (A-Z)</option>
@@ -1150,9 +1142,11 @@ const AdminPackages = () => {
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
               className={`p-2 border rounded-lg transition-colors ${
-                sortOrder === "asc"
-                  ? "border-violet-300 bg-violet-50 text-violet-600 dark:border-violet-600 dark:bg-violet-900/20 dark:text-violet-400"
-                  : "border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400"
+
+                sortOrder === 'asc' 
+                  ? 'border-violet-300 bg-violet-50 text-violet-600' 
+                  : 'border-slate-300 hover:bg-slate-50 text-slate-600'
+
               }`}
               title={`Sort ${sortOrder === "asc" ? "Descending" : "Ascending"}`}
             >
@@ -1162,22 +1156,24 @@ const AdminPackages = () => {
         </div>
 
         {/* Results Summary */}
-        <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-          <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
+        <div className="mt-4 pt-4 border-t border-slate-200">
+          <div className="flex items-center justify-between text-sm text-slate-600">
             <span>
               Showing {filteredPackages.length} of {packages.length} packages
               {searchTerm && (
-                <span className="ml-2 text-violet-600 dark:text-violet-400">
+                <span className="ml-2 text-violet-600">
                   matching "{searchTerm}"
                 </span>
               )}
-              {filterStatus !== "all" && (
-                <span className="ml-2 px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-xs">
+
+              {filterStatus !== 'all' && (
+                <span className="ml-2 px-2 py-1 bg-slate-100 rounded text-xs">
                   {filterStatus}
                 </span>
               )}
-              {filterCategory !== "all" && (
-                <span className="ml-2 px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded text-xs">
+              {filterCategory !== 'all' && (
+                <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+
                   Category {filterCategory}
                 </span>
               )}
@@ -1224,7 +1220,7 @@ const AdminPackages = () => {
             key={pkg.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
+            className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300"
           >
             {/* Package Header */}
             <div className="flex items-start justify-between mb-4">
@@ -1234,7 +1230,7 @@ const AdminPackages = () => {
                   <StarIcon className="h-5 w-5 text-yellow-500" />
                 )}
                 {pkg.category && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                     {pkg.category.name || `Category ${pkg.categoryId}`}
                   </span>
                 )}
@@ -1242,13 +1238,13 @@ const AdminPackages = () => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => openEditModal(pkg)}
-                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                 >
                   <PencilIcon className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => openDeleteModal(pkg)}
-                  className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                  className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                 >
                   <TrashIcon className="h-4 w-4" />
                 </button>
@@ -1270,10 +1266,10 @@ const AdminPackages = () => {
             )}
 
             {/* Package Title and Description */}
-            <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">
               {pkg.title}
             </h3>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3">
+            <p className="text-slate-600 text-sm mb-4 line-clamp-3">
               {pkg.description}
             </p>
 
@@ -1283,26 +1279,24 @@ const AdminPackages = () => {
                 <span className="text-2xl font-bold text-violet-600">
                   {pkg.price}
                 </span>
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    pkg.isActive === 1 || pkg.isActive === true
-                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                      : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-                  }`}
-                >
-                  {pkg.isActive === 1 || pkg.isActive === true
-                    ? "Active"
-                    : "Inactive"}
+
+                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  (pkg.isActive === 1 || pkg.isActive === true)
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800'
+                }`}>
+                  {(pkg.isActive === 1 || pkg.isActive === true) ? 'Active' : 'Inactive'}
+
                 </span>
               </div>
 
               {/* Revenue Share */}
               {pkg.revenueShare && (
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-600 dark:text-slate-400">
-                    Revenue Share:
-                  </span>
-                  <span className="font-semibold text-green-600 dark:text-green-400">
+
+                  <span className="text-slate-600">Revenue Share:</span>
+                  <span className="font-semibold text-green-600">
+
                     {pkg.revenueShare}
                   </span>
                 </div>
@@ -1311,14 +1305,14 @@ const AdminPackages = () => {
               {/* External Link */}
               {pkg.link && (
                 <div className="text-sm">
-                  <span className="text-slate-600 dark:text-slate-400">
-                    External Link:{" "}
-                  </span>
-                  <a
-                    href={pkg.link}
-                    target="_blank"
+
+                  <span className="text-slate-600">External Link: </span>
+                  <a 
+                    href={pkg.link} 
+                    target="_blank" 
+
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                    className="text-blue-600 hover:text-blue-800"
                   >
                     View Course
                   </a>
@@ -1329,7 +1323,7 @@ const AdminPackages = () => {
               <div className="mt-3">
                 <Link
                   to={`/buy-course/${pkg.id}`}
-                  className="inline-flex items-center px-3 py-2 text-xs font-medium text-violet-600 bg-violet-50 hover:bg-violet-100 dark:bg-violet-900/20 dark:text-violet-400 dark:hover:bg-violet-900/30 rounded-lg transition-colors"
+                  className="inline-flex items-center px-3 py-2 text-xs font-medium text-violet-600 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors"
                 >
                   <EyeIcon className="w-3 h-3 mr-1" />
                   View Course Page
@@ -1338,16 +1332,14 @@ const AdminPackages = () => {
             </div>
 
             {/* Requirements Section */}
-            {(pkg.efinRequired ||
-              pkg.ptinRequired ||
-              (pkg.minReturns && pkg.minReturns > 0)) && (
-              <div className="mb-4 p-3 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
-                  Requirements:
-                </p>
+
+            {(pkg.efinRequired || pkg.ptinRequired || (pkg.minReturns && pkg.minReturns > 0)) && (
+              <div className="mb-4 p-3 bg-slate-50 rounded-lg">
+                <p className="text-sm font-medium text-slate-900 mb-2">Requirements:</p>
+
                 <div className="space-y-1">
                   {pkg.efinRequired && (
-                    <div className="flex items-center text-xs text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center text-xs text-slate-600">
                       <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
                       EFIN Required
                       {pkg.efinDescription && (
@@ -1356,7 +1348,7 @@ const AdminPackages = () => {
                     </div>
                   )}
                   {pkg.ptinRequired && (
-                    <div className="flex items-center text-xs text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center text-xs text-slate-600">
                       <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2"></span>
                       PTIN Required
                       {pkg.ptinDescription && (
@@ -1365,7 +1357,7 @@ const AdminPackages = () => {
                     </div>
                   )}
                   {pkg.minReturns > 0 && (
-                    <div className="flex items-center text-xs text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center text-xs text-slate-600">
                       <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
                       Min {pkg.minReturns} Returns
                       {pkg.minReturnsDescription && (
@@ -1396,10 +1388,10 @@ const AdminPackages = () => {
 
               return includesArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
-                    What's Included:
-                  </p>
-                  <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+
+                  <p className="text-sm font-medium text-slate-900 mb-2">What's Included:</p>
+                  <ul className="text-sm text-slate-600 space-y-1">
+
                     {includesArray.slice(0, 3).map((item, index) => (
                       <li key={index} className="flex items-start">
                         <CheckCircleIcon className="w-3 h-3 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
@@ -1433,15 +1425,12 @@ const AdminPackages = () => {
 
               return processArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white mb-2">
-                    Process Steps:
-                  </p>
+
+                  <p className="text-sm font-medium text-slate-900 mb-2">Process Steps:</p>
                   <div className="space-y-1">
                     {processArray.slice(0, 2).map((step, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start text-xs text-slate-600 dark:text-slate-400"
-                      >
+                      <div key={index} className="flex items-start text-xs text-slate-600">
+
                         <span className="w-4 h-4 bg-violet-500 text-white rounded-full flex items-center justify-center text-xs mr-2 flex-shrink-0">
                           {index + 1}
                         </span>
@@ -1464,13 +1453,13 @@ const AdminPackages = () => {
       {filteredPackages.length === 0 && (
         <div className="text-center py-12">
           <CubeIcon className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-          <h3 className="text-xl font-medium text-slate-900 dark:text-white mb-2">
+          <h3 className="text-xl font-medium text-slate-900 mb-2">
             No packages found
           </h3>
-          <p className="text-slate-600 dark:text-slate-400">
-            {searchTerm
-              ? "Try adjusting your search criteria"
-              : "Get started by creating your first package"}
+
+          <p className="text-slate-600">
+            {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first package'}
+
           </p>
         </div>
       )}
@@ -1526,23 +1515,24 @@ const AdminPackages = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white dark:bg-slate-800 rounded-2xl p-6 w-full max-w-md"
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
             >
               <div className="text-center">
-                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                   <TrashIcon className="h-6 w-6 text-red-600" />
                 </div>
-                <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                <h3 className="text-lg font-medium text-slate-900 mb-2">
                   Delete Package
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-                  Are you sure you want to delete "{selectedPackage?.title}"?
-                  This action cannot be undone.
+
+                <p className="text-sm text-slate-600 mb-6">
+                  Are you sure you want to delete "{selectedPackage?.title}"? This action cannot be undone.
+
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={() => setShowDeleteModal(false)}
-                    className="px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                    className="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors"
                   >
                     Cancel
                   </button>

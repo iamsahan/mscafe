@@ -229,16 +229,16 @@ const BuyCourse = () => {
                   transition={{ delay: 0.1 }}
                   className="card p-8"
                 >
-                  <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-6">
+                  <h2 className="text-2xl font-bold text-secondary-900 mb-6">
                     What's Included
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {includesArray.map((feature, index) => (
                       <div key={index} className="flex items-start space-x-3">
                         <CheckCircleIcon className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-secondary-700 dark:text-secondary-300">
-                          {feature}
-                        </span>
+
+                        <span className="text-secondary-700">{feature}</span>
+
                       </div>
                     ))}
                   </div>
@@ -268,7 +268,7 @@ const BuyCourse = () => {
                   transition={{ delay: 0.2 }}
                   className="card p-8"
                 >
-                  <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-6">
+                  <h2 className="text-2xl font-bold text-secondary-900 mb-6">
                     Course Process
                   </h2>
                   <div className="space-y-6">
@@ -278,13 +278,13 @@ const BuyCourse = () => {
                           {index + 1}
                         </div>
                         <div>
-                          <h3 className="font-semibold text-secondary-900 dark:text-white mb-2">
-                            {typeof step === "object"
-                              ? step.title || step
-                              : step}
+
+                          <h3 className="font-semibold text-secondary-900 mb-2">
+                            {typeof step === 'object' ? step.title || step : step}
                           </h3>
-                          {typeof step === "object" && step.description && (
-                            <p className="text-secondary-600 dark:text-secondary-400">
+                          {typeof step === 'object' && step.description && (
+                            <p className="text-secondary-600">
+
                               {step.description}
                             </p>
                           )}
@@ -306,46 +306,42 @@ const BuyCourse = () => {
                 transition={{ delay: 0.3 }}
                 className="card p-8"
               >
-                <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-6">
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">
                   Requirements & Prerequisites
                 </h2>
                 <div className="space-y-4">
                   {course.efinRequired && (
-                    <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <div className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
                       <ShieldCheckIcon className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-blue-900 dark:text-blue-100">
-                          EFIN Required
-                        </h3>
-                        <p className="text-blue-700 dark:text-blue-300">
-                          {course.efinDescription}
-                        </p>
+
+                        <h3 className="font-semibold text-blue-900">EFIN Required</h3>
+                        <p className="text-blue-700">{course.efinDescription}</p>
+
                       </div>
                     </div>
                   )}
                   {course.ptinRequired && (
-                    <div className="flex items-start space-x-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                    <div className="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
                       <DocumentTextIcon className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-orange-900 dark:text-orange-100">
-                          PTIN Required
-                        </h3>
-                        <p className="text-orange-700 dark:text-orange-300">
-                          {course.ptinDescription}
-                        </p>
+
+                        <h3 className="font-semibold text-orange-900">PTIN Required</h3>
+                        <p className="text-orange-700">{course.ptinDescription}</p>
+
                       </div>
                     </div>
                   )}
                   {course.minReturns > 0 && (
-                    <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
                       <AcademicCapIcon className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-green-900 dark:text-green-100">
+                        <h3 className="font-semibold text-green-900">
                           Minimum {course.minReturns} Returns Experience
                         </h3>
-                        <p className="text-green-700 dark:text-green-300">
-                          {course.minReturnsDescription}
-                        </p>
+
+                        <p className="text-green-700">{course.minReturnsDescription}</p>
+
                       </div>
                     </div>
                   )}
@@ -361,11 +357,11 @@ const BuyCourse = () => {
                 transition={{ delay: 0.4 }}
                 className="card p-8"
               >
-                <h2 className="text-2xl font-bold text-secondary-900 dark:text-white mb-6">
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">
                   About This Course
                 </h2>
-                <div className="prose prose-lg dark:prose-invert max-w-none">
-                  <p className="text-secondary-600 dark:text-secondary-400 leading-relaxed">
+                <div className="prose prose-lg">
+                  <p className="text-secondary-600 leading-relaxed">
                     {course.description}
                   </p>
                 </div>
@@ -383,11 +379,11 @@ const BuyCourse = () => {
               <div className="card p-6 space-y-6">
                 {/* Course Price */}
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-secondary-900 dark:text-white mb-2">
+                  <div className="text-4xl font-bold text-secondary-900 mb-2">
                     {course.price}
                   </div>
                   {course.revenueShare && (
-                    <div className="text-sm text-green-600 dark:text-green-400 font-medium">
+                    <div className="text-sm text-green-600 font-medium">
                       Revenue Share: {course.revenueShare}
                     </div>
                   )}
@@ -413,29 +409,29 @@ const BuyCourse = () => {
                 </button>
 
                 {/* Course Features */}
-                <div className="space-y-3 pt-4 border-t border-secondary-200 dark:border-secondary-700">
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                <div className="space-y-3 pt-4 border-t border-secondary-200">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <ShieldCheckIcon className="w-5 h-5 text-green-500" />
                     <span>Quality education guarantee</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <GiftIcon className="w-5 h-5 text-blue-500" />
                     <span>Comprehensive learning materials</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-sm text-secondary-600 dark:text-secondary-400">
+                  <div className="flex items-center space-x-3 text-sm text-secondary-600">
                     <ChatBubbleLeftRightIcon className="w-5 h-5 text-purple-500" />
                     <span>Professional support</span>
                   </div>
                 </div>
 
                 {/* Contact Support */}
-                <div className="pt-4 border-t border-secondary-200 dark:border-secondary-700">
-                  <p className="text-sm text-secondary-600 dark:text-secondary-400 text-center">
+                <div className="pt-4 border-t border-secondary-200">
+                  <p className="text-sm text-secondary-600 text-center">
                     Questions about this course?
                   </p>
                   <Link
                     to="/contact"
-                    className="block text-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm mt-2"
+                    className="block text-center text-primary-600 hover:text-primary-700 font-medium text-sm mt-2"
                   >
                     Contact our support team
                   </Link>
