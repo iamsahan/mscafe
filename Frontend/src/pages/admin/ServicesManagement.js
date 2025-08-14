@@ -913,12 +913,12 @@ const ServicesManagement = () => {
 
       console.log(
         "Starting image upload to:",
-        "http://localhost:5000/api/v1/services/upload-image"
+        "http://148.230.87.141/api/v1/services/upload-image"
       );
 
       // Use the services upload endpoint
       const response = await fetch(
-        "http://localhost:5000/api/v1/services/upload-image",
+        "http://148.230.87.141/api/v1/services/upload-image",
         {
           method: "POST",
           headers: {
