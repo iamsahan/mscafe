@@ -328,7 +328,7 @@ const GetFinancialHelp = () => {
               </div>
 
               {/* Right Side - Service Card */}
-              <div className="lg:sticky lg:top-8">
+              <div className="lg:sticky lg:top-8 pt-10">
                 {selectedService ? (
                   <motion.div
                     key={selectedService.id}
