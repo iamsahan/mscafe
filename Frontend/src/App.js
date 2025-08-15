@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Context Providers
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
+import ScrollToTop from './components/ScrollToTop';
 
 // Layout Components
 import Navbar from './components/Layout/Navbar';
@@ -40,8 +41,9 @@ function App() {
   return (
     <AdminAuthProvider>
       <Router>
-        <div className="min-h-screen bg-white transition-colors duration-200">
-            <Routes>
+        <ScrollToTop>
+          <div className="min-h-screen bg-white transition-colors duration-200">
+              <Routes>
               {/* Public Routes with Navbar and Footer */}
               <Route path="/" element={
                 <>
@@ -203,7 +205,8 @@ function App() {
               theme="colored"
             />
           </div>
-        </Router>
+        </ScrollToTop>
+      </Router>
       </AdminAuthProvider>
   );
 }
