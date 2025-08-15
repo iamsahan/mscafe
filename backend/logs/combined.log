@@ -3197,3 +3197,5 @@
 {"level":"info","message":"::1 - - [13/Aug/2025:19:53:02 +0000] \"GET /api/v1/uploads/images/services/image-1754644793064-461531119.jpg HTTP/1.1\" 500 107 \"http://localhost:3000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"","service":"tax-education-api","timestamp":"2025-08-14 01:23:02"}
 {"level":"info","message":"::1 - - [13/Aug/2025:19:53:02 +0000] \"GET /api/v1/uploads/images/services/image-1754644546317-942236633.jpeg HTTP/1.1\" 500 108 \"http://localhost:3000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"","service":"tax-education-api","timestamp":"2025-08-14 01:23:02"}
 {"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-14 20:57:45"}
+{"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-15 10:50:59"}
+{"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-15 13:48:42"}
