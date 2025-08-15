@@ -72,15 +72,13 @@ const AdminSidebar = ({
     <div className="flex flex-col h-full">
       {/* Logo Section */}
       <div className="flex items-center justify-between p-6 border-b border-slate-200">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl flex items-center justify-center">
-            <ShieldCheckIcon className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h2 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              MSG Admin
-            </h2>
-            <p className="text-xs text-slate-500">Management Portal</p>
+        <div className="flex items-center justify-center flex-1">
+          <div className="w-40 h-9 rounded-xl flex items-center justify-center overflow-hidden">
+            <img 
+              src={require('../../images/logo.png')} 
+              alt="MSC Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
         </div>
         {mobile && (
