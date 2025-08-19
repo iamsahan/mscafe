@@ -273,9 +273,19 @@ const PriorityTradelinesManagement = () => {
   const filteredTradelines = tradelines
     .filter(tradeline => {
       const bank = tradeline.bank || '';
-      const age = tradeline.age || '';
-      const matchesSearch = bank.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           age.toLowerCase().includes(searchTerm.toLowerCase());
+      const age = String(tradeline.age || '');
+      const spots = String(tradeline.spots || '');
+      const creditLimit = String(tradeline.creditLimit || tradeline.credit_limit || '');
+      const price = String(tradeline.price || '');
+      const statement = tradeline.statement || '';
+      
+      const searchLower = searchTerm.toLowerCase();
+      const matchesSearch = bank.toLowerCase().includes(searchLower) ||
+                           age.toLowerCase().includes(searchLower) ||
+                           spots.toLowerCase().includes(searchLower) ||
+                           creditLimit.includes(searchLower) ||
+                           price.includes(searchLower) ||
+                           statement.toLowerCase().includes(searchLower);
       
       const isActive = tradeline.isActive === 1 || tradeline.isActive === true || 
                       tradeline.is_active === 1 || tradeline.is_active === true;
@@ -302,8 +312,8 @@ const PriorityTradelinesManagement = () => {
           bValue = parseFloat(b.creditLimit || b.credit_limit || 0);
           break;
         case 'age':
-          aValue = (a.age || '').toLowerCase();
-          bValue = (b.age || '').toLowerCase();
+          aValue = String(a.age || '').toLowerCase();
+          bValue = String(b.age || '').toLowerCase();
           break;
         case 'spots':
           aValue = parseInt(a.spots || 0);
@@ -589,7 +599,7 @@ const PriorityTradelinesManagement = () => {
               <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search tradelines by bank institution or account year..."
+                placeholder="Search by bank, year, spots, credit limit, price, or statement..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
