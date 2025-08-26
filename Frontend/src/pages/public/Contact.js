@@ -16,9 +16,9 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: PhoneIcon,
-      label: 'Phone',
-      value: '(478) 999-7456',
-      href: 'tel:+14789997456',
+      label: 'Personal Phone',
+      value: '(478) 219-9449',
+      href: 'tel:+14782199449',
       description: 'Call us for immediate assistance',
       color: 'bg-green-100 text-green-600'
     },
