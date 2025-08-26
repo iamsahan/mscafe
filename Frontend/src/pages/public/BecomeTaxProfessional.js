@@ -35,6 +35,21 @@ const BecomeTaxProfessional = () => {
     }
   };
 
+  // Function to sort courses by price (low to high)
+  const sortCoursesByPrice = (coursesToSort) => {
+    return [...coursesToSort].sort((a, b) => {
+      // Extract numeric value from price string (assuming format like "$299" or "299")
+      const priceA = parseFloat((a.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      const priceB = parseFloat((b.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      
+      // Sort by price (low to high)
+      return priceA - priceB;
+    });
+  };
+
+  // Get sorted courses for display
+  const displayCourses = sortCoursesByPrice(courses);
+
   const handleImageError = (courseId) => {
     setImageErrors((prev) => ({ ...prev, [courseId]: true }));
   };
@@ -228,7 +243,7 @@ const BecomeTaxProfessional = () => {
                 Try Again
               </button>
             </div>
-          ) : courses.length === 0 ? (
+          ) : displayCourses.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-4">📚</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -246,7 +261,7 @@ const BecomeTaxProfessional = () => {
               viewport={{ once: true }}
               className="space-y-16"
             >
-              {courses.map((course, index) => {
+              {displayCourses.map((course, index) => {
                 const imageUrl = getImageUrl(course);
                 const hasImageError = imageErrors[course.id];
                 const shouldShowImage = imageUrl && !hasImageError;

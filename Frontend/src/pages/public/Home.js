@@ -210,6 +210,21 @@ const Home = () => {
     }
   };
 
+  // Function to sort courses by price (low to high)
+  const sortCoursesByPrice = (coursesToSort) => {
+    return [...coursesToSort].sort((a, b) => {
+      // Extract numeric value from price string (assuming format like "$299" or "299")
+      const priceA = parseFloat((a.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      const priceB = parseFloat((b.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      
+      // Sort by price (low to high)
+      return priceA - priceB;
+    });
+  };
+
+  // Get sorted courses for display
+  const displayCourses = sortCoursesByPrice(courses);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Enhanced with Glassmorphism */}
@@ -1320,7 +1335,7 @@ const Home = () => {
             )}
           </motion.div>
 
-          {!loading && courses.length > 0 && (
+          {!loading && displayCourses.length > 0 && (
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -1328,7 +1343,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {courses.slice(0, 6).map((course, index) => {
+              {displayCourses.slice(0, 6).map((course, index) => {
                 const imageUrl = getImageUrl(course);
                 const hasImageError = imageErrors[course.id];
                 const shouldShowImage = imageUrl && !hasImageError;
