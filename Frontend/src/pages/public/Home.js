@@ -290,7 +290,7 @@ const Home = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-xl md:text-2xl mb-12 text-white/90 font-light max-w-4xl mx-auto leading-relaxed"
               >
-                Unlock expert help or become a certified tax professional – all
+                Unlock expert help or become your own boss – all
                 in one place with industry-leading education and support.
               </motion.p>
 
@@ -841,7 +841,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight relative text-center lg:text-left"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight relative text-left"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -877,7 +877,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg opacity-90 relative group text-center lg:text-left mx-auto lg:mx-0"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg opacity-90 relative group text-left"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -886,26 +886,9 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                We aim to become the leading resource for tax professionals
+                We aim to become the leading resource for tax professionals by delivering innovative solutions, reliable support, and unmatched opportunities for growth.
               </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                by delivering innovative solutions, reliable support,
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                and unmatched opportunities for growth.
-              </motion.span>
+             
             </motion.p>
           </motion.div>
 
@@ -1038,7 +1021,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight text-center lg:text-right relative"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight text-right relative"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -1074,7 +1057,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg ml-auto text-center lg:text-right relative group mx-auto lg:mx-0 lg:ml-auto"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg ml-auto text-right relative group"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -1083,27 +1066,10 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                Our mission as tax advisors has always been consistent:
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                we strive to provide the best standard of preeminence in pursuit
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                of conveying our accounting, tax, and business consulting
+                Our mission as tax advisors has always been consistent:we strive to provide the best standard of preeminence in pursuit of conveying our accounting, tax, and business consulting
                 services.
               </motion.span>
+             
             </motion.p>
           </motion.div>
         </div>
