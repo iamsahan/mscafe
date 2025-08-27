@@ -3210,3 +3210,8 @@
 {"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-27 02:42:04"}
 {"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-27 03:57:02"}
 {"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-27 04:02:15"}
+{"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-28 01:36:02"}
+{"level":"info","message":"::1 - - [27/Aug/2025:20:06:53 +0000] \"GET /uploads/images/courses/image-1753913076692-206802077.jpeg HTTP/1.1\" 200 974508 \"http://localhost:3000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\"","service":"tax-education-api","timestamp":"2025-08-28 01:36:53"}
+{"level":"info","message":"::1 - - [27/Aug/2025:20:06:53 +0000] \"GET /uploads/images/courses/image-1753914304513-238835964.jpeg HTTP/1.1\" 200 974508 \"http://localhost:3000/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\"","service":"tax-education-api","timestamp":"2025-08-28 01:36:53"}
+{"level":"info","message":"SIGINT received, shutting down gracefully","service":"tax-education-api","timestamp":"2025-08-28 01:37:08"}
+{"level":"info","message":"🚀 Server running on port 5000 in production mode","service":"tax-education-api","timestamp":"2025-08-28 01:37:13"}
