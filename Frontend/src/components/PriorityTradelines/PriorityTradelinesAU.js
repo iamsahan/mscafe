@@ -189,6 +189,22 @@ const PriorityTradelinesAU = () => {
     });
   };
 
+  // Format only day with ordinal suffix (e.g., 02nd)
+  const formatDayOrdinal = (dateString) => {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    if (Number.isNaN(d.getTime())) return '';
+    const day = d.getDate();
+    const dayStr = String(day).padStart(2, '0');
+    const mod10 = day % 10;
+    const mod100 = day % 100;
+    let suffix = 'th';
+    if (mod10 === 1 && mod100 !== 11) suffix = 'st';
+    else if (mod10 === 2 && mod100 !== 12) suffix = 'nd';
+    else if (mod10 === 3 && mod100 !== 13) suffix = 'rd';
+    return `${dayStr}${suffix}`;
+  };
+
   if (loading && tradelines.length === 0) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -532,10 +548,10 @@ const PriorityTradelinesAU = () => {
                     </div>
                   </div>
                   
-                  <div>
+          <div>
                     <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Closing Date</p>
                     <span className="bg-gray-100 px-3 py-1 rounded-lg text-xs font-medium">
-                      {formatDate(tradeline.closingDate)}
+            {formatDayOrdinal(tradeline.closingDate)}
                     </span>
                   </div>
                 </div>
@@ -629,9 +645,9 @@ const PriorityTradelinesAU = () => {
                       <td className="px-6 py-6 whitespace-nowrap text-sm font-bold text-green-600">
                         {formatCurrency(tradeline.creditLimit)}
                       </td>
-                      <td className="px-6 py-6 whitespace-nowrap text-sm text-gray-900">
+            <td className="px-6 py-6 whitespace-nowrap text-sm text-gray-900">
                         <span className="bg-gray-100 px-3 py-1 rounded-lg text-xs font-medium">
-                          {formatDate(tradeline.closingDate)}
+              {formatDayOrdinal(tradeline.closingDate)}
                         </span>
                       </td>
                       <td className="px-6 py-6 whitespace-nowrap text-sm">

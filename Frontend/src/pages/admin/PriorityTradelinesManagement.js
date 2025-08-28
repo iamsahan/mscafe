@@ -14,6 +14,25 @@ import {
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { priorityTradelinesAUAPI } from '../../services/api';
 
+// Helpers (module scope)
+const pad = (n) => String(n).padStart(2, '0');
+const computeNextDateFromDay = (dayStr) => {
+  const now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth(); // 0-indexed
+  let day = parseInt(dayStr, 10);
+  if (!Number.isFinite(day) || day < 1) day = 1;
+  // If day has already passed this month, move to next month
+  if (day < now.getDate()) {
+    month += 1;
+    if (month > 11) { month = 0; year += 1; }
+  }
+  // Clamp to days in target month
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  if (day > daysInMonth) day = daysInMonth;
+  return `${year}-${pad(month + 1)}-${pad(day)}`;
+};
+
 const PriorityTradelinesManagement = () => {
   const [tradelines, setTradelines] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -347,6 +366,8 @@ const PriorityTradelinesManagement = () => {
   const FormModal = ({ isOpen, onClose, onSubmit, title, isEdit = false, selectedTradeline = null }) => {
     // Create refs for all form inputs to manage them manually
     const formRef = useRef();
+    const [dayOnly, setDayOnly] = useState(false);
+    const [dayValue, setDayValue] = useState(''); // '01' .. '31'
     
     // Reset form when modal opens
     useEffect(() => {
@@ -365,15 +386,43 @@ const PriorityTradelinesManagement = () => {
               if (form && form.closingDate) form.closingDate.value = selectedTradeline.closingDate || '';
               if (form && form.price) form.price.value = selectedTradeline.price || '';
               // isActive is now controlled by React state, no need to set manually
+              // Prefill day selector from existing closing date
+              try {
+                const d = new Date(selectedTradeline.closingDate || selectedTradeline.closing_date || '');
+                if (!Number.isNaN(d.getTime())) setDayValue(pad(d.getDate()));
+                else setDayValue('');
+              } catch {
+                setDayValue('');
+              }
+              setDayOnly(false);
             } else {
               // Reset form for create and set default values
               formRef.current.reset();
+              // Ensure closingDate has a valid default (today) for date input type
+              const today = new Date();
+              const yyyy = today.getFullYear();
+              const mm = pad(today.getMonth() + 1);
+              const dd = pad(today.getDate());
+              if (formRef.current.closingDate) {
+                formRef.current.closingDate.value = `${yyyy}-${mm}-${dd}`;
+              }
+              setDayValue(dd);
+              setDayOnly(false);
               // isActive is now controlled by React state, defaults to true
             }
           }
         }, 50);
       }
     }, [isOpen, isEdit, selectedTradeline]);
+
+    // Keep date input in sync when using day-only mode
+    useEffect(() => {
+      if (!isOpen || !formRef.current) return;
+      const form = formRef.current;
+      if (dayOnly && dayValue && form && form.closingDate) {
+        form.closingDate.value = computeNextDateFromDay(dayValue);
+      }
+    }, [dayOnly, dayValue, isOpen]);
 
     return (
       <AnimatePresence>
@@ -481,13 +530,44 @@ const PriorityTradelinesManagement = () => {
                     <label className="block text-sm font-medium text-slate-700 mb-2">
                       Closing Date
                     </label>
-                    <input
-                      type="date"
-                      name="closingDate"
-                      required
-                      autoComplete="off"
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                    />
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="date"
+                        name="closingDate"
+                        required
+                        autoComplete="off"
+                        disabled={dayOnly}
+                        className={`w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent ${dayOnly ? 'bg-slate-50 cursor-not-allowed' : ''}`}
+                      />
+                    </div>
+                    <div className="mt-2 flex items-center gap-3">
+                      <label className="inline-flex items-center text-sm text-slate-700">
+                        <input
+                          type="checkbox"
+                          checked={dayOnly}
+                          onChange={(e) => setDayOnly(e.target.checked)}
+                          className="mr-2 w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500"
+                        />
+                        Enter day only
+                      </label>
+                      {dayOnly && (
+                        <select
+                          value={dayValue}
+                          onChange={(e) => setDayValue(e.target.value)}
+                          className="px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent text-sm"
+                        >
+                          <option value="">Select day</option>
+                          {Array.from({ length: 31 }, (_, i) => pad(i + 1)).map((d) => (
+                            <option key={d} value={d}>{d}</option>
+                          ))}
+                        </select>
+                      )}
+                      {dayOnly && dayValue && (
+                        <span className="text-xs text-slate-500">
+                          Will save as {computeNextDateFromDay(dayValue)}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div>
@@ -770,6 +850,22 @@ const PriorityTradelinesManagement = () => {
                   }
                 };
 
+                // Helper function: ordinal day (e.g., 02nd)
+                const formatDayOrdinal = (dateString) => {
+                  if (!dateString) return 'N/A';
+                  const d = new Date(dateString);
+                  if (Number.isNaN(d.getTime())) return 'N/A';
+                  const day = d.getDate();
+                  const dayStr = String(day).padStart(2, '0');
+                  const mod10 = day % 10;
+                  const mod100 = day % 100;
+                  let suffix = 'th';
+                  if (mod10 === 1 && mod100 !== 11) suffix = 'st';
+                  else if (mod10 === 2 && mod100 !== 12) suffix = 'nd';
+                  else if (mod10 === 3 && mod100 !== 13) suffix = 'rd';
+                  return `${dayStr}${suffix}`;
+                };
+
                 return (
                   <motion.tr
                     key={tradeline.id}
@@ -801,8 +897,11 @@ const PriorityTradelinesManagement = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="bg-slate-100 px-3 py-1 rounded-lg text-xs font-medium text-slate-900">
-                        {formatDate(closingDate)}
+                      <span
+                        className="bg-slate-100 px-3 py-1 rounded-lg text-xs font-medium text-slate-900"
+                        title={formatDate(closingDate)}
+                      >
+                        {formatDayOrdinal(closingDate)}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
