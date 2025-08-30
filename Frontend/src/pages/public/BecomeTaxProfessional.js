@@ -62,7 +62,7 @@ const BecomeTaxProfessional = () => {
       return imageUrl;
     }
 
-    const baseUrl = "http://148.230.87.141/api/v1";
+    const baseUrl = "https://moneysolutioncafe.com/api/v1";
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;

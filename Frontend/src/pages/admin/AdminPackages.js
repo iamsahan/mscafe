@@ -602,7 +602,7 @@ const AdminPackages = () => {
     if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl; // Already full URL
     }
-    return `http://148.230.87.141${imageUrl}`; // Prepend backend URL
+    return `https://moneysolutioncafe.com${imageUrl}`; // Prepend backend URL
   };
 
   const uploadImage = async (imageFile) => {
@@ -631,7 +631,7 @@ const AdminPackages = () => {
 
       // Use adminApi instance that already handles authentication
       const response = await fetch(
-        "http://148.230.87.141/api/v1/courses/upload-image",
+        "https://moneysolutioncafe.com/api/v1/courses/upload-image",
         {
           method: "POST",
           headers: {

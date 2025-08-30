@@ -885,7 +885,7 @@ const ServicesManagement = () => {
       return imageUrl;
     }
     // If it's a relative path, prepend the backend URL
-    return `http://148.230.87.141${imageUrl}`;
+    return `https://moneysolutioncafe.com${imageUrl}`;
   };
 
   const uploadImage = async (imageFile) => {
@@ -913,12 +913,12 @@ const ServicesManagement = () => {
 
       console.log(
         "Starting image upload to:",
-        "http://148.230.87.141/api/v1/services/upload-image"
+        "https://moneysolutioncafe.com/api/v1/services/upload-image"
       );
 
       // Use the services upload endpoint
       const response = await fetch(
-        "http://148.230.87.141/api/v1/services/upload-image",
+        "https://moneysolutioncafe.com/api/v1/services/upload-image",
         {
           method: "POST",
           headers: {
