@@ -130,8 +130,7 @@ const BuyService = () => {
           </h2>
 
           <p className="text-secondary-600 mb-6">
-            {error || 'The service you are looking for could not be found.'}
-
+            {error || "The service you are looking for could not be found."}
           </p>
           <Link
             to="/financial-help"
@@ -213,19 +212,24 @@ const BuyService = () => {
                 <div className="flex items-center p-4 bg-primary-50 rounded-lg border border-primary-200">
                   <CurrencyDollarIcon className="w-8 h-8 text-primary-600 mr-4" />
                   <div>
-
-                    <div className="text-2xl font-bold text-primary-900">${service.price}</div>
-                    <div className="text-sm text-primary-700">Service Price</div>
-
+                    <div className="text-2xl font-bold text-primary-900">
+                      ${service.price}
+                    </div>
+                    <div className="text-sm text-primary-700">
+                      Service Price
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <ClockIcon className="w-8 h-8 text-blue-600 mr-4" />
                   <div>
-
-                    <div className="text-2xl font-bold text-blue-900">{service.durationMinutes || service.duration_minutes || 60} min</div>
+                    <div className="text-2xl font-bold text-blue-900">
+                      {service.durationMinutes ||
+                        service.duration_minutes ||
+                        60}{" "}
+                      min
+                    </div>
                     <div className="text-sm text-blue-700">Duration</div>
-
                   </div>
                 </div>
               </div>
@@ -247,12 +251,10 @@ const BuyService = () => {
                 </p>
                 {service.requirements && (
                   <div className="mt-6">
-
-                    <h3 className="text-lg font-semibold text-secondary-900 mb-3">Requirements</h3>
-                    <p className="text-secondary-600">
-
-                      {service.requirements}
-                    </p>
+                    <h3 className="text-lg font-semibold text-secondary-900 mb-3">
+                      Requirements
+                    </h3>
+                    <p className="text-secondary-600">{service.requirements}</p>
                   </div>
                 )}
               </div>
@@ -274,8 +276,8 @@ const BuyService = () => {
                   </div>
 
                   <div className="text-sm text-secondary-600">
-                    {service.durationMinutes || service.duration_minutes || 60} minutes consultation
-
+                    {service.durationMinutes || service.duration_minutes || 60}{" "}
+                    minutes consultation
                   </div>
                 </div>
 

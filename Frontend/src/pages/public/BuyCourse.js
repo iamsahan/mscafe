@@ -109,8 +109,7 @@ const BuyCourse = () => {
           </h2>
 
           <p className="text-secondary-600 mb-6">
-            {error || 'The course you are looking for could not be found.'}
-
+            {error || "The course you are looking for could not be found."}
           </p>
           <Link
             to="/tax-professional"
@@ -187,20 +186,22 @@ const BuyCourse = () => {
                 <div className="flex items-center p-4 bg-primary-50 rounded-lg border border-[#93268f]">
                   <CurrencyDollarIcon className="w-8 h-8 text-[#93268f] mr-4" />
                   <div>
-
-                    <div className="text-2xl font-bold text-primary-900">{course.price}</div>
+                    <div className="text-2xl font-bold text-primary-900">
+                      {course.price}
+                    </div>
                     <div className="text-sm text-primary-700">Course Price</div>
-
                   </div>
                 </div>
                 {course.revenueShare && (
                   <div className="flex items-center p-4 bg-green-50 rounded-lg border border-green-200">
                     <TrophyIcon className="w-8 h-8 text-green-600 mr-4" />
                     <div>
-
-                      <div className="text-2xl font-bold text-green-900">{course.revenueShare}</div>
-                      <div className="text-sm text-green-700">Revenue Share</div>
-
+                      <div className="text-2xl font-bold text-green-900">
+                        {course.revenueShare}
+                      </div>
+                      <div className="text-sm text-green-700">
+                        Revenue Share
+                      </div>
                     </div>
                   </div>
                 )}
@@ -238,7 +239,6 @@ const BuyCourse = () => {
                         <CheckCircleIcon className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
 
                         <span className="text-secondary-700">{feature}</span>
-
                       </div>
                     ))}
                   </div>
@@ -278,13 +278,13 @@ const BuyCourse = () => {
                           {index + 1}
                         </div>
                         <div>
-
                           <h3 className="font-semibold text-secondary-900 mb-2">
-                            {typeof step === 'object' ? step.title || step : step}
+                            {typeof step === "object"
+                              ? step.title || step
+                              : step}
                           </h3>
-                          {typeof step === 'object' && step.description && (
+                          {typeof step === "object" && step.description && (
                             <p className="text-secondary-600">
-
                               {step.description}
                             </p>
                           )}
@@ -314,10 +314,12 @@ const BuyCourse = () => {
                     <div className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
                       <ShieldCheckIcon className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                       <div>
-
-                        <h3 className="font-semibold text-blue-900">EFIN Required</h3>
-                        <p className="text-blue-700">{course.efinDescription}</p>
-
+                        <h3 className="font-semibold text-blue-900">
+                          EFIN Required
+                        </h3>
+                        <p className="text-blue-700">
+                          {course.efinDescription}
+                        </p>
                       </div>
                     </div>
                   )}
@@ -325,10 +327,12 @@ const BuyCourse = () => {
                     <div className="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
                       <DocumentTextIcon className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
                       <div>
-
-                        <h3 className="font-semibold text-orange-900">PTIN Required</h3>
-                        <p className="text-orange-700">{course.ptinDescription}</p>
-
+                        <h3 className="font-semibold text-orange-900">
+                          PTIN Required
+                        </h3>
+                        <p className="text-orange-700">
+                          {course.ptinDescription}
+                        </p>
                       </div>
                     </div>
                   )}
@@ -340,8 +344,9 @@ const BuyCourse = () => {
                           Minimum {course.minReturns} Returns Experience
                         </h3>
 
-                        <p className="text-green-700">{course.minReturnsDescription}</p>
-
+                        <p className="text-green-700">
+                          {course.minReturnsDescription}
+                        </p>
                       </div>
                     </div>
                   )}
