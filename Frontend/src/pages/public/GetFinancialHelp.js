@@ -62,8 +62,10 @@ const GetFinancialHelp = () => {
       return imageUrl;
     }
 
-    // Use the API base URL from environment variable or fallback
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
+
+    // Use the same API base URL as the API service
+    const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {

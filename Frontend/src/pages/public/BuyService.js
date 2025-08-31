@@ -58,8 +58,9 @@ const BuyService = () => {
       return imageUrl;
     }
 
-    // Use the API base URL from environment variable or fallback
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
+
+    const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;
