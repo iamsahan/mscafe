@@ -602,7 +602,8 @@ const AdminPackages = () => {
     if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl; // Already full URL
     }
-    return `http://148.230.87.141${imageUrl}`; // Prepend backend URL
+    const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'http://localhost:5000';
+    return `${backendUrl}${imageUrl}`; // Prepend backend URL
   };
 
   const uploadImage = async (imageFile) => {
@@ -629,10 +630,10 @@ const AdminPackages = () => {
 
       console.log("Starting image upload...");
 
+      const uploadUrl = `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1'}/courses/upload-image`;
+      
       // Use adminApi instance that already handles authentication
-      const response = await fetch(
-        "http://148.230.87.141/api/v1/courses/upload-image",
-        {
+      const response = await fetch(uploadUrl, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,
