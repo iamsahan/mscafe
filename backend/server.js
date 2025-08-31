@@ -45,6 +45,10 @@ app.use(
           "http://localhost:3000",
           "http://148.230.87.141",
           "https://148.230.87.141",
+          "http://moneysolutioncafe.com",
+          "https://moneysolutioncafe.com",
+          "http://www.moneysolutioncafe.com",
+          "https://www.moneysolutioncafe.com",
         ],
         connectSrc: [
           "'self'",
@@ -52,6 +56,10 @@ app.use(
           "http://localhost:3000",
           "http://148.230.87.141",
           "https://148.230.87.141",
+          "http://moneysolutioncafe.com",
+          "https://moneysolutioncafe.com",
+          "http://www.moneysolutioncafe.com",
+          "https://www.moneysolutioncafe.com",
         ],
       },
     },
@@ -71,6 +79,8 @@ app.use(
       process.env.FRONTEND_URL || "http://localhost:3000",
       "http://148.230.87.141",
       "https://148.230.87.141",
+      "http://moneysolutioncafe.com",
+      "https://moneysolutioncafe.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
@@ -97,7 +107,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Rate limiting
-app.use(generalLimiter);
+//app.use(generalLimiter);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
@@ -131,6 +141,8 @@ app.use(
       process.env.FRONTEND_URL || "http://localhost:3000",
       "http://148.230.87.141",
       "https://148.230.87.141",
+      "http://moneysolutioncafe.com",
+      "https://moneysolutioncafe.com",
     ];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
@@ -156,6 +168,8 @@ app.use(
       process.env.FRONTEND_URL || "http://localhost:3000",
       "http://148.230.87.141",
       "https://148.230.87.141",
+      "http://moneysolutioncafe.com",
+      "https://moneysolutioncafe.com",
     ];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {

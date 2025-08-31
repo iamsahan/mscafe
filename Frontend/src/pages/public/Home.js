@@ -21,8 +21,8 @@ const gradientAnimationCSS = `
 `;
 
 // Inject CSS into the document
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
   style.textContent = gradientAnimationCSS;
   document.head.appendChild(style);
 }
@@ -98,8 +98,10 @@ const Home = () => {
       return imageUrl;
     }
 
+
     // Use the same API base URL as the API service
-    const baseUrl = "http://148.230.87.141/api/v1";
+    const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {
@@ -210,6 +212,23 @@ const Home = () => {
     }
   };
 
+  // Function to sort courses by price (low to high)
+  const sortCoursesByPrice = (coursesToSort) => {
+    return [...coursesToSort].sort((a, b) => {
+      // Extract numeric value from price string (assuming format like "$299" or "299")
+      const priceA =
+        parseFloat((a.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
+      const priceB =
+        parseFloat((b.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
+
+      // Sort by price (low to high)
+      return priceA - priceB;
+    });
+  };
+
+  // Get sorted courses for display
+  const displayCourses = sortCoursesByPrice(courses);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Enhanced with Glassmorphism */}
@@ -275,8 +294,8 @@ const Home = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-xl md:text-2xl mb-12 text-white/90 font-light max-w-4xl mx-auto leading-relaxed"
               >
-                Unlock expert help or become a certified tax professional – all
-                in one place with industry-leading education and support.
+                Unlock expert help or become your own boss – all in one place
+                with industry-leading education and support.
               </motion.p>
 
               <motion.div
@@ -578,7 +597,7 @@ const Home = () => {
               animation: "gradient 15s ease infinite",
             }}
           />
-          
+
           {/* Mobile Background */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -755,7 +774,7 @@ const Home = () => {
                 </motion.div>
               </div>
             </motion.div>
-            
+
             {/* Vision Icon with Complex Animation - Mobile */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
@@ -826,7 +845,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight relative text-center lg:text-left"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight relative text-left"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -862,7 +881,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg opacity-90 relative group text-center lg:text-left mx-auto lg:mx-0"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg opacity-90 relative group text-left"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -871,25 +890,9 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                We aim to become the leading resource for tax professionals
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                by delivering innovative solutions, reliable support,
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                and unmatched opportunities for growth.
+                We aim to become the leading resource for tax professionals by
+                delivering innovative solutions, reliable support, and unmatched
+                opportunities for growth.
               </motion.span>
             </motion.p>
           </motion.div>
@@ -958,7 +961,7 @@ const Home = () => {
                 </motion.div>
               </div>
             </motion.div>
-            
+
             {/* Mission Icon with Complex Animation - Mobile */}
             <motion.div
               initial={{ scale: 0, rotate: 180 }}
@@ -1023,7 +1026,7 @@ const Home = () => {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight text-center lg:text-right relative"
+                className="text-4xl lg:text-7xl font-black text-white leading-none tracking-tight text-right relative"
               >
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
@@ -1059,7 +1062,7 @@ const Home = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.8 }}
-              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg ml-auto text-center lg:text-right relative group mx-auto lg:mx-0 lg:ml-auto"
+              className="text-white text-lg lg:text-xl leading-relaxed max-w-lg ml-auto text-right relative group"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -1068,26 +1071,9 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                Our mission as tax advisors has always been consistent:
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                we strive to provide the best standard of preeminence in pursuit
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                className="block group-hover:text-white/100 transition-colors duration-300"
-              >
-                of conveying our accounting, tax, and business consulting
-                services.
+                Our mission as tax advisors has always been consistent:we strive
+                to provide the best standard of preeminence in pursuit of
+                conveying our accounting, tax, and business consulting services.
               </motion.span>
             </motion.p>
           </motion.div>
@@ -1320,7 +1306,7 @@ const Home = () => {
             )}
           </motion.div>
 
-          {!loading && courses.length > 0 && (
+          {!loading && displayCourses.length > 0 && (
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -1328,7 +1314,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {courses.slice(0, 6).map((course, index) => {
+              {displayCourses.slice(0, 6).map((course, index) => {
                 const imageUrl = getImageUrl(course);
                 const hasImageError = imageErrors[course.id];
                 const shouldShowImage = imageUrl && !hasImageError;
@@ -1617,7 +1603,9 @@ const Home = () => {
                         <h3 className="text-2xl lg:text-3xl font-bold mb-2 text-white">
                           Elyse Whisby
                         </h3>
-                        <p className="text-white/90 text-sm lg:text-base">Founder & CEO</p>
+                        <p className="text-white/90 text-sm lg:text-base">
+                          Founder & CEO
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -1633,7 +1621,9 @@ const Home = () => {
                   className="absolute -left-4 lg:-left-8 top-1/4 z-30 hidden lg:block"
                 >
                   <div className="bg-white rounded-xl p-4 lg:p-6 shadow-[0_20px_50px_rgba(147,38,143,0.2)] border border-[#93268f]/10">
-                    <div className="text-3xl lg:text-5xl font-bold text-[#93268f]">25+</div>
+                    <div className="text-3xl lg:text-5xl font-bold text-[#93268f]">
+                      25+
+                    </div>
                     <div className="text-xs lg:text-sm text-gray-600 mt-1">
                       Years Experience
                     </div>
@@ -1657,7 +1647,7 @@ const Home = () => {
                     </div>
                   </div>
                 </motion.div>
-                
+
                 {/* Mobile Stats Cards */}
                 <div className="lg:hidden mt-6 grid grid-cols-2 gap-4">
                   <motion.div
