@@ -51,6 +51,7 @@ const FormModal = ({
           className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
         >
           <div className="flex items-center justify-between mb-6">
+
             <h3 className="text-2xl font-bold text-slate-900">{title}</h3>
 
             <button
@@ -191,19 +192,11 @@ const FormModal = ({
                         </div>
                       ) : (
                         <>
+
                           <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3">
-                            <svg
-                              className="w-6 h-6 text-slate-400"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                              />
+                            <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+
                             </svg>
                           </div>
                           <p className="text-sm text-slate-600 mb-1">
@@ -223,9 +216,9 @@ const FormModal = ({
                       <div className="w-full border-t border-slate-300" />
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white text-slate-500">
-                        Or use image URL
-                      </span>
+
+                      <span className="px-2 bg-white text-slate-500">Or use image URL</span>
+
                     </div>
                   </div>
 
@@ -517,11 +510,9 @@ const AdminPackages = () => {
       setLoading(true);
       // Include inactive packages for admin view
 
-      const response = await coursesAPI.getAll({
-        includeInactive: "true",
-        limit: 1000,
-      });
-      console.log("Fetched packages response:", response.data);
+      const response = await coursesAPI.getAll({ includeInactive: 'true', limit: 1000 });
+      console.log('Fetched packages response:', response.data);
+      
 
       if (response.data && response.data.success) {
         const packagesData = response.data.data || [];
@@ -612,12 +603,17 @@ const AdminPackages = () => {
       return imageUrl; // Already full URL
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     return `https://moneysolutioncafe.com${imageUrl}`; // Prepend backend URL
 
 =======
     return `http://148.230.87.141${imageUrl}`; // Prepend backend URL
 >>>>>>> parent of 7b4b185 (fix image error)
+=======
+    const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'http://localhost:5000';
+    return `${backendUrl}${imageUrl}`; // Prepend backend URL
+>>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
   };
 
   const uploadImage = async (imageFile) => {
@@ -646,6 +642,7 @@ const AdminPackages = () => {
 
       // Use adminApi instance that already handles authentication
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       const response = await fetch(
         "https://moneysolutioncafe.com/api/v1/courses/upload-image",
@@ -656,6 +653,9 @@ const AdminPackages = () => {
         "http://148.230.87.141/api/v1/courses/upload-image",
         {
 >>>>>>> parent of 7b4b185 (fix image error)
+=======
+      const response = await fetch(uploadUrl, {
+>>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,
@@ -1072,10 +1072,10 @@ const AdminPackages = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">
-            Package Management
-          </h1>
+
+          <h1 className="text-3xl font-bold text-slate-900">Package Management</h1>
           <p className="text-slate-600 mt-1">
+
             Manage your tax packages and courses
           </p>
         </div>
@@ -1165,9 +1165,11 @@ const AdminPackages = () => {
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
               className={`p-2 border rounded-lg transition-colors ${
-                sortOrder === "asc"
-                  ? "border-violet-300 bg-violet-50 text-violet-600"
-                  : "border-slate-300 hover:bg-slate-50 text-slate-600"
+
+                sortOrder === 'asc' 
+                  ? 'border-violet-300 bg-violet-50 text-violet-600' 
+                  : 'border-slate-300 hover:bg-slate-50 text-slate-600'
+
               }`}
               title={`Sort ${sortOrder === "asc" ? "Descending" : "Ascending"}`}
             >
@@ -1186,13 +1188,15 @@ const AdminPackages = () => {
                   matching "{searchTerm}"
                 </span>
               )}
-              {filterStatus !== "all" && (
+
+              {filterStatus !== 'all' && (
                 <span className="ml-2 px-2 py-1 bg-slate-100 rounded text-xs">
                   {filterStatus}
                 </span>
               )}
-              {filterCategory !== "all" && (
+              {filterCategory !== 'all' && (
                 <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">
+
                   Category {filterCategory}
                 </span>
               )}
@@ -1299,24 +1303,23 @@ const AdminPackages = () => {
                   {pkg.price}
                 </span>
 
-                <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    pkg.isActive === 1 || pkg.isActive === true
-                      ? "bg-green-100 text-green-800"
-                      : "bg-red-100 text-red-800"
-                  }`}
-                >
-                  {pkg.isActive === 1 || pkg.isActive === true
-                    ? "Active"
-                    : "Inactive"}
+                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  (pkg.isActive === 1 || pkg.isActive === true)
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800'
+                }`}>
+                  {(pkg.isActive === 1 || pkg.isActive === true) ? 'Active' : 'Inactive'}
+
                 </span>
               </div>
 
               {/* Revenue Share */}
               {pkg.revenueShare && (
                 <div className="flex items-center justify-between text-sm">
+
                   <span className="text-slate-600">Revenue Share:</span>
                   <span className="font-semibold text-green-600">
+
                     {pkg.revenueShare}
                   </span>
                 </div>
@@ -1325,10 +1328,12 @@ const AdminPackages = () => {
               {/* External Link */}
               {pkg.link && (
                 <div className="text-sm">
+
                   <span className="text-slate-600">External Link: </span>
-                  <a
-                    href={pkg.link}
-                    target="_blank"
+                  <a 
+                    href={pkg.link} 
+                    target="_blank" 
+
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800"
                   >
@@ -1351,13 +1356,9 @@ const AdminPackages = () => {
 
             {/* Requirements Section */}
 
-            {(pkg.efinRequired ||
-              pkg.ptinRequired ||
-              (pkg.minReturns && pkg.minReturns > 0)) && (
+            {(pkg.efinRequired || pkg.ptinRequired || (pkg.minReturns && pkg.minReturns > 0)) && (
               <div className="mb-4 p-3 bg-slate-50 rounded-lg">
-                <p className="text-sm font-medium text-slate-900 mb-2">
-                  Requirements:
-                </p>
+                <p className="text-sm font-medium text-slate-900 mb-2">Requirements:</p>
 
                 <div className="space-y-1">
                   {pkg.efinRequired && (
@@ -1410,10 +1411,10 @@ const AdminPackages = () => {
 
               return includesArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 mb-2">
-                    What's Included:
-                  </p>
+
+                  <p className="text-sm font-medium text-slate-900 mb-2">What's Included:</p>
                   <ul className="text-sm text-slate-600 space-y-1">
+
                     {includesArray.slice(0, 3).map((item, index) => (
                       <li key={index} className="flex items-start">
                         <CheckCircleIcon className="w-3 h-3 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
@@ -1447,15 +1448,12 @@ const AdminPackages = () => {
 
               return processArray.length > 0 ? (
                 <div className="mb-4">
-                  <p className="text-sm font-medium text-slate-900 mb-2">
-                    Process Steps:
-                  </p>
+
+                  <p className="text-sm font-medium text-slate-900 mb-2">Process Steps:</p>
                   <div className="space-y-1">
                     {processArray.slice(0, 2).map((step, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start text-xs text-slate-600"
-                      >
+                      <div key={index} className="flex items-start text-xs text-slate-600">
+
                         <span className="w-4 h-4 bg-violet-500 text-white rounded-full flex items-center justify-center text-xs mr-2 flex-shrink-0">
                           {index + 1}
                         </span>
@@ -1483,9 +1481,8 @@ const AdminPackages = () => {
           </h3>
 
           <p className="text-slate-600">
-            {searchTerm
-              ? "Try adjusting your search criteria"
-              : "Get started by creating your first package"}
+            {searchTerm ? 'Try adjusting your search criteria' : 'Get started by creating your first package'}
+
           </p>
         </div>
       )}
@@ -1552,8 +1549,8 @@ const AdminPackages = () => {
                 </h3>
 
                 <p className="text-sm text-slate-600 mb-6">
-                  Are you sure you want to delete "{selectedPackage?.title}"?
-                  This action cannot be undone.
+                  Are you sure you want to delete "{selectedPackage?.title}"? This action cannot be undone.
+
                 </p>
                 <div className="flex justify-center space-x-4">
                   <button

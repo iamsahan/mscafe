@@ -19,8 +19,10 @@ const BecomeTaxProfessional = () => {
       setLoading(true);
       setError(null);
 
+      
       const response = await coursesAPI.getAll({ limit: 1000 });
-      console.log("Courses response:", response.data);
+      console.log('Courses response:', response.data);
+      
 
       const fetchedCourses = response.data.data || [];
       setCourses(fetchedCourses);
@@ -37,11 +39,9 @@ const BecomeTaxProfessional = () => {
   const sortCoursesByPrice = (coursesToSort) => {
     return [...coursesToSort].sort((a, b) => {
       // Extract numeric value from price string (assuming format like "$299" or "299")
-      const priceA =
-        parseFloat((a.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
-      const priceB =
-        parseFloat((b.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
-
+      const priceA = parseFloat((a.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      const priceB = parseFloat((b.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      
       // Sort by price (low to high)
       return priceA - priceB;
     });
@@ -63,6 +63,7 @@ const BecomeTaxProfessional = () => {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // Use the API base URL from environment variable or fallback
     const baseUrl = process.env.REACT_APP_API_BASE_URL || "https://moneysolutioncafe.com/api/v1";
@@ -70,6 +71,10 @@ const BecomeTaxProfessional = () => {
 =======
     const baseUrl = "http://148.230.87.141/api/v1";
 >>>>>>> parent of 7b4b185 (fix image error)
+=======
+    // Use the API base URL from environment variable or fallback
+    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
+>>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;
