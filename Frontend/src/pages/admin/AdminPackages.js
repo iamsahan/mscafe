@@ -604,6 +604,7 @@ const AdminPackages = () => {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     return `https://moneysolutioncafe.com${imageUrl}`; // Prepend backend URL
 
@@ -614,6 +615,9 @@ const AdminPackages = () => {
     const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'http://localhost:5000';
     return `${backendUrl}${imageUrl}`; // Prepend backend URL
 >>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
+=======
+    return `http://148.230.87.141${imageUrl}`; // Prepend backend URL
+>>>>>>> parent of 7b4b185 (fix image error)
   };
 
   const uploadImage = async (imageFile) => {
@@ -643,6 +647,7 @@ const AdminPackages = () => {
       // Use adminApi instance that already handles authentication
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       const response = await fetch(
         "https://moneysolutioncafe.com/api/v1/courses/upload-image",
@@ -656,6 +661,11 @@ const AdminPackages = () => {
 =======
       const response = await fetch(uploadUrl, {
 >>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
+=======
+      const response = await fetch(
+        "http://148.230.87.141/api/v1/courses/upload-image",
+        {
+>>>>>>> parent of 7b4b185 (fix image error)
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,

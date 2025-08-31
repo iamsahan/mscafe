@@ -100,6 +100,7 @@ const Home = () => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // Use the same API base URL as the API service
     const baseUrl = "https://moneysolutioncafe.com/api/v1";
@@ -112,6 +113,10 @@ const Home = () => {
     // Use the API base URL from environment variable or fallback
     const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
 >>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
+=======
+    // Use the same API base URL as the API service
+    const baseUrl = "http://148.230.87.141/api/v1";
+>>>>>>> parent of 7b4b185 (fix image error)
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {

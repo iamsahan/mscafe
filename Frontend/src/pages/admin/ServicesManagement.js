@@ -887,6 +887,7 @@ const ServicesManagement = () => {
     // If it's a relative path, prepend the backend URL
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'https://moneysolutioncafe.com';
     return `${backendUrl}${imageUrl}`;
@@ -898,6 +899,9 @@ const ServicesManagement = () => {
     const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'http://localhost:5000';
     return `${backendUrl}${imageUrl}`;
 >>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
+=======
+    return `http://148.230.87.141${imageUrl}`;
+>>>>>>> parent of 7b4b185 (fix image error)
   };
 
   const uploadImage = async (imageFile) => {
@@ -925,6 +929,7 @@ const ServicesManagement = () => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       const uploadUrl = `${process.env.REACT_APP_API_BASE_URL || 'https://moneysolutioncafe.com/api/v1'}/services/upload-image`;
 =======
@@ -949,6 +954,17 @@ const ServicesManagement = () => {
 >>>>>>> parent of 7b4b185 (fix image error)
 =======
 >>>>>>> parent of c3944b7 (Merge branch 'Dev_sasindu' of https://github.com/iamsahan/mscafe into Dev_sasindu)
+=======
+      console.log(
+        "Starting image upload to:",
+        "http://148.230.87.141/api/v1/services/upload-image"
+      );
+
+      // Use the services upload endpoint
+      const response = await fetch(
+        "http://148.230.87.141/api/v1/services/upload-image",
+        {
+>>>>>>> parent of 7b4b185 (fix image error)
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,
