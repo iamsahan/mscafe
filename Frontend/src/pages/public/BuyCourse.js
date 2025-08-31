@@ -57,9 +57,13 @@ const BuyCourse = () => {
       return imageUrl;
     }
 
+<<<<<<< HEAD
 
     const baseUrl = "https://moneysolutioncafe.com/api/v1";
 
+=======
+    const baseUrl = "http://148.230.87.141/api/v1";
+>>>>>>> parent of 7b4b185 (fix image error)
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;

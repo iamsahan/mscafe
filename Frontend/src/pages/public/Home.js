@@ -98,10 +98,15 @@ const Home = () => {
       return imageUrl;
     }
 
+<<<<<<< HEAD
 
     // Use the same API base URL as the API service
     const baseUrl = "https://moneysolutioncafe.com/api/v1";
 
+=======
+    // Use the same API base URL as the API service
+    const baseUrl = "http://148.230.87.141/api/v1";
+>>>>>>> parent of 7b4b185 (fix image error)
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {
