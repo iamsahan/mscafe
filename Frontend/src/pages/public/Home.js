@@ -98,8 +98,10 @@ const Home = () => {
       return imageUrl;
     }
 
+
     // Use the same API base URL as the API service
     const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {

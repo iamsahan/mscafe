@@ -611,7 +611,9 @@ const AdminPackages = () => {
     if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
       return imageUrl; // Already full URL
     }
+
     return `https://moneysolutioncafe.com${imageUrl}`; // Prepend backend URL
+
   };
 
   const uploadImage = async (imageFile) => {
@@ -638,10 +640,14 @@ const AdminPackages = () => {
 
       console.log("Starting image upload...");
 
+      const uploadUrl = `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1'}/courses/upload-image`;
+      
       // Use adminApi instance that already handles authentication
+
       const response = await fetch(
         "https://moneysolutioncafe.com/api/v1/courses/upload-image",
         {
+
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,

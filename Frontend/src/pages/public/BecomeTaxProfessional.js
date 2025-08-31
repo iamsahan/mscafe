@@ -62,7 +62,10 @@ const BecomeTaxProfessional = () => {
       return imageUrl;
     }
 
-    const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
+    // Use the API base URL from environment variable or fallback
+    const baseUrl = process.env.REACT_APP_API_BASE_URL || "https://moneysolutioncafe.com/api/v1";
+
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;

@@ -57,7 +57,9 @@ const BuyCourse = () => {
       return imageUrl;
     }
 
+
     const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     if (imageUrl.startsWith("/uploads/")) {
       return `${baseUrl}${imageUrl}`;

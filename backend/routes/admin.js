@@ -9,6 +9,9 @@ const {
   deleteAdmin
 } = require('../controllers/adminController');
 
+// Image management routes
+const imageAdminRoutes = require('./imageAdmin');
+
 // @route   GET /api/v1/admin/dashboard
 // @desc    Get dashboard statistics
 // @access  Private (Admin)
@@ -33,5 +36,8 @@ router.put('/users/:id', requireAdmin, checkPermission('admin_management'), upda
 // @desc    Delete admin
 // @access  Private (Super Admin)
 router.delete('/users/:id', requireAdmin, checkPermission('admin_management'), deleteAdmin);
+
+// Image management routes
+router.use('/images', requireAdmin, imageAdminRoutes);
 
 module.exports = router;
