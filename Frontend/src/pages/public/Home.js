@@ -21,8 +21,8 @@ const gradientAnimationCSS = `
 `;
 
 // Inject CSS into the document
-if (typeof document !== "undefined") {
-  const style = document.createElement("style");
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style');
   style.textContent = gradientAnimationCSS;
   document.head.appendChild(style);
 }
@@ -98,10 +98,8 @@ const Home = () => {
       return imageUrl;
     }
 
-
-    // Use the same API base URL as the API service
-    const baseUrl = "https://moneysolutioncafe.com/api/v1";
-
+    // Use the API base URL from environment variable or fallback
+    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {
@@ -216,11 +214,9 @@ const Home = () => {
   const sortCoursesByPrice = (coursesToSort) => {
     return [...coursesToSort].sort((a, b) => {
       // Extract numeric value from price string (assuming format like "$299" or "299")
-      const priceA =
-        parseFloat((a.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
-      const priceB =
-        parseFloat((b.price || "0").toString().replace(/[^0-9.]/g, "")) || 0;
-
+      const priceA = parseFloat((a.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      const priceB = parseFloat((b.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+      
       // Sort by price (low to high)
       return priceA - priceB;
     });
@@ -294,8 +290,8 @@ const Home = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-xl md:text-2xl mb-12 text-white/90 font-light max-w-4xl mx-auto leading-relaxed"
               >
-                Unlock expert help or become your own boss – all in one place
-                with industry-leading education and support.
+                Unlock expert help or become your own boss – all
+                in one place with industry-leading education and support.
               </motion.p>
 
               <motion.div
@@ -597,7 +593,7 @@ const Home = () => {
               animation: "gradient 15s ease infinite",
             }}
           />
-
+          
           {/* Mobile Background */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -774,7 +770,7 @@ const Home = () => {
                 </motion.div>
               </div>
             </motion.div>
-
+            
             {/* Vision Icon with Complex Animation - Mobile */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
@@ -890,10 +886,9 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                We aim to become the leading resource for tax professionals by
-                delivering innovative solutions, reliable support, and unmatched
-                opportunities for growth.
+                We aim to become the leading resource for tax professionals by delivering innovative solutions, reliable support, and unmatched opportunities for growth.
               </motion.span>
+             
             </motion.p>
           </motion.div>
 
@@ -961,7 +956,7 @@ const Home = () => {
                 </motion.div>
               </div>
             </motion.div>
-
+            
             {/* Mission Icon with Complex Animation - Mobile */}
             <motion.div
               initial={{ scale: 0, rotate: 180 }}
@@ -1071,10 +1066,10 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 1 }}
                 className="block group-hover:text-white/100 transition-colors duration-300"
               >
-                Our mission as tax advisors has always been consistent:we strive
-                to provide the best standard of preeminence in pursuit of
-                conveying our accounting, tax, and business consulting services.
+                Our mission as tax advisors has always been consistent:we strive to provide the best standard of preeminence in pursuit of conveying our accounting, tax, and business consulting
+                services.
               </motion.span>
+             
             </motion.p>
           </motion.div>
         </div>
@@ -1603,9 +1598,7 @@ const Home = () => {
                         <h3 className="text-2xl lg:text-3xl font-bold mb-2 text-white">
                           Elyse Whisby
                         </h3>
-                        <p className="text-white/90 text-sm lg:text-base">
-                          Founder & CEO
-                        </p>
+                        <p className="text-white/90 text-sm lg:text-base">Founder & CEO</p>
                       </div>
                     </div>
                   </div>
@@ -1621,9 +1614,7 @@ const Home = () => {
                   className="absolute -left-4 lg:-left-8 top-1/4 z-30 hidden lg:block"
                 >
                   <div className="bg-white rounded-xl p-4 lg:p-6 shadow-[0_20px_50px_rgba(147,38,143,0.2)] border border-[#93268f]/10">
-                    <div className="text-3xl lg:text-5xl font-bold text-[#93268f]">
-                      25+
-                    </div>
+                    <div className="text-3xl lg:text-5xl font-bold text-[#93268f]">25+</div>
                     <div className="text-xs lg:text-sm text-gray-600 mt-1">
                       Years Experience
                     </div>
@@ -1647,7 +1638,7 @@ const Home = () => {
                     </div>
                   </div>
                 </motion.div>
-
+                
                 {/* Mobile Stats Cards */}
                 <div className="lg:hidden mt-6 grid grid-cols-2 gap-4">
                   <motion.div

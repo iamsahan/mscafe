@@ -885,10 +885,8 @@ const ServicesManagement = () => {
       return imageUrl;
     }
     // If it's a relative path, prepend the backend URL
-
-    const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'https://moneysolutioncafe.com';
+    const backendUrl = process.env.REACT_APP_API_BASE_URL?.replace('/api/v1', '') || 'http://localhost:5000';
     return `${backendUrl}${imageUrl}`;
-
   };
 
   const uploadImage = async (imageFile) => {
@@ -914,13 +912,11 @@ const ServicesManagement = () => {
         return null;
       }
 
-
-      const uploadUrl = `${process.env.REACT_APP_API_BASE_URL || 'https://moneysolutioncafe.com/api/v1'}/services/upload-image`;
+      const uploadUrl = `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1'}/services/upload-image`;
       console.log("Starting image upload to:", uploadUrl);
 
       // Use the services upload endpoint
       const response = await fetch(uploadUrl, {
-
           method: "POST",
           headers: {
             Authorization: `Bearer ${adminToken}`,
