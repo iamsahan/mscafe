@@ -62,8 +62,10 @@ const GetFinancialHelp = () => {
       return imageUrl;
     }
 
-    // Use the API base URL from environment variable or fallback
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api/v1";
+
+    // Use the same API base URL as the API service
+    const baseUrl = "https://moneysolutioncafe.com/api/v1";
+
 
     // If imageUrl starts with /uploads/, replace it with the API route
     if (imageUrl.startsWith("/uploads/")) {
@@ -217,8 +219,8 @@ const GetFinancialHelp = () => {
             </h2>
 
             <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
-              Tailored solutions to secure your wealth and empower your financial journey.
-
+              Tailored solutions to secure your wealth and empower your
+              financial journey.
             </p>
           </motion.div>
 
@@ -284,10 +286,8 @@ const GetFinancialHelp = () => {
                       onClick={() => setSelectedService(service)}
                       className={`group relative overflow-hidden p-4 rounded-xl cursor-pointer transition-all duration-500 border-2 ${
                         selectedService?.id === service.id
-
-                          ? 'bg-gradient-to-r from-purple-100 to-[#93268f]/10 border-[#93268f] shadow-lg transform scale-105'
-                          : 'bg-white backdrop-blur-md border-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-300 hover:scale-105 hover:shadow-md'
-
+                          ? "bg-gradient-to-r from-purple-100 to-[#93268f]/10 border-[#93268f] shadow-lg transform scale-105"
+                          : "bg-white backdrop-blur-md border-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-300 hover:scale-105 hover:shadow-md"
                       }`}
                     >
                       <div className="flex items-center space-x-3">
@@ -313,12 +313,13 @@ const GetFinancialHelp = () => {
                           )}
                         </div>
 
-                        <h4 className={`text-base font-bold transition-colors duration-200 ${
-                          selectedService?.id === service.id 
-                            ? 'text-[#93268f]' 
-                            : 'text-gray-900 group-hover:text-[#93268f]'
-                        }`}>
-
+                        <h4
+                          className={`text-base font-bold transition-colors duration-200 ${
+                            selectedService?.id === service.id
+                              ? "text-[#93268f]"
+                              : "text-gray-900 group-hover:text-[#93268f]"
+                          }`}
+                        >
                           {service.name}
                         </h4>
                       </div>
@@ -402,10 +403,10 @@ const GetFinancialHelp = () => {
                         </div>
                         {selectedService.description && (
                           <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
-                            {selectedService.description.length > 100 
-                              ? selectedService.description.substring(0, 100) + '...' 
-                              : selectedService.description
-                            }
+                            {selectedService.description.length > 100
+                              ? selectedService.description.substring(0, 100) +
+                                "..."
+                              : selectedService.description}
                           </p>
                         )}
                       </div>
@@ -443,8 +444,8 @@ const GetFinancialHelp = () => {
                     </h3>
 
                     <p className="text-gray-500 text-base">
-                      Choose a service to view details and book your consultation
-
+                      Choose a service to view details and book your
+                      consultation
                     </p>
                   </motion.div>
                 )}
