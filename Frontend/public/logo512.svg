@@ -1,7 +1,1 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="64" fill="#3B82F6"/>
-  <circle cx="256" cy="256" r="160" fill="#ffffff" fill-opacity="0.1"/>
-  <text x="256" y="300" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="160" font-weight="bold">M</text>
-  <text x="256" y="360" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="40">MSG</text>
-  <text x="256" y="400" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24">Tax Services</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" fill="none" viewBox="0 0 512 512"><rect width="512" height="512" fill="#3B82F6" rx="64"/><circle cx="256" cy="256" r="160" fill="#fff" fill-opacity=".1"/><text x="256" y="300" fill="#fff" font-family="Arial, sans-serif" font-size="160" font-weight="bold" text-anchor="middle">M</text><text x="256" y="360" fill="#fff" font-family="Arial, sans-serif" font-size="40" text-anchor="middle">MSG</text><text x="256" y="400" fill="#fff" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">Tax Services</text></svg>
