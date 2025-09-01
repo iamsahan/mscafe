@@ -106,8 +106,8 @@ if (process.env.NODE_ENV === "development") {
   );
 }
 
-// Rate limiting
-//app.use(generalLimiter);
+// Rate limiting - disable problematic rate limiter for now
+// app.use(generalLimiter);
 
 // Health check endpoint
 app.get("/health", (req, res) => {

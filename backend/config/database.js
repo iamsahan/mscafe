@@ -20,6 +20,24 @@ const sequelize = new Sequelize(
     define: {
       underscored: true,
       freezeTableName: true
+    },
+    dialectOptions: {
+      connectTimeout: 60000,
+      acquireTimeout: 60000,
+      timeout: 60000,
+    },
+    retry: {
+      match: [
+        /ETIMEDOUT/,
+        /EHOSTUNREACH/,
+        /ECONNRESET/,
+        /ECONNREFUSED/,
+        /EHOSTDOWN/,
+        /ENETDOWN/,
+        /ENETUNREACH/,
+        /ER_ACCESS_DENIED_ERROR/
+      ],
+      max: 3
     }
   }
 );

@@ -16,14 +16,9 @@ const authLimiter = skipInDevelopment
       },
       standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
       legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-      trustProxy: true, // Trust the proxy
       keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
+        // Simplified key generator to avoid proxy issues
+        return req.ip || req.connection.remoteAddress || 'anonymous';
       },
       handler: (req, res) => {
         res.status(429).json({
@@ -46,14 +41,13 @@ const generalLimiter = skipInDevelopment
       },
       standardHeaders: true,
       legacyHeaders: false,
-      trustProxy: true, // Trust the proxy
+      skip: (req) => {
+        // Skip rate limiting for internal requests and health checks
+        return req.path === '/health' || req.ip === '127.0.0.1';
+      },
       keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
+        // Simplified key generator to avoid proxy issues
+        return req.ip || req.connection.remoteAddress || 'anonymous';
       },
       handler: (req, res) => {
         res.status(429).json({
@@ -75,14 +69,9 @@ const strictLimiter = skipInDevelopment
       },
       standardHeaders: true,
       legacyHeaders: false,
-      trustProxy: true, // Trust the proxy
       keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
+        // Simplified key generator to avoid proxy issues
+        return req.ip || req.connection.remoteAddress || 'anonymous';
       },
       handler: (req, res) => {
         res.status(429).json({
