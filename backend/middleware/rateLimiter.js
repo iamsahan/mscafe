@@ -16,15 +16,7 @@ const authLimiter = skipInDevelopment
       },
       standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
       legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-      trustProxy: true, // Trust the proxy
-      keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
-      },
+      // Remove trustProxy and keyGenerator to use defaults that work with Express trust proxy
       handler: (req, res) => {
         res.status(429).json({
           success: false,
@@ -46,15 +38,7 @@ const generalLimiter = skipInDevelopment
       },
       standardHeaders: true,
       legacyHeaders: false,
-      trustProxy: true, // Trust the proxy
-      keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
-      },
+      // Remove trustProxy and keyGenerator to use defaults that work with Express trust proxy
       handler: (req, res) => {
         res.status(429).json({
           success: false,
@@ -75,15 +59,7 @@ const strictLimiter = skipInDevelopment
       },
       standardHeaders: true,
       legacyHeaders: false,
-      trustProxy: true, // Trust the proxy
-      keyGenerator: (req) => {
-        // Use X-Forwarded-For header if available, otherwise use connection remote address
-        return (
-          req.headers["x-forwarded-for"]?.split(",")[0] ||
-          req.connection.remoteAddress ||
-          req.ip
-        );
-      },
+      // Remove trustProxy and keyGenerator to use defaults that work with Express trust proxy
       handler: (req, res) => {
         res.status(429).json({
           success: false,
