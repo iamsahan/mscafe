@@ -42,6 +42,7 @@ const Contact = () => {
       icon: MapPinIcon,
       label: 'Address',
       value: '900 Pio Nono Ave\nMacon, GA 31204',
+      businessHours: 'Mon - Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 3:00 PM',
       href: 'https://maps.google.com/?q=900+Pio+Nono+Ave+Macon+GA+31204',
       description: 'Visit our office location',
       color: 'bg-purple-100 text-purple-600'
@@ -297,6 +298,14 @@ const Contact = () => {
                           <p className="text-lg font-medium text-secondary-700 mb-2 whitespace-pre-line">
                             {item.value}
                           </p>
+                          {item.businessHours && (
+                            <div className="mt-3 mb-2">
+                              <p className="text-sm font-semibold text-secondary-600 mb-1">Business Hours:</p>
+                              <p className="text-sm text-secondary-600 whitespace-pre-line">
+                                {item.businessHours}
+                              </p>
+                            </div>
+                          )}
                           <p className="text-secondary-500 text-sm">
                             {item.description}
                           </p>

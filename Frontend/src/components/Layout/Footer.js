@@ -147,6 +147,7 @@ Macon Office #: 478-219-9449</span>
                 <ClockIcon className="w-5 h-5 text-primary-400 flex-shrink-0" />
                 <div className="text-sm">
                   <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                  <p>Sat: 10:00 AM - 3:00 PM</p>
                 </div>
               </div>
             </div>
