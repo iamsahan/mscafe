@@ -216,10 +216,29 @@ const GetFinancialHelp = () => {
               Premium Financial Services
             </h2>
 
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-light mb-12">
               Tailored solutions to secure your wealth and empower your
               financial journey.
             </p>
+
+            {/* Book Tax Appointment Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-8"
+            >
+              <a
+                href="https://api.leadconnectorhq.com/widget/bookings/tax-appt-msc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f4b342] to-amber-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:shadow-amber-500/40 transition-all duration-300 transform hover:scale-105 mx-2"
+              >
+                <DocumentTextIcon className="w-5 h-5 mr-2" />
+                <span>Book In-Person Tax Appointment</span>
+                <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </a>
+            </motion.div>
           </motion.div>
 
           {/* Services Content */}
