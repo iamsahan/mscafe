@@ -44,14 +44,7 @@ const Footer = () => {
               >
                 <FacebookIcon className="w-5 h-5" />
               </button>
-              <button 
-                type="button"
-                className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
-                onClick={() => window.open('https://twitter.com', '_blank')}
-                aria-label="Visit our Twitter page"
-              >
-                <TwitterIcon className="w-5 h-5" />
-              </button>
+        
               <button 
                 type="button"
                 className="text-secondary-400 hover:text-primary-400 transition-colors duration-200"
@@ -101,7 +94,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link 
-                  to="/testimonials" 
+                  to="https://www.google.com/search?sca_esv=cbb70bed2ede2303&sxsrf=AE3TifNViokabvUmlsgAdZcrXkiCp5ubHQ:1756920852001&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EyAVv0WUaN76pnxg8aP6tzGqKEiqUwH_V6JJ8dSKfnbxpbwlmoR4qRjevofe_U6tJzXWZd1EcFBQG1MWq7Qep7aUGzNhiFUlzx1DZznLltjtfIHU2g%3D%3D&q=Money+Solution+Cafe+Reviews&sa=X&ved=2ahUKEwiFyqCakL2PAxUcsVYBHXADNpwQ0bkNegQIKRAE&biw=1536&bih=695&dpr=1.25" 
                   className="text-sm hover:text-primary-400 transition-colors duration-200"
                 >
                   Testimonials
@@ -124,7 +117,6 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="text-sm">Tax Filing & Preparation</li>
               <li className="text-sm">Credit Repair Services</li>
-              <li className="text-sm">Notary Services</li>
               <li className="text-sm">Financial Consulting</li>
               <li className="text-sm">Tax Professional Courses</li>
               <li className="text-sm">Continuing Education</li>
@@ -144,17 +136,17 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <PhoneIcon className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                <span className="text-sm">1 (478) 999-7456</span>
+                <span className="text-sm">Main Office #: 478-999-7456 <br />
+Macon Office #: 478-219-9449</span>
               </div>
               <div className="flex items-center space-x-3">
                 <EnvelopeIcon className="w-5 h-5 text-primary-400 flex-shrink-0" />
-                <span className="text-sm">support@moneysolutioncafe.com</span>
+                <span className="text-sm">help@moneysolutioncafe.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <ClockIcon className="w-5 h-5 text-primary-400 flex-shrink-0" />
                 <div className="text-sm">
                   <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                  <p>Sat: 10:00 AM - 4:00 PM</p>
                 </div>
               </div>
             </div>

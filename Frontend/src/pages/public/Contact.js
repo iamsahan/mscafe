@@ -16,17 +16,25 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: PhoneIcon,
-      label: 'Personal Phone',
-      value: '(478) 219-9449',
-      href: 'tel:+14782199449',
-      description: 'Call us for immediate assistance',
+      label: 'Main Office',
+      value: '478-999-7456',
+      href: 'tel:+14789997456',
+      description: 'Primary business line for immediate assistance',
       color: 'bg-green-100 text-green-600'
+    },
+    {
+      icon: PhoneIcon,
+      label: 'Macon Office',
+      value: '478-219-9449',
+      href: 'tel:+14782199449',
+      description: 'Local Macon office direct line',
+      color: 'bg-emerald-100 text-emerald-600'
     },
     {
       icon: EnvelopeIcon,
       label: 'Email',
-      value: 'support@moneysolutioncafe.com',
-      href: 'mailto:support@moneysolutioncafe.com',
+      value: 'help@moneysolutioncafe.com',
+      href: 'mailto:help@moneysolutioncafe.com',
       description: 'Send us a detailed message',
       color: 'bg-blue-100 text-blue-600'
     },
@@ -211,12 +219,12 @@ const Contact = () => {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-purple-600/10 rounded-3xl blur-2xl"></div>
                 <div className="relative bg-white p-8 rounded-3xl shadow-2xl border border-secondary-100">
-                  <div className="w-full" style={{ height: '882px' }}>
+                  <div className="w-full" style={{ height: '1050px' }}>
                     <iframe
-                      src="https://api.leadconnectorhq.com/widget/form/TTqBTsHvipiLYIR0a28A"
+                      src="https://api.leadconnectorhq.com/widget/form/kz1vOKOUI5HbkGDZnTO0"
                       style={{
                         width: '100%',
-                        height: '882px',
+                        height: '1050px',
                         border: 'none',
                         borderRadius: '12px'
                       }}
@@ -226,6 +234,7 @@ const Contact = () => {
                       onLoad={() => console.log('Iframe loaded successfully')}
                     />
                   </div>
+                  
                 </div>
               </div>
             </motion.div>
