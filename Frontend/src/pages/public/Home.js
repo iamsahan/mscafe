@@ -1849,7 +1849,7 @@ const Home = () => {
                     class='lc_reviews_widget' 
                     src='https://reputationhub.site/reputation/widgets/review_widget/NYApyDzbavj6XMhd5VPP' 
                     frameborder='0' 
-                    scrolling='no'>
+                    scrolling='yes'>
                   </iframe>
                 `,
               }}
