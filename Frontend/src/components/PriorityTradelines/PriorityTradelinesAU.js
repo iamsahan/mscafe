@@ -29,6 +29,22 @@ const PriorityTradelinesAU = () => {
   const [stats, setStats] = useState(null);
   const [faqOpen, setFaqOpen] = useState({}); // For FAQ accordion state
 
+  // Load the form embed script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://link.msgsndr.com/js/form_embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on component unmount
+      const existingScript = document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]');
+      if (existingScript) {
+        document.body.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   // Fetch tradelines data
   const fetchTradelines = useCallback(async () => {
     try {
@@ -1031,35 +1047,31 @@ const PriorityTradelinesAU = () => {
               </p>
             </div>
             <div className="p-0 sm:p-4 lg:p-8">
-              <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg sm:rounded-xl p-1 sm:p-2 border-2 border-gray-200/50 h-[3320px] sm:h-[2650px] min-h-[2650px] sm:min-h-[1200px]">
-                <div className="w-full h-full">
-                  <iframe
-                    src="https://api.leadconnectorhq.com/widget/form/ENmFAls3bPBOyTtbu0yD"
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      border: 'none', 
-                      borderRadius: '8px'
-                    }}
-                    id="inline-ENmFAls3bPBOyTtbu0yD"
-                    data-layout="{'id':'INLINE'}"
-                    data-trigger-type="alwaysShow"
-                    data-trigger-value=""
-                    data-activation-type="alwaysActivated"
-                    data-activation-value=""
-                    data-deactivation-type="neverDeactivate"
-                    data-deactivation-value=""
-                    data-form-name="MSC Tradeline Purchase - New//"
-                    data-height="1200"
-                    data-layout-iframe-id="inline-ENmFAls3bPBOyTtbu0yD"
-                    data-form-id="ENmFAls3bPBOyTtbu0yD"
-                    title="MSC Tradeline Purchase - New//"
-                    loading="lazy"
-                    onError={(e) => {
-                      console.warn('Iframe failed to load:', e);
-                    }}
-                  />
-                </div>
+              <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg sm:rounded-xl p-1 sm:p-2 border-2 border-gray-200/50">
+                <iframe
+                  src="https://api.leadconnectorhq.com/widget/form/ENmFAls3bPBOyTtbu0yD"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    border: 'none',
+                    borderRadius: '3px',
+                    minHeight: '2226px'
+                  }}
+                  id="inline-ENmFAls3bPBOyTtbu0yD" 
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="showOnScrolling"
+                  data-trigger-value="50"
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="Tradeline Purchase"
+                  data-height="2226"
+                  data-layout-iframe-id="inline-ENmFAls3bPBOyTtbu0yD"
+                  data-form-id="ENmFAls3bPBOyTtbu0yD"
+                  title="Tradeline Purchase"
+                />
               </div>
             </div>
           </div>
