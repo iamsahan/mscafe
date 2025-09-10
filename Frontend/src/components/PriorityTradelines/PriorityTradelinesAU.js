@@ -18,7 +18,8 @@ const PriorityTradelinesAU = () => {
     minPrice: '',
     maxPrice: '',
     minCreditLimit: '',
-    maxCreditLimit: ''
+    maxCreditLimit: '',
+    search: ''
   });
   const [pagination, setPagination] = useState({
     page: 1,
@@ -45,36 +46,6 @@ const PriorityTradelinesAU = () => {
     };
   }, []);
 
-  // Fetch tradelines data
-  const fetchTradelines = useCallback(async () => {
-    try {
-      setLoading(true);
-      const queryParams = {
-        page: pagination.page,
-        limit: pagination.limit,
-        ...Object.fromEntries(
-          Object.entries(filters).filter(([_, value]) => value !== '')
-        )
-      };
-
-      const response = await priorityTradelinesAUAPI.getAll(queryParams);
-      
-      if (response.data.success) {
-        setTradelines(response.data.data);
-        setPagination(prev => ({
-          ...prev,
-          totalPages: response.data.pagination.totalPages,
-          total: response.data.total
-        }));
-      }
-    } catch (err) {
-      setError('Failed to fetch tradelines');
-      console.error('Error fetching tradelines:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [pagination.page, pagination.limit, filters]);
-
   // Fetch statistics
   const fetchStats = async () => {
     try {
@@ -88,74 +59,148 @@ const PriorityTradelinesAU = () => {
   };
 
   useEffect(() => {
-    fetchTradelines();
-    fetchStats();
+    // Only fetch when page changes (not when filters change - that's handled separately)
+    const fetchPageData = async () => {
+      try {
+        setLoading(true);
+        const queryParams = {
+          page: pagination.page,
+          limit: pagination.limit,
+          ...Object.fromEntries(
+            Object.entries(filters).filter(([_, value]) => value !== '')
+          )
+        };
+
+        const response = await priorityTradelinesAUAPI.getAll(queryParams);
+        
+        if (response.data.success) {
+          setTradelines(response.data.data);
+          setPagination(prev => ({
+            ...prev,
+            totalPages: response.data.pagination.totalPages,
+            total: response.data.total
+          }));
+        }
+      } catch (err) {
+        setError('Failed to fetch tradelines');
+        console.error('Error fetching tradelines:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPageData();
     
-    // Add global error handler for form embed script errors
-    const handleFormEmbedError = (event) => {
-      // Check if the error is from the form embed script
-      if (event.filename && event.filename.includes('form_embed.js')) {
-        console.warn('Form embed script error suppressed:', event.message);
-        event.preventDefault();
-        return true;
-      }
-      // Check for iframe communication errors
-      if (event.message && event.message.includes('Script error')) {
-        console.warn('Script communication error suppressed');
-        event.preventDefault();
-        return true;
-      }
-    };
-
-    // Add error event listener
-    window.addEventListener('error', handleFormEmbedError);
-
-    // Load the form embed script with error handling
-    const loadFormScript = () => {
-      // Check if script is already loaded
-      if (document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]')) {
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = 'https://link.msgsndr.com/js/form_embed.js';
-      script.async = true;
+    // Only load stats and form script on initial mount
+    if (pagination.page === 1) {
+      fetchStats();
       
-      // Add error handling
-      script.onerror = (error) => {
-        console.warn('Form embed script failed to load:', error);
-      };
-      
-      script.onload = () => {
-        console.log('Form embed script loaded successfully');
+      // Add global error handler for form embed script errors
+      const handleFormEmbedError = (event) => {
+        // Check if the error is from the form embed script
+        if (event.filename && event.filename.includes('form_embed.js')) {
+          console.warn('Form embed script error suppressed:', event.message);
+          event.preventDefault();
+          return true;
+        }
+        // Check for iframe communication errors
+        if (event.message && event.message.includes('Script error')) {
+          console.warn('Script communication error suppressed');
+          event.preventDefault();
+          return true;
+        }
       };
 
-      document.head.appendChild(script);
-    };
+      // Add error event listener
+      window.addEventListener('error', handleFormEmbedError);
 
-    // Add a small delay to ensure DOM is ready
-    setTimeout(loadFormScript, 100);
+      // Load the form embed script with error handling
+      const loadFormScript = () => {
+        // Check if script is already loaded
+        if (document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]')) {
+          return;
+        }
 
-    return () => {
-      // Remove error event listener
-      window.removeEventListener('error', handleFormEmbedError);
-      
-      // Cleanup script when component unmounts
-      const existingScript = document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
-  }, [fetchTradelines, pagination.page, pagination.limit]);
+        const script = document.createElement('script');
+        script.src = 'https://link.msgsndr.com/js/form_embed.js';
+        script.async = true;
+        
+        // Add error handling
+        script.onerror = (error) => {
+          console.warn('Form embed script failed to load:', error);
+        };
+        
+        script.onload = () => {
+          console.log('Form embed script loaded successfully');
+        };
+
+        document.head.appendChild(script);
+      };
+
+      // Add a small delay to ensure DOM is ready
+      setTimeout(loadFormScript, 100);
+
+      return () => {
+        // Remove error event listener
+        window.removeEventListener('error', handleFormEmbedError);
+        
+        // Cleanup script when component unmounts
+        const existingScript = document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]');
+        if (existingScript) {
+          document.head.removeChild(existingScript);
+        }
+      };
+    }
+  }, [pagination.page, pagination.limit]);
 
   // Auto-filter when filters change (but not when page changes)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setPagination(prev => ({ ...prev, page: 1 }));
+      // Reset to page 1 and fetch with new filters
+      setPagination(prev => {
+        if (prev.page !== 1) {
+          return { ...prev, page: 1 };
+        }
+        return prev;
+      });
+      
+      // Fetch with current filters
+      const queryParams = {
+        page: 1, // Always search from page 1 when filters change
+        limit: pagination.limit,
+        ...Object.fromEntries(
+          Object.entries(filters).filter(([_, value]) => value !== '')
+        )
+      };
+
+      // Manually fetch with filters to avoid dependency issues
+      const fetchWithFilters = async () => {
+        try {
+          setLoading(true);
+          const response = await priorityTradelinesAUAPI.getAll(queryParams);
+          
+          if (response.data.success) {
+            setTradelines(response.data.data);
+            setPagination(prev => ({
+              ...prev,
+              page: 1,
+              totalPages: response.data.pagination.totalPages,
+              total: response.data.total
+            }));
+          }
+        } catch (err) {
+          setError('Failed to fetch tradelines');
+          console.error('Error fetching tradelines:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchWithFilters();
     }, 500); // 500ms delay for debouncing
 
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [filters, pagination.limit]);
 
   // Handle filter changes
   const handleFilterChange = (e) => {
@@ -173,6 +218,20 @@ const PriorityTradelinesAU = () => {
       ...prev,
       [name]: value
     }));
+  };
+
+  // Clear all filters
+  const clearFilters = () => {
+    setFilters({
+      bank: '',
+      minAge: '',
+      maxAge: '',
+      minPrice: '',
+      maxPrice: '',
+      minCreditLimit: '',
+      maxCreditLimit: '',
+      search: ''
+    });
   };
 
   // Handle pagination
@@ -382,15 +441,52 @@ const PriorityTradelinesAU = () => {
 
         {/* Filters */}
         <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-white/50 p-4 sm:p-6 lg:p-8 mb-8 sm:mb-12">
-          <div className="flex items-center mb-4 sm:mb-6">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-primary-600 to-[#93268f] rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
-              </svg>
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
+            <div className="flex items-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-primary-600 to-[#93268f] rounded-lg sm:rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary-600 to-[#93268f] bg-clip-text text-transparent">Smart Filters</h2>
+                {Object.values(filters).some(value => value !== '') && (
+                  <p className="text-xs sm:text-sm text-primary-600 font-medium">
+                    {Object.values(filters).filter(value => value !== '').length} filter(s) active
+                  </p>
+                )}
+              </div>
             </div>
-            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary-600 to-[#93268f] bg-clip-text text-transparent">Smart Filters</h2>
+            <button
+              onClick={clearFilters}
+              disabled={!Object.values(filters).some(value => value !== '')}
+              className="inline-flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg sm:rounded-xl transition-all duration-200 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              Clear All
+            </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+            {/* General Search */}
+            <div className="group lg:col-span-2">
+              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3 group-hover:text-primary-600 transition-colors">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Search Tradelines
+              </label>
+              <input
+                type="text"
+                name="search"
+                value={filters.search}
+                onChange={handleFilterChange}
+                placeholder="Search by bank name, spots, or statement..."
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-gray-300"
+              />
+            </div>
+            
             <div className="group">
               <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3 group-hover:text-primary-600 transition-colors">
                 <svg className="w-3 h-3 sm:w-4 sm:h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -403,7 +499,7 @@ const PriorityTradelinesAU = () => {
                 name="bank"
                 value={filters.bank}
                 onChange={handleFilterChange}
-                placeholder="Search by bank name..."
+                placeholder="Filter by bank name..."
                 className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-gray-300"
               />
             </div>
@@ -521,9 +617,19 @@ const PriorityTradelinesAU = () => {
               <div>
                 <h2 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-primary-600 to-[#93268f] bg-clip-text text-transparent">
                   Available Tradelines
+                  {loading && (
+                    <svg className="inline w-4 h-4 ml-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  )}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">
                   {pagination.total} premium tradelines in inventory
+                  {Object.values(filters).some(value => value !== '') && (
+                    <span className="text-primary-600 font-medium ml-2">
+                      (Filtered results)
+                    </span>
+                  )}
                 </p>
               </div>
             </div>
@@ -532,8 +638,30 @@ const PriorityTradelinesAU = () => {
             <LoadingSpinner />
           </div>
         ) : tradelines.length === 0 ? (
-          <div className="text-center py-6 sm:py-8">
-            <p className="text-gray-500 text-sm sm:text-base">No tradelines found matching your criteria.</p>
+          <div className="text-center py-8 sm:py-12">
+            <div className="mb-4">
+              <svg className="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">No tradelines found</h3>
+            <p className="text-gray-500 text-sm sm:text-base mb-4">
+              {Object.values(filters).some(value => value !== '') 
+                ? "No tradelines match your current filters. Try adjusting your search criteria."
+                : "No tradelines are currently available in our inventory."
+              }
+            </p>
+            {Object.values(filters).some(value => value !== '') && (
+              <button
+                onClick={clearFilters}
+                className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Clear All Filters
+              </button>
+            )}
           </div>
         ) : (
           <>
