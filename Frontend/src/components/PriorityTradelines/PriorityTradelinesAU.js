@@ -12,7 +12,6 @@ const PriorityTradelinesAU = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
-    bank: '',
     minAge: '',
     maxAge: '',
     minPrice: '',
@@ -208,7 +207,6 @@ const PriorityTradelinesAU = () => {
   // Clear all filters
   const clearFilters = () => {
     setFilters({
-      bank: '',
       minAge: '',
       maxAge: '',
       minPrice: '',
@@ -465,22 +463,6 @@ const PriorityTradelinesAU = () => {
               />
             </div>
             
-            <div className="group">
-              <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3 group-hover:text-primary-600 transition-colors">
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h2M7 3h10M7 7h3m0 0v8m0-8h7m-7 0V3" />
-                </svg>
-                Bank Institution
-              </label>
-              <input
-                type="text"
-                name="bank"
-                value={filters.bank}
-                onChange={handleFilterChange}
-                placeholder="Filter by bank name..."
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 hover:border-gray-300"
-              />
-            </div>
             
             <div className="group">
               <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3 group-hover:text-primary-600 transition-colors">
