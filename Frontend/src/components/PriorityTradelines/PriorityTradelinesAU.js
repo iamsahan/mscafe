@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { priorityTradelinesAUAPI } from '../../services/api';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import zelleIcon from '../../images/z.png';
@@ -29,22 +29,9 @@ const PriorityTradelinesAU = () => {
   });
   const [stats, setStats] = useState(null);
   const [faqOpen, setFaqOpen] = useState({}); // For FAQ accordion state
+  const [appliedFilters, setAppliedFilters] = useState({}); // Snapshot of filters used for paging
 
-  // Load the form embed script
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://link.msgsndr.com/js/form_embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on component unmount
-      const existingScript = document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]');
-      if (existingScript) {
-        document.body.removeChild(existingScript);
-      }
-    };
-  }, []);
+  // Note: form embed script is loaded later with error handling (to avoid duplicate injections)
 
   // Fetch statistics
   const fetchStats = async () => {
@@ -66,9 +53,7 @@ const PriorityTradelinesAU = () => {
         const queryParams = {
           page: pagination.page,
           limit: pagination.limit,
-          ...Object.fromEntries(
-            Object.entries(filters).filter(([_, value]) => value !== '')
-          )
+          ...appliedFilters
         };
 
         const response = await priorityTradelinesAUAPI.getAll(queryParams);
@@ -91,7 +76,7 @@ const PriorityTradelinesAU = () => {
 
     fetchPageData();
     
-    // Only load stats and form script on initial mount
+  // Only load stats and form script on initial mount
     if (pagination.page === 1) {
       fetchStats();
       
@@ -126,12 +111,8 @@ const PriorityTradelinesAU = () => {
         script.async = true;
         
         // Add error handling
-        script.onerror = (error) => {
-          console.warn('Form embed script failed to load:', error);
-        };
-        
-        script.onload = () => {
-          console.log('Form embed script loaded successfully');
+        script.onerror = () => {
+          // Swallow script load errors in production
         };
 
         document.head.appendChild(script);
@@ -144,14 +125,14 @@ const PriorityTradelinesAU = () => {
         // Remove error event listener
         window.removeEventListener('error', handleFormEmbedError);
         
-        // Cleanup script when component unmounts
+    // Cleanup script when component unmounts
         const existingScript = document.querySelector('script[src="https://link.msgsndr.com/js/form_embed.js"]');
         if (existingScript) {
           document.head.removeChild(existingScript);
         }
       };
     }
-  }, [pagination.page, pagination.limit]);
+  }, [pagination.page, pagination.limit, appliedFilters]);
 
   // Auto-filter when filters change (but not when page changes)
   useEffect(() => {
@@ -187,6 +168,10 @@ const PriorityTradelinesAU = () => {
               totalPages: response.data.pagination.totalPages,
               total: response.data.total
             }));
+            // Snapshot the applied filters for subsequent page navigation
+            setAppliedFilters(Object.fromEntries(
+              Object.entries(filters).filter(([_, value]) => value !== '')
+            ));
           }
         } catch (err) {
           setError('Failed to fetch tradelines');
@@ -255,14 +240,7 @@ const PriorityTradelinesAU = () => {
     }).format(amount);
   };
 
-  // Format date
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
+  // (formatDate removed: unused)
 
   // Format only day with ordinal suffix (e.g., 02nd)
   const formatDayOrdinal = (dateString) => {
