@@ -1195,7 +1195,7 @@ const PriorityTradelinesAU = () => {
                       <div className="sm:ml-4 lg:ml-6 text-center sm:text-left">
                         <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1">Zelle</h3>
                         <p className="text-purple-700 font-semibold text-sm sm:text-base">Elyse Whisby</p>
-                        <p className="text-base sm:text-lg font-mono text-primary-600 font-bold">770-500-0566</p>
+                        <p className="text-base sm:text-lg font-mono text-primary-600 font-bold">Money solution Cafe / moneysolutioncafe@gmail.com</p>
                       </div>
                     </div>
                   </div>
