@@ -654,17 +654,29 @@ const ServicesManagement = () => {
 
       const serviceData = {
         name: formData.name.trim(),
-        description: formData.description.trim() || undefined, // Don't send empty strings
-        shortDescription: formData.shortDescription.trim() || undefined,
         price: parseFloat(formData.price),
         durationMinutes: parseInt(formData.durationMinutes) || 60,
         serviceType: formData.serviceType,
         isActive: Boolean(formData.isActive),
         featured: Boolean(formData.featured),
-        requirements: formData.requirements.trim() || undefined,
-        seoKeywords: formData.seoKeywords.trim() || undefined,
-        seoDescription: formData.seoDescription.trim() || undefined,
       };
+
+      // Add optional text fields only if they have values
+      if (formData.description?.trim()) {
+        serviceData.description = formData.description.trim();
+      }
+      if (formData.shortDescription?.trim()) {
+        serviceData.shortDescription = formData.shortDescription.trim();
+      }
+      if (formData.requirements?.trim()) {
+        serviceData.requirements = formData.requirements.trim();
+      }
+      if (formData.seoKeywords?.trim()) {
+        serviceData.seoKeywords = formData.seoKeywords.trim();
+      }
+      if (formData.seoDescription?.trim()) {
+        serviceData.seoDescription = formData.seoDescription.trim();
+      }
 
       // Add optional fields only if they have valid values
       const imageUrlValue = (imageUrl || "").trim();
@@ -779,17 +791,29 @@ const ServicesManagement = () => {
 
       const serviceData = {
         name: formData.name.trim(),
-        description: formData.description.trim() || undefined, // Don't send empty strings
-        shortDescription: formData.shortDescription.trim() || undefined,
         price: parseFloat(formData.price),
         durationMinutes: parseInt(formData.durationMinutes) || 60,
         serviceType: formData.serviceType,
         isActive: Boolean(formData.isActive),
         featured: Boolean(formData.featured),
-        requirements: formData.requirements.trim() || undefined,
-        seoKeywords: formData.seoKeywords.trim() || undefined,
-        seoDescription: formData.seoDescription.trim() || undefined,
       };
+
+      // Add optional text fields only if they have values
+      if (formData.description?.trim()) {
+        serviceData.description = formData.description.trim();
+      }
+      if (formData.shortDescription?.trim()) {
+        serviceData.shortDescription = formData.shortDescription.trim();
+      }
+      if (formData.requirements?.trim()) {
+        serviceData.requirements = formData.requirements.trim();
+      }
+      if (formData.seoKeywords?.trim()) {
+        serviceData.seoKeywords = formData.seoKeywords.trim();
+      }
+      if (formData.seoDescription?.trim()) {
+        serviceData.seoDescription = formData.seoDescription.trim();
+      }
 
       // Add optional fields only if they have valid values
       const imageUrlValue = (imageUrl || "").trim();
