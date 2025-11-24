@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   DocumentTextIcon,
@@ -17,6 +17,7 @@ import { LoadingSpinner } from "../../components/UI/SocialIcons";
 import hero from "../../images/service.png";
 
 const GetFinancialHelp = () => {
+  const navigate = useNavigate();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedService, setSelectedService] = useState(null);
@@ -101,6 +102,19 @@ const GetFinancialHelp = () => {
         return "from-orange-600 via-amber-700 to-red-600";
       default:
         return "from-[#93268f] via-purple-700 to-[#93268f]/80";
+    }
+  };
+
+  const handleServiceClick = (service) => {
+    // Check if mobile view (screen width < 1024px for lg breakpoint)
+    const isMobile = window.innerWidth < 1024;
+    
+    if (isMobile) {
+      // On mobile, navigate directly to buy service page
+      navigate(`/buy-service/${service.id}`);
+    } else {
+      // On desktop, show the service card
+      setSelectedService(service);
     }
   };
 
@@ -295,170 +309,58 @@ const GetFinancialHelp = () => {
                   const shouldShowImage = imageUrl && !hasImageError;
 
                   return (
-                    <React.Fragment key={service.id}>
-                      <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                        onClick={() => setSelectedService(service)}
-                        className={`group relative overflow-hidden p-4 rounded-xl cursor-pointer transition-all duration-500 border-2 ${
-                          selectedService?.id === service.id
-                            ? "bg-gradient-to-r from-purple-100 to-[#93268f]/10 border-[#93268f] shadow-lg transform scale-105"
-                            : "bg-white backdrop-blur-md border-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-300 hover:scale-105 hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-3">
-                          {/* Image or Icon Container */}
-                          <div className="relative">
-                            {shouldShowImage ? (
-                              <div className="w-12 h-12 rounded-lg overflow-hidden shadow-md">
-                                <img
-                                  src={imageUrl}
-                                  alt={service.name}
-                                  className="w-full h-full object-cover"
-                                  onError={() => handleImageError(service.id)}
-                                />
-                              </div>
-                            ) : (
-                              <div
-                                className={`p-2 rounded-lg bg-gradient-to-br ${getServiceColor(
-                                  service.service_type || service.serviceType
-                                )} shadow-md`}
-                              >
-                                <IconComponent className="w-5 h-5 text-white" />
-                              </div>
-                            )}
-                          </div>
-
-                          <h4
-                            className={`text-base font-bold transition-colors duration-200 ${
-                              selectedService?.id === service.id
-                                ? "text-[#93268f]"
-                                : "text-gray-900 group-hover:text-[#93268f]"
-                            }`}
-                          >
-                            {service.name}
-                          </h4>
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, x: -40 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      onClick={() => handleServiceClick(service)}
+                      className={`group relative overflow-hidden p-4 rounded-xl cursor-pointer transition-all duration-500 border-2 ${
+                        selectedService?.id === service.id
+                          ? "bg-gradient-to-r from-purple-100 to-[#93268f]/10 border-[#93268f] shadow-lg transform scale-105"
+                          : "bg-white backdrop-blur-md border-gray-200 hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-300 hover:scale-105 hover:shadow-md"
+                      }`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        {/* Image or Icon Container */}
+                        <div className="relative">
+                          {shouldShowImage ? (
+                            <div className="w-12 h-12 rounded-lg overflow-hidden shadow-md">
+                              <img
+                                src={imageUrl}
+                                alt={service.name}
+                                className="w-full h-full object-cover"
+                                onError={() => handleImageError(service.id)}
+                              />
+                            </div>
+                          ) : (
+                            <div
+                              className={`p-2 rounded-lg bg-gradient-to-br ${getServiceColor(
+                                service.service_type || service.serviceType
+                              )} shadow-md`}
+                            >
+                              <IconComponent className="w-5 h-5 text-white" />
+                            </div>
+                          )}
                         </div>
-                      </motion.div>
 
-                      {/* Mobile Service Card - appears directly below each service */}
-                      {selectedService?.id === service.id && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="lg:hidden mt-4"
+                        <h4
+                          className={`text-base font-bold transition-colors duration-200 ${
+                            selectedService?.id === service.id
+                              ? "text-[#93268f]"
+                              : "text-gray-900 group-hover:text-[#93268f]"
+                          }`}
                         >
-                          <motion.div
-                            key={selectedService.id}
-                            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ duration: 0.7, ease: "easeOut" }}
-                            className="group relative overflow-hidden bg-white backdrop-blur-xl border border-gray-200 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
-                          >
-                            {/* Service Header */}
-                            <div className="relative h-56 overflow-hidden">
-                              {(() => {
-                                const imageUrl = getImageUrl(selectedService);
-                                const hasImageError = imageErrors[selectedService.id];
-                                const shouldShowImage = imageUrl && !hasImageError;
-
-                                if (shouldShowImage) {
-                                  return (
-                                    <img
-                                      src={imageUrl}
-                                      alt={selectedService.name}
-                                      className="w-full h-full object-cover group-hover:scale-115 transition-transform duration-700"
-                                      onError={() =>
-                                        handleImageError(selectedService.id)
-                                      }
-                                    />
-                                  );
-                                } else {
-                                  // Fallback to gradient background with icon
-                                  const IconComponent = getServiceIcon(
-                                    selectedService.service_type ||
-                                      selectedService.serviceType
-                                  );
-                                  return (
-                                    <div
-                                      className={`absolute inset-0 bg-gradient-to-br ${getServiceColor(
-                                        selectedService.service_type ||
-                                          selectedService.serviceType
-                                      )} flex items-center justify-center`}
-                                    >
-                                      <div className="relative">
-                                        <IconComponent className="w-24 h-24 text-white opacity-80" />
-                                      </div>
-                                    </div>
-                                  );
-                                }
-                              })()}
-
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                              <div className="absolute top-4 right-4 bg-gradient-to-r from-[#f4b342] to-[#f4b342]  text-white rounded-xl px-4 py-2 shadow-md backdrop-blur-sm border border-white/20">
-                                <div className="text-xl font-bold flex items-center">
-                                  <CurrencyDollarIcon className="w-5 h-5 mr-1" />
-                                  {selectedService.price}
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="p-6">
-                              <div className="mb-4">
-                                <h3 className="text-2xl font-extrabold text-gray-900 mb-3 bg-gradient-to-r from-gray-900 to-[#93268f] bg-clip-text text-transparent">
-                                  {selectedService.name}
-                                </h3>
-                                <div className="flex items-center justify-between mb-3">
-                                  <div className="flex items-center bg-purple-100 px-3 py-1.5 rounded-lg">
-                                    <ClockIcon className="w-4 h-4 mr-2 text-[#93268f]" />
-                                    <span className="font-medium">
-                                      {selectedService.duration_minutes ||
-                                        selectedService.durationMinutes}{" "}
-                                      minutes
-                                    </span>
-                                  </div>
-                                </div>
-                                {selectedService.description && (
-                                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
-                                    {selectedService.description.length > 100
-                                      ? selectedService.description.substring(0, 100) +
-                                        "..."
-                                      : selectedService.description}
-                                  </p>
-                                )}
-                              </div>
-
-                              <div className="flex flex-col space-y-3">
-                                <Link
-                                  to={`/buy-service/${selectedService.id}`}
-                                  className="group relative overflow-hidden w-full bg-gradient-to-r from-[#93268f]  to-[#93268f]/80 text-white font-bold py-4 px-8 rounded-xl hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300 transform hover:scale-105"
-                                >
-                                  <div className="flex items-center justify-center">
-                                    <span className="text-lg">Book Service</span>
-                                    <ArrowRightIcon className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform duration-200" />
-                                  </div>
-                                </Link>
-                                <Link
-                                  to="/contact"
-                                  className="w-full border-2 border-gray-300 text-gray-700 font-semibold py-4 px-8 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-[#93268f]/5 hover:border-purple-400 transition-all duration-300 text-center"
-                                >
-                                  <span className="text-lg">Ask a Question</span>
-                                </Link>
-                              </div>
-                            </div>
-                          </motion.div>
-                        </motion.div>
-                      )}
-                    </React.Fragment>
+                          {service.name}
+                        </h4>
+                      </div>
+                    </motion.div>
                   );
                 })}
               </div>
 
-              {/* Right Side - Service Card (Desktop only) */}
-              <div className="hidden lg:block lg:sticky lg:top-8 pt-10">
+              {/* Right Side - Service Card */}
+              <div className="lg:sticky lg:top-8 pt-10">
                 {selectedService ? (
                   <motion.div
                     key={selectedService.id}
