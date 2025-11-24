@@ -336,12 +336,12 @@ const FormModal = ({
                     value={formData.seoDescription}
                     onChange={onInputChange}
                     rows={3}
-                    maxLength={160}
+                    maxLength={500}
                     className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     placeholder="Brief description for search engines (max 160 characters)"
                   />
                   <p className="text-xs text-slate-500 mt-1">
-                    {formData.seoDescription.length}/160 characters
+                    {formData.seoDescription.length}/500 characters
                   </p>
                 </div>
               </div>
