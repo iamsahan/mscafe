@@ -83,34 +83,34 @@ const courseUpdate = Joi.object({
 // Service validation schemas
 const serviceCreate = Joi.object({
   name: Joi.string().min(3).max(255).required(),
-  description: Joi.string().allow('', null).optional(),
+  description: Joi.string().max(5000).allow('', null).optional(),
   shortDescription: Joi.string().max(500).allow('', null).optional(),
   price: Joi.number().precision(2).min(0).required(),
   durationMinutes: Joi.number().integer().min(15).optional(),
   serviceType: Joi.string().valid('consultation', 'tax_preparation', 'financial_planning', 'business_advisory').required(),
   imageUrl: Joi.string().max(500).allow('', null).optional(),
-  link: Joi.string().uri().max(1000).allow('', null).optional(),
+  link: Joi.string().uri().allow('', null).max(1000).optional(),
   isActive: Joi.boolean().optional(),
   featured: Joi.boolean().optional(),
-  requirements: Joi.string().allow('', null).optional(),
+  requirements: Joi.string().max(5000).allow('', null).optional(),
   seoKeywords: Joi.string().max(500).allow('', null).optional(),
-  seoDescription: Joi.string().allow('', null).optional()
+  seoDescription: Joi.string().max(500).allow('', null).optional()
 });
 
 const serviceUpdate = Joi.object({
   name: Joi.string().min(3).max(255).optional(),
-  description: Joi.string().allow('', null).optional(),
-  shortDescription: Joi.string().allow('', null).max(500).optional(),
+  description: Joi.string().max(5000).allow('', null).optional(),
+  shortDescription: Joi.string().max(500).allow('', null).optional(),
   price: Joi.number().precision(2).min(0).optional(),
   durationMinutes: Joi.number().integer().min(15).optional(),
   serviceType: Joi.string().valid('consultation', 'tax_preparation', 'financial_planning', 'business_advisory').optional(),
   imageUrl: Joi.string().max(500).allow('', null).optional(),
-  link: Joi.string().uri().max(1000).allow('', null).optional(),
+  link: Joi.string().uri().allow('', null).max(1000).optional(),
   isActive: Joi.boolean().optional(),
   featured: Joi.boolean().optional(),
-  requirements: Joi.string().allow('', null).optional(),
+  requirements: Joi.string().max(5000).allow('', null).optional(),
   seoKeywords: Joi.string().max(500).allow('', null).optional(),
-  seoDescription: Joi.string().allow('', null).optional()
+  seoDescription: Joi.string().max(500).allow('', null).optional()
 });
 
 // Booking validation schemas
