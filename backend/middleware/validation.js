@@ -73,6 +73,8 @@ const courseUpdate = Joi.object({
   includes: Joi.array().items(Joi.string()).optional(),
   imageUrl: Joi.string().max(500).optional(),
   link: Joi.string().uri().max(1000).optional(),
+  seoKeywords: Joi.string().max(500).allow('', null).optional(),
+  seoDescription: Joi.string().allow('', null).optional(),
   isActive: Joi.boolean().optional(),
   featured: Joi.boolean().optional(),
   sortOrder: Joi.number().integer().min(0).optional()
@@ -90,7 +92,9 @@ const serviceCreate = Joi.object({
   link: Joi.string().uri().max(1000).allow('', null).optional(),
   isActive: Joi.boolean().optional(),
   featured: Joi.boolean().optional(),
-  requirements: Joi.string().allow('', null).optional()
+  requirements: Joi.string().allow('', null).optional(),
+  seoKeywords: Joi.string().max(500).allow('', null).optional(),
+  seoDescription: Joi.string().allow('', null).optional()
 });
 
 const serviceUpdate = Joi.object({
@@ -104,7 +108,9 @@ const serviceUpdate = Joi.object({
   link: Joi.string().uri().max(1000).allow('', null).optional(),
   isActive: Joi.boolean().optional(),
   featured: Joi.boolean().optional(),
-  requirements: Joi.string().allow('', null).optional()
+  requirements: Joi.string().allow('', null).optional(),
+  seoKeywords: Joi.string().max(500).allow('', null).optional(),
+  seoDescription: Joi.string().allow('', null).optional()
 });
 
 // Booking validation schemas

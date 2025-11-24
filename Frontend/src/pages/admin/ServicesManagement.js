@@ -308,6 +308,45 @@ const FormModal = ({
               />
             </div>
 
+            {/* SEO Section */}
+            <div className="border-t border-slate-200 pt-6">
+              <h4 className="text-lg font-semibold text-slate-900 mb-4">SEO Settings (Optional)</h4>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    SEO Keywords
+                  </label>
+                  <input
+                    type="text"
+                    name="seoKeywords"
+                    value={formData.seoKeywords}
+                    onChange={onInputChange}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    placeholder="tax preparation, financial planning, business advisory"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Comma-separated keywords for search engines</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    SEO Description
+                  </label>
+                  <textarea
+                    name="seoDescription"
+                    value={formData.seoDescription}
+                    onChange={onInputChange}
+                    rows={3}
+                    maxLength={160}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    placeholder="Brief description for search engines (max 160 characters)"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    {formData.seoDescription.length}/160 characters
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div className="flex items-center space-x-6">
               <label className="flex items-center">
                 <input
@@ -401,6 +440,8 @@ const ServicesManagement = () => {
     isActive: true,
     featured: false,
     requirements: "",
+    seoKeywords: "",
+    seoDescription: "",
   });
 
   const fetchServices = useCallback(async () => {
@@ -621,6 +662,8 @@ const ServicesManagement = () => {
         isActive: Boolean(formData.isActive),
         featured: Boolean(formData.featured),
         requirements: formData.requirements.trim() || undefined,
+        seoKeywords: formData.seoKeywords.trim() || undefined,
+        seoDescription: formData.seoDescription.trim() || undefined,
       };
 
       // Add optional fields only if they have valid values
@@ -744,6 +787,8 @@ const ServicesManagement = () => {
         isActive: Boolean(formData.isActive),
         featured: Boolean(formData.featured),
         requirements: formData.requirements.trim() || undefined,
+        seoKeywords: formData.seoKeywords.trim() || undefined,
+        seoDescription: formData.seoDescription.trim() || undefined,
       };
 
       // Add optional fields only if they have valid values
@@ -840,6 +885,8 @@ const ServicesManagement = () => {
       isActive: true,
       featured: false,
       requirements: "",
+      seoKeywords: "",
+      seoDescription: "",
     });
     setSelectedService(null);
 
@@ -869,6 +916,8 @@ const ServicesManagement = () => {
       isActive: service.isActive === 1 || service.isActive === true,
       featured: service.featured === 1 || service.featured === true,
       requirements: service.requirements || "",
+      seoKeywords: service.seoKeywords || service.seo_keywords || "",
+      seoDescription: service.seoDescription || service.seo_description || "",
     });
     setShowEditModal(true);
   };

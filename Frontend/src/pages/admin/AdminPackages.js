@@ -424,6 +424,45 @@ const FormModal = ({
               </div>
             </div>
 
+            {/* SEO Section */}
+            <div className="border-t border-slate-200 pt-6">
+              <h4 className="text-lg font-semibold text-slate-900 mb-4">SEO Settings (Optional)</h4>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    SEO Keywords
+                  </label>
+                  <input
+                    type="text"
+                    name="seoKeywords"
+                    value={formData.seoKeywords}
+                    onChange={onInputChange}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    placeholder="tax course, tax professional, PTIN, EFIN"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">Comma-separated keywords for search engines</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    SEO Description
+                  </label>
+                  <textarea
+                    name="seoDescription"
+                    value={formData.seoDescription}
+                    onChange={onInputChange}
+                    rows={3}
+                    maxLength={160}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    placeholder="Brief description for search engines (max 160 characters)"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    {formData.seoDescription.length}/160 characters
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Status and Visibility */}
             <div className="flex items-center space-x-6">
               <label className="flex items-center">
@@ -504,6 +543,8 @@ const AdminPackages = () => {
     minReturns: 0,
     minReturnsDescription: "",
     link: "",
+    seoKeywords: "",
+    seoDescription: "",
     isActive: true,
     featured: false,
   });
@@ -766,6 +807,17 @@ const AdminPackages = () => {
         }
       }
 
+      // Add SEO fields if provided
+      const seoKeywords = (formData.seoKeywords || "").trim();
+      if (seoKeywords) {
+        packageData.seoKeywords = seoKeywords;
+      }
+
+      const seoDescription = (formData.seoDescription || "").trim();
+      if (seoDescription) {
+        packageData.seoDescription = seoDescription;
+      }
+
       console.log("Sending to API:", packageData);
       console.log("Package data JSON:", JSON.stringify(packageData, null, 2));
 
@@ -865,6 +917,15 @@ const AdminPackages = () => {
         }
       }
 
+      // Add SEO fields if provided
+      if ((formData.seoKeywords || "").trim()) {
+        packageData.seoKeywords = formData.seoKeywords.trim();
+      }
+
+      if ((formData.seoDescription || "").trim()) {
+        packageData.seoDescription = formData.seoDescription.trim();
+      }
+
       console.log("Updating package with data:", packageData);
       const response = await coursesAPI.update(selectedPackage.id, packageData);
       console.log("Update response:", response.data);
@@ -922,6 +983,8 @@ const AdminPackages = () => {
       minReturns: 0,
       minReturnsDescription: "",
       link: "",
+      seoKeywords: "",
+      seoDescription: "",
       isActive: true,
       featured: false,
     });
@@ -964,6 +1027,8 @@ const AdminPackages = () => {
       minReturns: pkg.minReturns || 0,
       minReturnsDescription: pkg.minReturnsDescription || "",
       link: pkg.link || "",
+      seoKeywords: pkg.seoKeywords || pkg.seo_keywords || "",
+      seoDescription: pkg.seoDescription || pkg.seo_description || "",
       isActive: pkg.isActive === 1 || pkg.isActive === true,
       featured: pkg.featured === 1 || pkg.featured === true,
     });

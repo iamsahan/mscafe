@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { coursesAPI } from "../../services/api";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import {
@@ -123,8 +124,75 @@ const BuyCourse = () => {
     );
   }
 
+  // Prepare SEO metadata
+  const pageTitle = course.title
+    ? `${course.title} - Money Solution Cafe`
+    : "Course - Money Solution Cafe";
+  const pageDescription =
+    course.seoDescription ||
+    course.seo_description ||
+    course.description ||
+    "Professional tax education and training courses at Money Solution Cafe";
+  const pageKeywords =
+    course.seoKeywords ||
+    course.seo_keywords ||
+    "tax course, tax professional, PTIN, EFIN, tax preparation, money solution cafe";
+  const courseUrl = `https://moneysolutioncafe.com/buy-course/${course.id}`;
+  const courseImage = getImageUrl(course) || "https://moneysolutioncafe.com/images/default-course.jpg";
+
   return (
     <div className="min-h-screen bg-secondary-50 pt-20">
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={pageKeywords} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={courseUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={courseImage} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={courseUrl} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={pageDescription} />
+        <meta property="twitter:image" content={courseImage} />
+
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="author" content="Money Solution Cafe" />
+        <link rel="canonical" href={courseUrl} />
+
+        {/* Schema.org JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            name: course.title,
+            description: pageDescription,
+            provider: {
+              "@type": "Organization",
+              name: "Money Solution Cafe",
+              url: "https://moneysolutioncafe.com",
+            },
+            offers: {
+              "@type": "Offer",
+              price: course.price ? course.price.replace('$', '') : "0",
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
+            image: courseImage,
+            educationalLevel: "Professional",
+          })}
+        </script>
+      </Helmet>
+
       {/* Header Navigation */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

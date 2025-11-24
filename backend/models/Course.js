@@ -121,6 +121,16 @@ const TaxPackage = sequelize.define('TaxPackage', {
     type: DataTypes.STRING(1000),
     allowNull: true
   },
+  seoKeywords: {
+    type: DataTypes.STRING(500),
+    allowNull: true,
+    field: 'seo_keywords'
+  },
+  seoDescription: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    field: 'seo_description'
+  },
   featured: {
     type: DataTypes.BOOLEAN,
     defaultValue: false

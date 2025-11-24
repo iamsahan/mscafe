@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { servicesAPI } from "../../services/api";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
 import {
@@ -148,8 +149,78 @@ const BuyService = () => {
     service.serviceType || service.service_type
   );
 
+  // Prepare SEO metadata
+  const pageTitle = service.name
+    ? `${service.name} - Money Solution Cafe`
+    : "Service - Money Solution Cafe";
+  const pageDescription =
+    service.seoDescription ||
+    service.seo_description ||
+    service.shortDescription ||
+    service.short_description ||
+    service.description ||
+    "Professional financial and tax services at Money Solution Cafe";
+  const pageKeywords =
+    service.seoKeywords ||
+    service.seo_keywords ||
+    "tax preparation, financial planning, business advisory, money solution cafe";
+  const serviceUrl = `https://moneysolutioncafe.com/buy-service/${service.id}`;
+  const serviceImage = getImageUrl(service) || "https://moneysolutioncafe.com/images/default-service.jpg";
+
   return (
     <div className="min-h-screen bg-secondary-50 pt-20">
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={pageKeywords} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={serviceUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={serviceImage} />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={serviceUrl} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={pageDescription} />
+        <meta property="twitter:image" content={serviceImage} />
+
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="author" content="Money Solution Cafe" />
+        <link rel="canonical" href={serviceUrl} />
+
+        {/* Schema.org JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: service.name,
+            description: pageDescription,
+            provider: {
+              "@type": "Organization",
+              name: "Money Solution Cafe",
+              url: "https://moneysolutioncafe.com",
+            },
+            offers: {
+              "@type": "Offer",
+              price: service.price,
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
+            image: serviceImage,
+            serviceType:
+              service.serviceType || service.service_type || "Financial Service",
+          })}
+        </script>
+      </Helmet>
+
       {/* Header Navigation */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

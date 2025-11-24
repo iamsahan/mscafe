@@ -56,6 +56,16 @@ const Service = sequelize.define('Service', {
   requirements: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  seoKeywords: {
+    type: DataTypes.STRING(500),
+    allowNull: true,
+    field: 'seo_keywords'
+  },
+  seoDescription: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    field: 'seo_description'
   }
 }, {
   tableName: 'services',

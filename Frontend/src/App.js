@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,11 +40,12 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <AdminAuthProvider>
-      <Router>
-        <ScrollToTop>
-          <div className="min-h-screen bg-white transition-colors duration-200">
-              <Routes>
+    <HelmetProvider>
+      <AdminAuthProvider>
+        <Router>
+          <ScrollToTop>
+            <div className="min-h-screen bg-white transition-colors duration-200">
+                <Routes>
               {/* Public Routes with Navbar and Footer */}
               <Route path="/" element={
                 <>
@@ -204,10 +206,11 @@ function App() {
               pauseOnHover
               theme="colored"
             />
-          </div>
-        </ScrollToTop>
-      </Router>
+            </div>
+          </ScrollToTop>
+        </Router>
       </AdminAuthProvider>
+    </HelmetProvider>
   );
 }
 
