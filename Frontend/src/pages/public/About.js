@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { 
   UserGroupIcon,
@@ -84,6 +85,56 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>About Money Solution Cafe | Credit Repair, Business Setup & Tax Experts Since 2000</title>
+        <meta
+          name="description"
+          content="Learn about Money Solution Cafe – 25+ years empowering clients with credit repair, business credit buildout, LLC formation, tax preparation, and funding readiness. Trusted by 5000+ clients nationwide."
+        />
+        <meta
+          name="keywords"
+          content="about Money Solution Cafe, credit repair company, business credit experts, tax preparation professionals, financial consulting firm, LLC formation services, Georgia business licensing, credit restoration specialists, business funding advisors, Elyse Whisby"
+        />
+        <link rel="canonical" href="https://moneysolutioncafe.com/about" />
+        <meta property="og:title" content="About Money Solution Cafe | Credit Repair, Business Setup & Tax Experts" />
+        <meta property="og:description" content="Discover how Money Solution Cafe helps individuals and entrepreneurs transform credit, launch businesses, and achieve financial independence with 25+ years of expertise." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://moneysolutioncafe.com/about" />
+        <meta property="og:image" content="https://moneysolutioncafe.com/static/og-about.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            mainEntity: {
+              '@type': 'Organization',
+              name: 'Money Solution Cafe',
+              url: 'https://moneysolutioncafe.com/',
+              logo: 'https://moneysolutioncafe.com/static/logo.png',
+              founder: {
+                '@type': 'Person',
+                name: 'Elyse Whisby',
+                jobTitle: 'Founder & CEO'
+              },
+              foundingDate: '2000',
+              description:
+                'Money Solution Cafe provides credit repair, business credit buildout, LLC/INC formation, tax preparation, Georgia licensing, and funding preparation services to help clients achieve financial independence.',
+              areaServed: 'United States',
+              numberOfEmployees: '10-50',
+              slogan: 'Empowering Your Financial Future',
+              knowsAbout: [
+                'Credit repair',
+                'Business credit building',
+                'Tax preparation',
+                'LLC formation',
+                'Business licensing',
+                'Funding preparation'
+              ]
+            }
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-[#93268f] to-purple-900 py-24 lg:py-32">
         <div className="absolute inset-0">
