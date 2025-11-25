@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { servicesAPI, coursesAPI } from "../../services/api";
 import homeImage from "../../images/home.jpg";
@@ -230,54 +229,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Money Solution Cafe – Credit Repair, Business Setup, Tax Solutions &amp; Funding Preparation</title>
-        <meta
-          name="description"
-          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities."
-        />
-        <meta
-          name="keywords"
-          content="credit repair services, fix bad credit, personal credit improvement, business credit buildout, credit boost services, priority tradelines AU, start a business LLC INC, business setup services, Georgia business licensing, tax preparation services, sales tax registration, business funding preparation, improve credit for mortgage/home, credit repair near me, credit repair for auto approval, business credit Paydex 80, financial consulting firm"
-        />
-        <link rel="canonical" href="https://moneysolutioncafe.com/" />
-        <meta property="og:title" content="Money Solution Cafe – Credit Repair, Business Setup, Tax Solutions &amp; Funding Preparation" />
-        <meta property="og:description" content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://moneysolutioncafe.com/" />
-        <meta property="og:image" content="https://moneysolutioncafe.com/static/og-default.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'Money Solution Cafe',
-            url: 'https://moneysolutioncafe.com/',
-            logo: 'https://moneysolutioncafe.com/static/logo.png',
-            sameAs: [
-              'https://www.facebook.com/moneysolutioncafe',
-              'https://www.instagram.com/moneysolutioncafe'
-            ],
-            description:
-              'Money Solution Cafe provides credit repair services, business setup (LLC/INC formation), tax preparation, Georgia licensing guidance, business credit buildout, and funding preparation to help individuals and entrepreneurs achieve financial independence.',
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'Georgia',
-              addressRegion: 'GA',
-              addressCountry: 'US'
-            },
-            areaServed: 'United States',
-            service: [
-              'Credit repair services',
-              'Business credit buildout',
-              'LLC / INC formation',
-              'Georgia business licensing',
-              'Tax preparation services',
-              'Funding preparation'
-            ]
-          })}
-        </script>
-      </Helmet>
       {/* Hero Section - Enhanced with Glassmorphism */}
       <section className="relative h-screen overflow-hidden">
         <div
