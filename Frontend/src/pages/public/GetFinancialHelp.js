@@ -243,13 +243,13 @@ const GetFinancialHelp = () => {
               className="mb-8"
             >
               <a
-                href="https://api.leadconnectorhq.com/widget/bookings/tax-appt-msc"
+                href="https://api.leadconnectorhq.com/widget/bookings/in-person-tax-preparation-zoom-phone"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f4b342] to-amber-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:shadow-amber-500/40 transition-all duration-300 transform hover:scale-105 mx-2"
               >
                 <DocumentTextIcon className="w-5 h-5 mr-2" />
-                <span>Book In-Person Tax Appointment</span>
+                <span>Book Tax Preparation Appointment </span>
                 <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </a>
             </motion.div>
