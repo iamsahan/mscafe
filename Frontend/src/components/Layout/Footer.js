@@ -177,7 +177,7 @@ Macon Office #: 478-219-9449</span>
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-secondary-800 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-secondary-400 mb-4 md:mb-0">
-            © {currentYear} SSE Services. All rights reserved.
+            © {currentYear} EX Solutions Services. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
             <Link 
