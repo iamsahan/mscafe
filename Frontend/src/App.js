@@ -21,6 +21,7 @@ import Contact from './pages/public/Contact';
 import BuyCourse from './pages/public/BuyCourse';
 import BuyService from './pages/public/BuyService';
 import PriorityTradelines from './pages/public/PriorityTradelines';
+import Chat from './pages/public/Chat';
 
 // Admin Pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -123,6 +124,9 @@ function App() {
                   <Footer />
                 </>
               } />
+
+              {/* Standalone Chat Booking Page */}
+              <Route path="/chat" element={<Chat />} />
 
               {/* Redirect /login to /admin/login */}
               <Route path="/login" element={<Navigate to="/admin/login" replace />} />
