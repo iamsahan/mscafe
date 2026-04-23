@@ -243,7 +243,7 @@ const GetFinancialHelp = () => {
               className="mb-8"
             >
               <a
-                href="https://api.leadconnectorhq.com/widget/bookings/in-person-tax-preparation-zoom-phone"
+                href="https://api.leadconnectorhq.com/widget/bookings/in-person-tax-preparation-phone"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f4b342] to-amber-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl hover:shadow-amber-500/40 transition-all duration-300 transform hover:scale-105 mx-2"
