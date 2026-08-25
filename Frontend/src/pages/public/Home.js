@@ -29,6 +29,9 @@ if (typeof document !== "undefined") {
 }
 
 const Home = () => {
+  // AUDIT_HIDDEN: Set to true to restore the "Your Path to Financial Freedom" section after audit
+  const SHOW_CREDIT_REPAIR_SECTION = false;
+
   const [services, setServices] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -233,14 +236,14 @@ const Home = () => {
       {/* SEO Meta Tags */}
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Money Solution Cafe | Credit Repair, Business Setup, Tax Services & Funding Preparation</title>
+        <title>Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation</title>
         <meta 
           name="description" 
-          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta 
           name="keywords" 
-          content="credit repair services, fix bad credit, personal credit improvement, business credit buildout, credit boost services, priority tradelines AU, start a business LLC INC, business setup services, Georgia business licensing, tax preparation services, sales tax registration, business funding preparation, improve credit for mortgage, credit repair near me, credit repair for auto approval, business credit Paydex 80, financial consulting firm" 
+          content="business credit buildout, priority tradelines AU, start a business LLC INC, business setup services, Georgia business licensing, tax preparation services, sales tax registration, business funding preparation, business credit Paydex 80, financial consulting firm" 
         />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Money Solution Cafe" />
@@ -249,10 +252,10 @@ const Home = () => {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://moneysolutioncafe.com" />
-        <meta property="og:title" content="Money Solution Cafe | Credit Repair, Business Setup, Tax Services & Funding Preparation" />
+        <meta property="og:title" content="Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation" />
         <meta 
           property="og:description" 
-          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta property="og:image" content="https://moneysolutioncafe.com/images/og-image.jpg" />
         <meta property="og:site_name" content="Money Solution Cafe" />
@@ -260,10 +263,10 @@ const Home = () => {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://moneysolutioncafe.com" />
-        <meta name="twitter:title" content="Money Solution Cafe | Credit Repair, Business Setup, Tax Services & Funding Preparation" />
+        <meta name="twitter:title" content="Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation" />
         <meta 
           name="twitter:description" 
-          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta name="twitter:image" content="https://moneysolutioncafe.com/images/og-image.jpg" />
 
@@ -280,7 +283,7 @@ const Home = () => {
             "@context": "https://schema.org",
             "@type": "FinancialService",
             "name": "Money Solution Cafe",
-            "description": "Money Solution Cafe (MSC) empowers individuals and entrepreneurs with credit repair, business formation, tax services, funding preparation, and strategic financial solutions designed to unlock long-term success.",
+            "description": "Money Solution Cafe (MSC) empowers individuals and entrepreneurs with business formation, tax services, funding preparation, and strategic financial solutions designed to unlock long-term success.",
             "url": "https://moneysolutioncafe.com",
             "logo": "https://moneysolutioncafe.com/images/logo.png",
             "founder": {
@@ -289,7 +292,6 @@ const Home = () => {
             },
             "areaServed": "United States",
             "serviceType": [
-              "Credit Repair Services",
               "Business Credit Building",
               "LLC/INC Formation",
               "Tax Preparation Services",
@@ -312,7 +314,7 @@ const Home = () => {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Money Solution Cafe",
-            "description": "Expert credit repair, business setup, tax services, and funding preparation services.",
+            "description": "Expert business setup, tax services, and funding preparation services.",
             "url": "https://moneysolutioncafe.com",
             "priceRange": "$$",
             "address": {
@@ -1953,124 +1955,130 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SEO Content Section - Long-Form SEO Description */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="prose prose-lg max-w-none"
-          >
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#93268f]/10 to-[#f4b342]/10 text-[#93268f] rounded-full text-sm font-semibold mb-4">
-                Your Path to Financial Freedom
-              </span>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                Comprehensive Financial Solutions at{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#93268f] to-[#f4b342]">
-                  Money Solution Cafe
-                </span>
-              </h2>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-6"
-              >
-                <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  <strong className="text-[#93268f]">Money Solution Cafe (MSC)</strong> empowers individuals and entrepreneurs with{" "}
-                  <strong>credit repair</strong>, <strong>business formation</strong>, <strong>tax services</strong>,{" "}
-                  <strong>funding preparation</strong>, and strategic financial solutions designed to unlock long-term success. 
-                  Whether you're rebuilding your credit, launching a new business, or preparing to acquire funding, 
-                  our experts provide step-by-step support proven to deliver results.
-                </p>
-                <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  Our services include <strong>credit dispute packages</strong>, credit optimization,{" "}
-                  <strong>business credit building</strong>, <strong>LLC/INC formation</strong>, Georgia licensing,{" "}
-                  <strong>sales tax setup</strong>, business restructuring, and{" "}
-                  <strong>priority tradelines for score enhancement</strong>. MSC is known for offering professional, 
-                  high-impact support that helps clients achieve fast results—whether the goal is homeownership, 
-                  auto approval, business loans, or scaling operations.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="space-y-6"
-              >
-                <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  We take a personalized approach to every client. MSC reviews your credit reports, challenges 
-                  inaccurate or outdated information, and provides strategies to strengthen both personal and 
-                  <strong> business credit profiles</strong>. For entrepreneurs, we create lender-friendly business structures, 
-                  establish essential compliance elements, register your business properly, and guide you through 
-                  the blueprint to reach an <strong>80+ Paydex score</strong> quickly.
-                </p>
-                <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
-                  At Money Solution Cafe, we believe everyone deserves access to <strong>financial independence</strong>. 
-                  From <strong>credit repair</strong> to <strong>business funding</strong>, our mission is to help you build a strong 
-                  foundation so you can grow confidently. Start your journey today and take control of your 
-                  financial future with trusted professionals who understand the path to success.
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Service Keywords Grid */}
+      {/* AUDIT_HIDDEN_START: "Your Path to Financial Freedom / Comprehensive Financial Solutions" section
+           hidden temporarily for business loan audit. Contains credit repair service descriptions.
+           TO RESTORE: Set SHOW_CREDIT_REPAIR_SECTION = true near the top of this component. */}
+      {SHOW_CREDIT_REPAIR_SECTION && (
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-6xl mx-auto px-4">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 pt-8 border-t border-gray-200"
+              transition={{ duration: 0.8 }}
+              className="prose prose-lg max-w-none"
             >
-              <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
-                Our Expertise Includes
-              </h3>
-              <div className="flex flex-wrap justify-center gap-3">
-                {[
-                  "Credit Repair Services",
-                  "Fix Bad Credit",
-                  "Personal Credit Improvement",
-                  "Business Credit Buildout",
-                  "Credit Boost Services",
-                  "Priority Tradelines AU",
-                  "Start a Business LLC/INC",
-                  "Business Setup Services",
-                  "Georgia Business Licensing",
-                  "Tax Preparation Services",
-                  "Sales Tax Registration",
-                  "Business Funding Preparation",
-                  "Credit Repair for Mortgage",
-                  "Credit Repair for Auto Approval",
-                  "Business Credit Paydex 80",
-                  "Financial Consulting"
-                ].map((service, index) => (
-                  <span
-                    key={service}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default
-                      ${index % 3 === 0 
-                        ? "bg-[#93268f]/10 text-[#93268f]" 
-                        : index % 3 === 1 
-                        ? "bg-[#f4b342]/10 text-[#93268f]"
-                        : "bg-gray-100 text-gray-700"
-                      }`}
-                  >
-                    {service}
+              <div className="text-center mb-12">
+                <span className="inline-block px-4 py-2 bg-gradient-to-r from-[#93268f]/10 to-[#f4b342]/10 text-[#93268f] rounded-full text-sm font-semibold mb-4">
+                  Your Path to Financial Freedom
+                </span>
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                  Comprehensive Financial Solutions at{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#93268f] to-[#f4b342]">
+                    Money Solution Cafe
                   </span>
-                ))}
+                </h2>
               </div>
+
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="space-y-6"
+                >
+                  <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+                    <strong className="text-[#93268f]">Money Solution Cafe (MSC)</strong> empowers individuals and entrepreneurs with{" "}
+                    <strong>credit repair</strong>, <strong>business formation</strong>, <strong>tax services</strong>,{" "}
+                    <strong>funding preparation</strong>, and strategic financial solutions designed to unlock long-term success.
+                    Whether you're rebuilding your credit, launching a new business, or preparing to acquire funding,
+                    our experts provide step-by-step support proven to deliver results.
+                  </p>
+                  <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+                    Our services include <strong>credit dispute packages</strong>, credit optimization,{" "}
+                    <strong>business credit building</strong>, <strong>LLC/INC formation</strong>, Georgia licensing,{" "}
+                    <strong>sales tax setup</strong>, business restructuring, and{" "}
+                    <strong>priority tradelines for score enhancement</strong>. MSC is known for offering professional,
+                    high-impact support that helps clients achieve fast results—whether the goal is homeownership,
+                    auto approval, business loans, or scaling operations.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="space-y-6"
+                >
+                  <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+                    We take a personalized approach to every client. MSC reviews your credit reports, challenges
+                    inaccurate or outdated information, and provides strategies to strengthen both personal and
+                    <strong> business credit profiles</strong>. For entrepreneurs, we create lender-friendly business structures,
+                    establish essential compliance elements, register your business properly, and guide you through
+                    the blueprint to reach an <strong>80+ Paydex score</strong> quickly.
+                  </p>
+                  <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+                    At Money Solution Cafe, we believe everyone deserves access to <strong>financial independence</strong>.
+                    From <strong>credit repair</strong> to <strong>business funding</strong>, our mission is to help you build a strong
+                    foundation so you can grow confidently. Start your journey today and take control of your
+                    financial future with trusted professionals who understand the path to success.
+                  </p>
+                </motion.div>
+              </div>
+
+              {/* Service Keywords Grid */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="mt-12 pt-8 border-t border-gray-200"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
+                  Our Expertise Includes
+                </h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    "Credit Repair Services",
+                    "Fix Bad Credit",
+                    "Personal Credit Improvement",
+                    "Business Credit Buildout",
+                    "Credit Boost Services",
+                    "Priority Tradelines AU",
+                    "Start a Business LLC/INC",
+                    "Business Setup Services",
+                    "Georgia Business Licensing",
+                    "Tax Preparation Services",
+                    "Sales Tax Registration",
+                    "Business Funding Preparation",
+                    "Credit Repair for Mortgage",
+                    "Credit Repair for Auto Approval",
+                    "Business Credit Paydex 80",
+                    "Financial Consulting"
+                  ].map((service, index) => (
+                    <span
+                      key={service}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 cursor-default
+                        ${index % 3 === 0
+                          ? "bg-[#93268f]/10 text-[#93268f]"
+                          : index % 3 === 1
+                          ? "bg-[#f4b342]/10 text-[#93268f]"
+                          : "bg-gray-100 text-gray-700"
+                        }`}
+                    >
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+      {/* AUDIT_HIDDEN_END */}
+
 
       {/* Call to Action - Premium CTA Section */}
       <section className="py-12 lg:py-24 bg-gradient-to-r from-[#93268f] to-[#93268f]/90 relative overflow-hidden">
