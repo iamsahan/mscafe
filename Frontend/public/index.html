@@ -18,6 +18,35 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     
+    <!-- Auto-update: on every visit, silently checks a tiny always-fresh file for the
+         current build version. If a visitor's browser is showing an older cached page,
+         this detects the mismatch and reloads them onto the latest build automatically.
+         Runs as a non-blocking background fetch, so it never delays page rendering. -->
+    <script>
+      (function () {
+        var STORAGE_KEY = "msc_build_version";
+        try {
+          fetch("/build-meta.json?_=" + Date.now(), { cache: "no-store" })
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .then(function (data) {
+              if (!data || !data.version) return;
+              var stored = localStorage.getItem(STORAGE_KEY);
+              if (!stored) {
+                localStorage.setItem(STORAGE_KEY, data.version);
+                return;
+              }
+              if (stored !== data.version) {
+                localStorage.setItem(STORAGE_KEY, data.version);
+                var url = new URL(window.location.href);
+                url.searchParams.set("_v", data.version);
+                window.location.replace(url.toString());
+              }
+            })
+            .catch(function () {});
+        } catch (e) {}
+      })();
+    </script>
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://moneysolutioncafe.com/" />

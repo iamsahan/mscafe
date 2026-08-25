@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
@@ -40,6 +40,20 @@ import AdminLayout from './components/Layout/AdminLayout';
 import NotFound from './pages/NotFound';
 
 function App() {
+  useEffect(() => {
+    // Gracefully handle dynamic chunk errors when deployment updates files
+    const handleChunkError = (event) => {
+      if (
+        event?.message?.includes("Loading chunk") ||
+        event?.message?.includes("ChunkLoadError")
+      ) {
+        window.location.reload();
+      }
+    };
+    window.addEventListener("error", handleChunkError);
+    return () => window.removeEventListener("error", handleChunkError);
+  }, []);
+
   return (
     <HelmetProvider>
       <AdminAuthProvider>

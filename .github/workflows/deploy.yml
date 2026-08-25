@@ -141,12 +141,22 @@ jobs:
                 add_header X-XSS-Protection "1; mode=block" always;
                 add_header X-Content-Type-Options "nosniff" always;
                 
+                # Never cache the HTML shell so every visit picks up the latest build's
+                # asset references. try_files below internally redirects SPA routes to
+                # /index.html, which re-enters location matching and hits this block too.
+                location = /index.html {
+                    root /var/www/html/mscafe;
+                    add_header Cache-Control "no-cache, no-store, must-revalidate" always;
+                    add_header Pragma "no-cache" always;
+                    expires -1;
+                }
+
                 # Serve React frontend from /var/www/html (nginx default location)
                 location / {
                     root /var/www/html/mscafe;
                     index index.html;
                     try_files $uri $uri/ /index.html;
-                    
+
                     # Cache static assets
                     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
                         expires 1y;
