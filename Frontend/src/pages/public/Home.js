@@ -247,6 +247,7 @@ const Home = () => {
         />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Money Solution Cafe" />
+        <meta name="google-site-verification" content="_LkMlTB_wg8owJS7lgPm_K86eVk4GTTX35Mi7QgKwdc" />
         <link rel="canonical" href="https://moneysolutioncafe.com" />
 
         {/* Open Graph / Facebook */}
