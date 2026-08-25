@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { coursesAPI } from "../../services/api";
 import { Helmet } from "react-helmet-async";
-import hero from "../../images/course.png";
+import hero from "../../images/course.webp";
 
 const BecomeTaxProfessional = () => {
   const [courses, setCourses] = useState([]);
@@ -323,6 +323,8 @@ const BecomeTaxProfessional = () => {
                             <img
                               src={imageUrl}
                               alt={course.title}
+                              loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               onError={() => handleImageError(course.id)}
                             />

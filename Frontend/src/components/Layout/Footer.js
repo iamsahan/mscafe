@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.webp';
 import {
   MapPinIcon,
   PhoneIcon,
@@ -24,9 +24,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img 
+              <img
                 src={logo}
-                alt="MSG Services" 
+                alt="MSG Services"
+                loading="lazy"
+                decoding="async"
                 className="h-20 w-auto object-contain"
               />
             </div>

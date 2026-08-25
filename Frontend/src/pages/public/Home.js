@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { servicesAPI, coursesAPI } from "../../services/api";
-import homeImage from "../../images/home.jpg";
-import elyseImage from "../../images/Elyse.jpg";
-import about from "../../images/about.jpg";
+import elyseImage from "../../images/Elyse.webp";
+import about from "../../images/about.webp";
+
+// Served from /public so it can be <link rel="preload">-ed by a stable URL
+// and start downloading before the JS bundle finishes loading.
+const homeImage = `${process.env.PUBLIC_URL}/images/hero.webp`;
 
 // Add gradient animation CSS
 const gradientAnimationCSS = `
@@ -607,6 +610,8 @@ const Home = () => {
                     <img
                       src={about}
                       alt="Money Solution Cafe Team"
+                      loading="lazy"
+                      decoding="async"
                       className="w-[250px] lg:w-[350px] h-[250px] lg:h-[350px] object-cover rounded-full border-4 lg:border-6 border-black/30
                            shadow-[0_20px_40px_rgba(0,0,0,0.3),0_0_0_20px_rgba(255,255,255,0.05),0_0_0_40px_rgba(255,255,255,0.02)]
                            transition-all duration-500 group-hover:rounded-[40%_60%_30%_70%/60%_30%_70%_40%]"
@@ -1288,6 +1293,8 @@ const Home = () => {
                           <img
                             src={imageUrl}
                             alt={service.name}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                             onError={() => handleImageError(service.id)}
                           />
@@ -1476,6 +1483,8 @@ const Home = () => {
                           <img
                             src={imageUrl}
                             alt={course.title}
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                             onError={() => handleImageError(course.id)}
                           />
@@ -1737,6 +1746,8 @@ const Home = () => {
                     <img
                       src={elyseImage}
                       alt="Elyse Whisby"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-[400px] lg:h-[600px] object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

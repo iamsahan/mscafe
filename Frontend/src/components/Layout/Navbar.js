@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../images/logo.png'; 
+import logo from '../../images/logo.webp';
 import {
   Bars3Icon,
   XMarkIcon,

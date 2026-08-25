@@ -75,7 +75,7 @@ const AdminSidebar = ({
         <div className="flex items-center justify-center flex-1">
           <div className="w-40 h-9 rounded-xl flex items-center justify-center overflow-hidden">
             <img 
-              src={require('../../images/logo.png')} 
+              src={require('../../images/logo.webp')}
               alt="MSC Logo" 
               className="w-full h-full object-contain"
             />
