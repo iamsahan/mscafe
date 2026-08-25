@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
@@ -8,44 +8,36 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AdminAuthProvider } from './contexts/AdminAuthContext';
 import ScrollToTop from './components/ScrollToTop';
 
-// Layout Components (used on every route, kept in the main bundle)
+// Layout Components
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
-import LoadingSpinner from './components/UI/LoadingSpinner';
+
+// Public Pages
+import Home from './pages/public/Home';
+import About from './pages/public/About';
+import GetFinancialHelp from './pages/public/GetFinancialHelp';
+import BecomeTaxProfessional from './pages/public/BecomeTaxProfessional';
+import Contact from './pages/public/Contact';
+import BuyCourse from './pages/public/BuyCourse';
+import BuyService from './pages/public/BuyService';
+import PriorityTradelines from './pages/public/PriorityTradelines';
+import Chat from './pages/public/Chat';
+
+// Admin Pages
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminManagement from './pages/admin/AdminManagement';
+import ServicesManagement from './pages/admin/ServicesManagement';
+import AdminPackages from './pages/admin/AdminPackages';
+import PriorityTradelinesManagement from './pages/admin/PriorityTradelinesManagement';
+import AdminProfile from './pages/admin/AdminProfile';
 
 // Admin Components
 import ProtectedAdminRoute from './components/Auth/ProtectedAdminRoute';
 import AdminLayout from './components/Layout/AdminLayout';
 
-// Public Pages — code-split so visiting "/" only downloads Home's chunk
-const Home = lazy(() => import('./pages/public/Home'));
-const About = lazy(() => import('./pages/public/About'));
-const GetFinancialHelp = lazy(() => import('./pages/public/GetFinancialHelp'));
-const BecomeTaxProfessional = lazy(() => import('./pages/public/BecomeTaxProfessional'));
-const Contact = lazy(() => import('./pages/public/Contact'));
-const BuyCourse = lazy(() => import('./pages/public/BuyCourse'));
-const BuyService = lazy(() => import('./pages/public/BuyService'));
-const PriorityTradelines = lazy(() => import('./pages/public/PriorityTradelines'));
-const Chat = lazy(() => import('./pages/public/Chat'));
-
-// Admin Pages — never needed by a public visitor, so keep entirely out of
-// the main bundle
-const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
-const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
-const AdminManagement = lazy(() => import('./pages/admin/AdminManagement'));
-const ServicesManagement = lazy(() => import('./pages/admin/ServicesManagement'));
-const AdminPackages = lazy(() => import('./pages/admin/AdminPackages'));
-const PriorityTradelinesManagement = lazy(() => import('./pages/admin/PriorityTradelinesManagement'));
-const AdminProfile = lazy(() => import('./pages/admin/AdminProfile'));
-
 // Error Pages
-const NotFound = lazy(() => import('./pages/NotFound'));
-
-const PageFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <LoadingSpinner size="lg" />
-  </div>
-);
+import NotFound from './pages/NotFound';
 
 function App() {
   useEffect(() => {
@@ -68,7 +60,6 @@ function App() {
         <Router>
           <ScrollToTop>
             <div className="min-h-screen bg-white transition-colors duration-200">
-                <Suspense fallback={<PageFallback />}>
                 <Routes>
               {/* Public Routes with Navbar and Footer */}
               <Route path="/" element={
@@ -219,8 +210,7 @@ function App() {
                 </>
               } />
             </Routes>
-                </Suspense>
-
+            
             {/* Toast Notifications */}
             <ToastContainer
               position="top-right"

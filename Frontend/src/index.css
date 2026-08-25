@@ -2,9 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Inter is loaded once via the <link> in public/index.html (with
-   preconnect); it is intentionally not re-imported here to avoid a
-   second, render-blocking request for the same font family. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   html {

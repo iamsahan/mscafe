@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { priorityTradelinesAUAPI } from '../../services/api';
 import LoadingSpinner from '../UI/LoadingSpinner';
-import zelleIcon from '../../images/z.webp';
-import cashAppIcon from '../../images/$.webp';
-import applePayIcon from '../../images/ipay.webp';
-import logoImage from '../../images/logo.webp';
-import tradelineImage from '../../images/trandline.webp';
+import zelleIcon from '../../images/z.png';
+import cashAppIcon from '../../images/$.png';
+import applePayIcon from '../../images/ipay.png';
+import logoImage from '../../images/logo.png';
+import tradelineImage from '../../images/trandline.jpeg';
 
 const PriorityTradelinesAU = () => {
   const [tradelines, setTradelines] = useState([]);
@@ -337,11 +337,9 @@ const PriorityTradelinesAU = () => {
               <div className="order-1 lg:order-2">
                 <div className="relative">
                   <div className="bg-gradient-to-br from-white to-gray-100 rounded-2xl p-4 shadow-lg">
-                    <img
-                      src={tradelineImage}
-                      alt="Credit Score Improvement Tradeline Graph"
-                      loading="lazy"
-                      decoding="async"
+                    <img 
+                      src={tradelineImage} 
+                      alt="Credit Score Improvement Tradeline Graph" 
                       className="w-full h-auto rounded-xl shadow-md"
                     />
                   </div>

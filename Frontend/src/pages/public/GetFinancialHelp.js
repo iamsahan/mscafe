@@ -15,7 +15,7 @@ import {
 import { servicesAPI } from "../../services/api";
 import { LoadingSpinner } from "../../components/UI/SocialIcons";
 import { Helmet } from "react-helmet-async";
-import hero from "../../images/service.webp";
+import hero from "../../images/service.png";
 
 const GetFinancialHelp = () => {
   const navigate = useNavigate();
@@ -363,8 +363,6 @@ const GetFinancialHelp = () => {
                               <img
                                 src={imageUrl}
                                 alt={service.name}
-                                loading="lazy"
-                                decoding="async"
                                 className="w-full h-full object-cover"
                                 onError={() => handleImageError(service.id)}
                               />
