@@ -14,6 +14,7 @@ import {
   GlobeAltIcon
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   const stats = [
@@ -84,6 +85,39 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>About Us | Money Solution Cafe</title>
+        <meta 
+          name="description" 
+          content="Learn about Money Solution Cafe, founder Elyse Whisby, and our mission to empower individuals and businesses with tax services, business setup, and funding preparation." 
+        />
+        <link rel="canonical" href="https://moneysolutioncafe.com/about" />
+        <meta property="og:title" content="About Us | Money Solution Cafe" />
+        <meta property="og:description" content="Learn about Money Solution Cafe, founder Elyse Whisby, and our mission to empower individuals and businesses." />
+        <meta property="og:url" content="https://moneysolutioncafe.com/about" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://moneysolutioncafe.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About Us",
+                "item": "https://moneysolutioncafe.com/about"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-[#93268f] to-purple-900 py-24 lg:py-32">
         <div className="absolute inset-0">

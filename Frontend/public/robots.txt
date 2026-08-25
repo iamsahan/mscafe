@@ -1,7 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Allow: /
 Disallow: /admin
+Disallow: /admin/*
 Disallow: /login
 Disallow: /register
 
-Sitemap: https://msgtaxservices.com/sitemap.xml
+Sitemap: https://moneysolutioncafe.com/sitemap.xml

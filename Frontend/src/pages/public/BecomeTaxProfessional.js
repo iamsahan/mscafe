@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { coursesAPI } from "../../services/api";
+import { Helmet } from "react-helmet-async";
 import hero from "../../images/course.png";
 
 const BecomeTaxProfessional = () => {
@@ -96,6 +97,39 @@ const BecomeTaxProfessional = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Become a Tax Professional | Tax Education | Money Solution Cafe</title>
+        <meta 
+          name="description" 
+          content="Launch your career in tax preparation with professional courses, IRS approved training, mentoring, and continuing education at Money Solution Cafe." 
+        />
+        <link rel="canonical" href="https://moneysolutioncafe.com/tax-professional" />
+        <meta property="og:title" content="Become a Tax Professional | Money Solution Cafe" />
+        <meta property="og:description" content="Launch your career in tax preparation with professional courses, IRS approved training, and mentoring." />
+        <meta property="og:url" content="https://moneysolutioncafe.com/tax-professional" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://moneysolutioncafe.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tax Professional",
+                "item": "https://moneysolutioncafe.com/tax-professional"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Modern Glass Design */}
       <section className="relative min-h-screen overflow-hidden flex items-center">
         <div

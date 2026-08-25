@@ -325,6 +325,54 @@ const Home = () => {
             }
           })}
         </script>
+
+        {/* Structured Data - WebSite with Sitelinks Navigation */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Money Solution Cafe",
+            "alternateName": ["MSC", "Money Solution Cafe LLC"],
+            "url": "https://moneysolutioncafe.com",
+            "hasPart": [
+              {
+                "@type": "WebPage",
+                "@id": "https://moneysolutioncafe.com/financial-help",
+                "name": "Financial Services & Consulting",
+                "description": "Professional business formation, tax planning, restructuring, and strategic funding preparation services.",
+                "url": "https://moneysolutioncafe.com/financial-help"
+              },
+              {
+                "@type": "WebPage",
+                "@id": "https://moneysolutioncafe.com/tax-professional",
+                "name": "Become a Tax Professional",
+                "description": "Comprehensive tax education, IRS approved courses, hands-on training, and professional certification.",
+                "url": "https://moneysolutioncafe.com/tax-professional"
+              },
+              {
+                "@type": "WebPage",
+                "@id": "https://moneysolutioncafe.com/priority-tradelines",
+                "name": "Priority Tradelines AU",
+                "description": "Authorized user tradelines to strengthen credit profiles and boost funding opportunities.",
+                "url": "https://moneysolutioncafe.com/priority-tradelines"
+              },
+              {
+                "@type": "WebPage",
+                "@id": "https://moneysolutioncafe.com/about",
+                "name": "About Us",
+                "description": "Learn about Money Solution Cafe, founder Elyse Whisby, and our mission to empower businesses and individuals.",
+                "url": "https://moneysolutioncafe.com/about"
+              },
+              {
+                "@type": "WebPage",
+                "@id": "https://moneysolutioncafe.com/contact",
+                "name": "Contact Us",
+                "description": "Get in touch with Money Solution Cafe for personalized financial consulting, office locations, and phone support.",
+                "url": "https://moneysolutioncafe.com/contact"
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       {/* Hero Section - Enhanced with Glassmorphism */}

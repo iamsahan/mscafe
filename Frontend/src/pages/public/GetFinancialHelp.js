@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { servicesAPI } from "../../services/api";
 import { LoadingSpinner } from "../../components/UI/SocialIcons";
+import { Helmet } from "react-helmet-async";
 import hero from "../../images/service.png";
 
 const GetFinancialHelp = () => {
@@ -120,6 +121,39 @@ const GetFinancialHelp = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-purple-100">
+      <Helmet>
+        <title>Financial Services &amp; Consulting | Money Solution Cafe</title>
+        <meta 
+          name="description" 
+          content="Explore financial advisory services, business formation, tax planning, restructuring, and funding preparation at Money Solution Cafe." 
+        />
+        <link rel="canonical" href="https://moneysolutioncafe.com/financial-help" />
+        <meta property="og:title" content="Financial Services &amp; Consulting | Money Solution Cafe" />
+        <meta property="og:description" content="Explore financial advisory services, business formation, tax planning, restructuring, and funding preparation." />
+        <meta property="og:url" content="https://moneysolutioncafe.com/financial-help" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://moneysolutioncafe.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Financial Services",
+                "item": "https://moneysolutioncafe.com/financial-help"
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Modern Glass Design */}
       <section className="relative min-h-screen overflow-hidden flex items-center">
         <div
