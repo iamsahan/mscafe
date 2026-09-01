@@ -5,6 +5,7 @@ import { servicesAPI, coursesAPI } from "../../services/api";
 import homeImage from "../../images/home.jpg";
 import elyseImage from "../../images/Elyse.jpg";
 import about from "../../images/about.jpg";
+import BarkBadge from "../../components/UI/BarkBadge";
 
 // Add gradient animation CSS
 const gradientAnimationCSS = `
@@ -589,7 +590,7 @@ const Home = () => {
             <div className="grid lg:grid-cols-2 min-h-[600px]">
               {/* Image Section */}
               <div
-                className="relative overflow-hidden flex items-center justify-center p-6 lg:p-12 
+                className="relative overflow-hidden flex flex-col items-center justify-center gap-8 p-6 lg:p-12
                         bg-gradient-to-br from-[#93268f]/20 to-[#f4b342]/20"
               >
                 <motion.div
@@ -617,6 +618,19 @@ const Home = () => {
                             group-hover:rounded-[40%_60%_30%_70%/60%_30%_70%_40%] transition-all duration-500"
                     />
                   </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="flex flex-col items-center"
+                >
+                  <p className="text-sm font-medium text-black/70 mb-3">
+                    Verified &amp; trusted on Bark
+                  </p>
+                  <BarkBadge />
                 </motion.div>
               </div>
 

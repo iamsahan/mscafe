@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import BarkBadge from '../../components/UI/BarkBadge';
 
 const About = () => {
   const stats = [
@@ -217,6 +218,19 @@ const About = () => {
                 </motion.div>
               );
             })}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-14 flex flex-col items-center"
+          >
+            <p className="text-secondary-600 font-medium mb-4">
+              Verified &amp; trusted on Bark
+            </p>
+            <BarkBadge />
           </motion.div>
         </div>
       </section>
