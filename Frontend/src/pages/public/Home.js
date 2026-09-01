@@ -30,7 +30,7 @@ if (typeof document !== "undefined") {
 
 const Home = () => {
   // AUDIT_HIDDEN: Set to true to restore the "Your Path to Financial Freedom" section after audit
-  const SHOW_CREDIT_REPAIR_SECTION = false;
+  const SHOW_CREDIT_REPAIR_SECTION = true;
 
   const [services, setServices] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -236,14 +236,14 @@ const Home = () => {
       {/* SEO Meta Tags */}
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation</title>
+        <title>Money Solution Cafe | Credit Repair, Business Setup, Tax Services &amp; Funding Preparation</title>
         <meta 
           name="description" 
-          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta 
           name="keywords" 
-          content="business credit buildout, priority tradelines AU, start a business LLC INC, business setup services, Georgia business licensing, tax preparation services, sales tax registration, business funding preparation, business credit Paydex 80, financial consulting firm" 
+          content="credit repair services, fix bad credit, personal credit improvement, business credit buildout, credit boost services, priority tradelines AU, start a business LLC INC, business setup services, Georgia business licensing, tax preparation services, sales tax registration, business funding preparation, improve credit for mortgage, credit repair near me, credit repair for auto approval, business credit Paydex 80, financial consulting firm" 
         />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Money Solution Cafe" />
@@ -253,10 +253,10 @@ const Home = () => {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://moneysolutioncafe.com" />
-        <meta property="og:title" content="Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation" />
+        <meta property="og:title" content="Money Solution Cafe | Credit Repair, Business Setup, Tax Services &amp; Funding Preparation" />
         <meta 
           property="og:description" 
-          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta property="og:image" content="https://moneysolutioncafe.com/images/og-image.jpg" />
         <meta property="og:site_name" content="Money Solution Cafe" />
@@ -264,10 +264,10 @@ const Home = () => {
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://moneysolutioncafe.com" />
-        <meta name="twitter:title" content="Money Solution Cafe | Business Setup, Tax Services &amp; Funding Preparation" />
+        <meta name="twitter:title" content="Money Solution Cafe | Credit Repair, Business Setup, Tax Services &amp; Funding Preparation" />
         <meta 
           name="twitter:description" 
-          content="Money Solution Cafe offers expert business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
+          content="Money Solution Cafe offers expert credit repair, business setup, tax services, and funding preparation to help you build wealth, grow your business, and unlock new financial opportunities." 
         />
         <meta name="twitter:image" content="https://moneysolutioncafe.com/images/og-image.jpg" />
 
@@ -284,7 +284,7 @@ const Home = () => {
             "@context": "https://schema.org",
             "@type": "FinancialService",
             "name": "Money Solution Cafe",
-            "description": "Money Solution Cafe (MSC) empowers individuals and entrepreneurs with business formation, tax services, funding preparation, and strategic financial solutions designed to unlock long-term success.",
+            "description": "Money Solution Cafe (MSC) empowers individuals and entrepreneurs with credit repair, business formation, tax services, funding preparation, and strategic financial solutions designed to unlock long-term success.",
             "url": "https://moneysolutioncafe.com",
             "logo": "https://moneysolutioncafe.com/images/logo.png",
             "founder": {
@@ -293,6 +293,7 @@ const Home = () => {
             },
             "areaServed": "United States",
             "serviceType": [
+              "Credit Repair Services",
               "Business Credit Building",
               "LLC/INC Formation",
               "Tax Preparation Services",
@@ -315,7 +316,7 @@ const Home = () => {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Money Solution Cafe",
-            "description": "Expert business setup, tax services, and funding preparation services.",
+            "description": "Expert credit repair, business setup, tax services, and funding preparation services.",
             "url": "https://moneysolutioncafe.com",
             "priceRange": "$$",
             "address": {

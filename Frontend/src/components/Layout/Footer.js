@@ -116,8 +116,7 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li className="text-sm">Tax Filing & Preparation</li>
-              {/* AUDIT_HIDDEN: Credit Repair Services — hidden for business loan audit. To restore: remove this comment wrapper. */}
-              {/* <li className="text-sm">Credit Repair Services</li> */}
+              <li className="text-sm">Credit Repair Services</li>
               <li className="text-sm">Financial Consulting</li>
               <li className="text-sm">Tax Professional Courses</li>
               <li className="text-sm">Continuing Education</li>
